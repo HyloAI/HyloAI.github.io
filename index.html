@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hylo AI</title>
+<meta name="description" content="Hylo evaluates robot policies, learns from what they did, promotes only changes that pass a paired statistical test on held-out episodes, and runs the approved version on the robot.">
+<meta property="og:title" content="Hylo AI">
+<meta property="og:description" content="Robot policies that improve behind a statistical gate. Open source, Apache-2.0.">
+<meta property="og:image" content="https://hyloai.github.io/assets/frame-6.jpg">
+<link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700&display=swap">
+<style>
+/* Layout: a lab-instrument page. A ruled hero with a live episode viewer, then sections that read like an
+   experiment record: what it does, the gated loop, measured results, the open-source repositories. */
+:root {
+  --paper: #f6f9f8;
+  --panel: #ffffff;
+  --ink: #10272b;
+  --muted: #4f676b;
+  --line: #d3e0e0;
+  --rule: rgba(13, 92, 99, .07);
+  --teal: #0d5c63;
+  --teal-2: #2a7f86;
+  --signal: #c2410c;
+  --on-teal: #ffffff;
+  --code: #eaf2f2;
+  --figure: #ffffff;
+  --font-display: "Archivo", "Noto Sans SC", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "IBM Plex Sans", "Noto Sans SC", "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", "Noto Sans SC", ui-monospace, Menlo, Consolas, monospace;
+  --wrap: 72rem;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0d1618; --panel: #132023; --ink: #e3eeee; --muted: #97adb0; --line: #23383b;
+    --rule: rgba(90, 184, 191, .07); --teal: #5ab8bf; --teal-2: #8fd3d8; --signal: #fb923c; --on-teal: #0d1618;
+    --code: #162629; --figure: #f8fafc; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #0d1618; --panel: #132023; --ink: #e3eeee; --muted: #97adb0; --line: #23383b;
+  --rule: rgba(90, 184, 191, .07); --teal: #5ab8bf; --teal-2: #8fd3d8; --signal: #fb923c; --on-teal: #0d1618;
+  --code: #162629; --figure: #f8fafc; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--paper); color: var(--ink); font: 400 17px/1.65 var(--font-body); }
+:lang(zh) body, html[lang="zh-CN"] body { line-height: 1.8; }
+a { color: var(--teal); text-underline-offset: 3px; }
+:focus-visible { outline: 2px solid var(--signal); outline-offset: 3px; border-radius: 2px; }
+.wrap { max-width: var(--wrap); margin: 0 auto; padding-left: max(20px, env(safe-area-inset-left, 0px));
+  padding-right: max(20px, env(safe-area-inset-right, 0px)); }
+img { max-width: 100%; height: auto; display: block; }
+
+/* ---------------------------------------------------------------- header */
+header.top { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--paper) 88%, transparent);
+  backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+.top .wrap { display: flex; align-items: center; gap: 1.6rem; padding-block: .75rem; }
+.brand { display: inline-flex; align-items: center; gap: .6rem; color: var(--ink); text-decoration: none;
+  font: 800 1.2rem/1 var(--font-display); letter-spacing: -.01em; }
+.brand img { width: 30px; height: 30px; }
+.brand small { font: 500 .8rem var(--font-body); color: var(--muted); letter-spacing: 0; }
+nav.links { display: flex; gap: 1.3rem; margin-left: auto; font-size: .92rem; }
+nav.links a { color: var(--muted); text-decoration: none; }
+nav.links a:hover { color: var(--ink); }
+.lang { font: 500 .82rem var(--font-mono); border: 1px solid var(--line); background: var(--panel); color: var(--ink);
+  border-radius: 999px; padding: .32rem .8rem; cursor: pointer; }
+.lang:hover { border-color: var(--teal); }
+@media (max-width: 860px) { nav.links { display: none; } .lang { margin-left: auto; } }
+
+/* ---------------------------------------------------------------- hero */
+.hero { position: relative; border-bottom: 1px solid var(--line);
+  background-image: linear-gradient(var(--rule) 1px, transparent 1px), linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+  background-size: 28px 28px; }
+.hero .wrap { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr); gap: 3.5rem; align-items: center;
+  padding-block: 4.5rem 4rem; }
+.eyebrow { font: 500 .78rem var(--font-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--signal); margin: 0 0 1rem; }
+h1 { font: 800 clamp(2.4rem, 5.2vw, 4rem)/1.04 var(--font-display); letter-spacing: -.025em; margin: 0 0 1.3rem; text-wrap: balance; }
+html[lang="zh-CN"] h1 { letter-spacing: 0; line-height: 1.2; }
+.lede { font-size: 1.12rem; color: var(--muted); max-width: 34rem; margin: 0 0 2rem; }
+.cta { display: flex; flex-wrap: wrap; gap: .8rem; }
+.btn { display: inline-flex; align-items: center; gap: .5rem; padding: .78rem 1.3rem; border-radius: 6px; font-weight: 600;
+  font-size: .95rem; text-decoration: none; border: 1.5px solid var(--teal); }
+.btn.primary { background: var(--teal); color: var(--on-teal); }
+.btn.primary:hover { background: var(--teal-2); border-color: var(--teal-2); }
+.btn.ghost { color: var(--teal); background: var(--panel); }
+.btn.ghost:hover { background: var(--code); }
+.meta { margin-top: 1.6rem; font: 400 .82rem var(--font-mono); color: var(--muted); }
+
+/* the episode viewer */
+.viewer { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: .9rem;
+  box-shadow: 0 18px 40px -24px rgba(13, 50, 55, .45); }
+.viewer-head { display: flex; justify-content: space-between; gap: .6rem; font: 500 .74rem var(--font-mono); color: var(--muted);
+  letter-spacing: .04em; text-transform: uppercase; margin-bottom: .6rem; flex-wrap: wrap; }
+.viewer-head .ok { color: #15803d; }
+.screen { position: relative; aspect-ratio: 1 / 1; max-width: 100%; border-radius: 6px; overflow: hidden; background: #1b1b1b; }
+.screen img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .35s ease; }
+.screen img.on { opacity: 1; }
+.hud { position: absolute; left: .6rem; right: .6rem; top: .55rem; display: flex; justify-content: space-between;
+  font: 500 .72rem var(--font-mono); color: #ffffff; text-shadow: 0 1px 2px rgba(0, 0, 0, .7); }
+.track { position: relative; height: 4px; background: var(--line); border-radius: 2px; margin: .75rem 0 .55rem; }
+.track span { position: absolute; left: 0; top: 0; bottom: 0; width: 0; background: var(--signal); border-radius: 2px; transition: width .35s ease; }
+.thumbs { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+.thumbs button { padding: 0; border: 2px solid transparent; border-radius: 4px; overflow: hidden; cursor: pointer; background: none; }
+.thumbs button.on { border-color: var(--signal); }
+.instr { margin: .7rem 0 0; font-size: .85rem; color: var(--muted); }
+.instr q { color: var(--ink); }
+@media (max-width: 900px) { .hero .wrap { grid-template-columns: minmax(0, 1fr); padding-block: 3rem; gap: 2.4rem; } }
+
+/* ---------------------------------------------------------------- figures band */
+.figures { border-bottom: 1px solid var(--line); background: var(--panel); }
+.figures .wrap { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); padding-block: 1.6rem; }
+.fig { padding: .2rem 1.2rem; border-left: 1px solid var(--line); }
+.fig:first-child { border-left: 0; padding-left: 0; }
+.fig b { display: block; font: 700 1.9rem/1.15 var(--font-display); letter-spacing: -.01em; color: var(--teal); font-variant-numeric: tabular-nums; }
+.fig span { font-size: .86rem; color: var(--muted); }
+@media (max-width: 860px) { .figures .wrap { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 1.2rem; }
+  .fig:nth-child(3) { border-left: 0; padding-left: 0; } }
+
+/* ---------------------------------------------------------------- sections */
+section { padding-block: 5rem; border-bottom: 1px solid var(--line); }
+.label { font: 500 .78rem var(--font-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--signal); margin: 0 0 .7rem; }
+h2 { font: 700 clamp(1.8rem, 3.4vw, 2.5rem)/1.15 var(--font-display); letter-spacing: -.02em; margin: 0 0 1rem; max-width: 40rem; text-wrap: balance; }
+html[lang="zh-CN"] h2 { letter-spacing: 0; }
+.intro { color: var(--muted); max-width: 42rem; margin: 0 0 2.6rem; }
+.grid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2.4rem 2.6rem; }
+.cap h3 { font: 700 1.12rem/1.3 var(--font-display); margin: 0 0 .45rem; display: flex; gap: .6rem; align-items: baseline; }
+.cap h3 code { font: 500 .72rem var(--font-mono); color: var(--teal); background: var(--code); padding: .1rem .4rem; border-radius: 3px; }
+.cap p { margin: 0; color: var(--muted); font-size: .97rem; }
+@media (max-width: 900px) { .grid3 { grid-template-columns: minmax(0, 1fr); gap: 1.8rem; } }
+
+.loop { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 3rem; align-items: start; }
+.steps { list-style: none; margin: 0; padding: 0; counter-reset: s; display: grid; gap: 1.3rem; }
+.steps li { counter-increment: s; display: grid; grid-template-columns: 2.4rem minmax(0, 1fr); gap: .8rem; }
+.steps li::before { content: counter(s); font: 700 1rem var(--font-mono); color: var(--teal); border: 1.5px solid var(--teal);
+  border-radius: 50%; width: 2.1rem; height: 2.1rem; display: grid; place-items: center; }
+.steps b { display: block; font: 600 1rem var(--font-body); margin-bottom: .15rem; }
+.steps span { color: var(--muted); font-size: .95rem; }
+.frame { background: var(--figure); border: 1px solid var(--line); border-radius: 8px; padding: .8rem; }
+.note { font-size: .85rem; color: var(--muted); margin: .7rem 0 0; }
+@media (max-width: 900px) { .loop { grid-template-columns: minmax(0, 1fr); } }
+
+.results { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.6rem; }
+.result { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 1.4rem 1.5rem; display: flex; flex-direction: column; gap: .8rem; }
+.result .k { font: 500 .74rem var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.result .v { font: 800 2.1rem/1.1 var(--font-display); color: var(--ink); font-variant-numeric: tabular-nums; }
+.result .v em { font-style: normal; color: var(--signal); }
+.result p { margin: 0; color: var(--muted); font-size: .94rem; }
+.result .frame { padding: .5rem; margin-top: auto; }
+@media (max-width: 900px) { .results { grid-template-columns: minmax(0, 1fr); } }
+
+.repos { display: grid; grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); gap: .9rem; margin-bottom: 2.6rem; }
+.repo { display: block; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 1rem 1.1rem;
+  text-decoration: none; color: var(--ink); }
+.repo:hover { border-color: var(--teal); }
+.repo b { font: 600 .95rem var(--font-mono); color: var(--teal); }
+.repo span { display: block; font-size: .88rem; color: var(--muted); margin-top: .3rem; }
+.start { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 2.6rem; align-items: start; }
+pre { margin: 0; background: var(--code); border: 1px solid var(--line); border-radius: 8px; padding: 1rem 1.1rem; overflow-x: auto;
+  font: 400 .84rem/1.7 var(--font-mono); color: var(--ink); }
+pre .c { color: var(--muted); }
+.copy { margin-top: .6rem; font: 500 .8rem var(--font-mono); background: none; border: 1px solid var(--line); border-radius: 4px;
+  padding: .3rem .7rem; color: var(--ink); cursor: pointer; }
+@media (max-width: 900px) { .start { grid-template-columns: minmax(0, 1fr); } }
+
+footer { padding-block: 2.6rem 3rem; color: var(--muted); font-size: .88rem; }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; }
+footer a { color: var(--muted); }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .screen img, .track span { transition: none; } }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#"><img src="assets/logo.svg" alt="" width="30" height="30">Hylo <small data-i18n="company">Hylo AI</small></a>
+    <nav class="links" aria-label="Sections">
+      <a href="#platform" data-i18n="nav.platform">Platform</a>
+      <a href="#loop" data-i18n="nav.loop">How it works</a>
+      <a href="#results" data-i18n="nav.results">Results</a>
+      <a href="#open-source" data-i18n="nav.oss">Open source</a>
+      <a href="https://hyloai.github.io/hylo-docs/" data-i18n="nav.docs">Docs</a>
+      <a href="https://github.com/HyloAI">GitHub</a>
+    </nav>
+    <button class="lang" id="lang" type="button" aria-label="Switch language">中文</button>
+  </div>
+</header>
+
+<main>
+<div class="hero">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow" data-i18n="hero.eyebrow">Physical AI, measured</p>
+      <h1 data-i18n="hero.title">Robot policies that improve behind a gate.</h1>
+      <p class="lede" data-i18n="hero.lede">Hylo evaluates robot policies, learns from what they did, and promotes a change only when a paired statistical test on episodes it never trained on says it is better. The approved version then runs on the robot, through the same episode loop it was measured with.</p>
+      <div class="cta">
+        <a class="btn primary" href="https://hyloai.github.io/hylo-docs/getting-started/quickstart/" data-i18n="hero.start">Get started</a>
+        <a class="btn ghost" href="https://github.com/HyloAI" data-i18n="hero.github">View on GitHub</a>
+      </div>
+      <p class="meta" data-i18n="hero.meta">Open source · Apache-2.0 · Python 3.10+ · MuJoCo, LIBERO, LeRobot, openpi</p>
+    </div>
+    <figure class="viewer" aria-label="A recorded episode">
+      <div class="viewer-head"><span>SmolVLA · LIBERO-10</span><span class="ok" data-i18n="viewer.status">success · 355 steps</span></div>
+      <div class="screen" id="screen">
+        <img src="assets/frame-0.jpg" alt="Robot arm above a table with a basket and groceries, step 0" class="on" width="400" height="400">
+        <img src="assets/frame-1.jpg" alt="" loading="lazy" width="400" height="400">
+        <img src="assets/frame-2.jpg" alt="" loading="lazy" width="400" height="400">
+        <img src="assets/frame-3.jpg" alt="" loading="lazy" width="400" height="400">
+        <img src="assets/frame-4.jpg" alt="" loading="lazy" width="400" height="400">
+        <img src="assets/frame-5.jpg" alt="" loading="lazy" width="400" height="400">
+        <img src="assets/frame-6.jpg" alt="" loading="lazy" width="400" height="400">
+        <div class="hud"><span>agentview</span><span id="step">step 0000 / 0355</span></div>
+      </div>
+      <div class="track"><span id="bar"></span></div>
+      <div class="thumbs" id="thumbs"></div>
+      <figcaption class="instr"><span data-i18n="viewer.task">Task:</span> <q>put both the alphabet soup and the tomato sauce in the basket</q></figcaption>
+    </figure>
+  </div>
+</div>
+
+<div class="figures">
+  <div class="wrap">
+    <div class="fig"><b>0.40 → 1.00</b><span data-i18n="fig.campaign">held-out success after one gated cycle (MuJoCo reach)</span></div>
+    <div class="fig"><b>83</b><span data-i18n="fig.plugins">plugins across 15 versioned contracts, 59 run end to end</span></div>
+    <div class="fig"><b>AUC 0.92</b><span data-i18n="fig.judge">success judge learned from traces, 600 LIBERO episodes</span></div>
+    <div class="fig"><b>21</b><span data-i18n="fig.packages">packages in 7 repositories, one command: hylo</span></div>
+  </div>
+</div>
+
+<section id="platform">
+  <div class="wrap">
+    <p class="label" data-i18n="platform.label">Platform</p>
+    <h2 data-i18n="platform.title">One set of contracts from simulation to hardware.</h2>
+    <p class="intro" data-i18n="platform.intro">Environments, policies, learners and gates are plugins behind versioned contracts. What an experiment measures is separate from where it runs, so a result means the same thing on a workstation, a GPU box and the robot computer.</p>
+    <div class="grid3">
+      <div class="cap"><h3><span data-i18n="cap.measure.t">Measure</span><code>hylo run</code></h3><p data-i18n="cap.measure.d">Every episode is traced step by step. A digest identifies the experiment on any machine; where components run never changes it.</p></div>
+      <div class="cap"><h3><span data-i18n="cap.bench.t">Benchmark</span><code>hylo bench</code></h3><p data-i18n="cap.bench.d">Protocols fix episodes, seeds and timing. Scorecards carry Wilson intervals; pairs of policies are compared with McNemar's test.</p></div>
+      <div class="cap"><h3><span data-i18n="cap.policy.t">Run any policy</span><code>ChunkPolicy</code></h3><p data-i18n="cap.policy.d">One contract covers retrieval, behaviour cloning, flow matching, tokenized actions and model-based planning, plus SmolVLA and pi0 through LeRobot and openpi.</p></div>
+      <div class="cap"><h3><span data-i18n="cap.learn.t">Learn</span><code>hylo learn</code></h3><p data-i18n="cap.learn.d">Learners turn development runs into sealed, digest-pinned artifacts: critics, memories, world models, success judges. Gate and held-out data are never read.</p></div>
+      <div class="cap"><h3><span data-i18n="cap.improve.t">Improve behind a gate</span><code>hylo evolve</code></h3><p data-i18n="cap.improve.d">Campaigns propose config patches and learned artifacts, screen them, and promote one only after a sequential paired test and a person's approval.</p></div>
+      <div class="cap"><h3><span data-i18n="cap.deploy.t">Deploy</span><code>hylo serve</code></h3><p data-i18n="cap.deploy.d">A workcell runs the same episode loop in real time, behind a safety shield and an operator channel with stop, e-stop and verdicts.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="loop">
+  <div class="wrap loop">
+    <div>
+      <p class="label" data-i18n="loop.label">How it works</p>
+      <h2 data-i18n="loop.title">Improvement is an experiment, not a guess.</h2>
+      <p class="intro" data-i18n="loop.intro">Every candidate change goes through the same cascade on disjoint sets of initial states, so the episodes that decide a promotion were never used to find it.</p>
+      <ol class="steps">
+        <li><div><b data-i18n="s1.t">Diagnose</b><span data-i18n="s1.d">Run the current version on the search split and bucket its failures from the traces.</span></div></li>
+        <li><div><b data-i18n="s2.t">Propose</b><span data-i18n="s2.d">Generators suggest config patches or train artifacts from development data only.</span></div></li>
+        <li><div><b data-i18n="s3.t">Select and confirm</b><span data-i18n="s3.d">Select on search_val, then confirm on the gate split with a sequential paired test, Holm correction and regression vetoes.</span></div></li>
+        <li><div><b data-i18n="s4.t">Report, approve, deploy</b><span data-i18n="s4.d">Report on held-out episodes no decision has read, wait for approval, then serve the promoted version. Rollback is one command.</span></div></li>
+      </ol>
+    </div>
+    <figure style="margin:0">
+      <div class="frame"><img src="assets/improvement-loop.svg" alt="The improvement cycle: diagnosis, generators, stage 0 checks, stages 1 and 2 on search_val, the gate, held-out report, approval, promotion" width="1500" height="1050" loading="lazy"></div>
+      <figcaption class="note" data-i18n="loop.caption">One campaign cycle, as implemented in hylo-evolve.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section id="results">
+  <div class="wrap">
+    <p class="label" data-i18n="results.label">Results</p>
+    <h2 data-i18n="results.title">Measured, with the commands to reproduce them.</h2>
+    <p class="intro" data-i18n="results.intro">Small studies so far, each recorded with its configuration, versions and per-episode outcomes.</p>
+    <div class="results">
+      <article class="result">
+        <span class="k" data-i18n="r1.k">Gated campaign · MuJoCo reach</span>
+        <span class="v">0.40 → <em>1.00</em></span>
+        <p data-i18n="r1.d">A rule generator raised a weak controller gain; the candidate passed the sequential gate and was promoted. On held-out episodes it won 24 pairs and lost none (p = 6e-8): success went from 0.40 to 1.00.</p>
+        <div class="frame"><img src="assets/campaign-mujoco-reach-gain.png" alt="Bar chart: parent versus candidate success on search_val, gate and held-out splits" width="1440" height="960" loading="lazy"></div>
+      </article>
+      <article class="result">
+        <span class="k" data-i18n="r2.k">Reference policies · 100 held-out episodes</span>
+        <span class="v">86% · 84% · 83%</span>
+        <p data-i18n="r2.d">Model-based planning, flow matching with steering and ACT-style temporal ensembling lead plain behaviour cloning (71%) on the same protocol; the IK expert reaches 100%.</p>
+        <div class="frame"><img src="assets/leaderboard-mujoco-reach.png" alt="Leaderboard of eight policies with 95% Wilson intervals" width="1660" height="860" loading="lazy"></div>
+      </article>
+      <article class="result">
+        <span class="k" data-i18n="r3.k">Deployment timing · SmolVLA on LIBERO-10</span>
+        <span class="v">0.20 → <em>0.05</em></span>
+        <p data-i18n="r3.d">The same policy scored with the world waiting for each call, then in real time with 0.5 s per chunk and the arm still moving: 19 hold steps per episode. Too few episodes for a conclusion, enough to show the gap is measurable.</p>
+      </article>
+      <article class="result">
+        <span class="k" data-i18n="r4.k">Success judge · learned from traces</span>
+        <span class="v">AUC 0.92</span>
+        <p data-i18n="r4.d">Calibrated against simulator outcomes on 600 LIBERO-10 episodes before it may label any data; instruments are trusted only after calibration.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="open-source">
+  <div class="wrap">
+    <p class="label" data-i18n="oss.label">Open source</p>
+    <h2 data-i18n="oss.title">Seven repositories on one base.</h2>
+    <p class="intro" data-i18n="oss.intro">The harness is the only base. Every other repository builds on it alone and cooperates with the rest through formats defined in hylo-core. Apache-2.0.</p>
+    <div class="repos">
+      <a class="repo" href="https://github.com/HyloAI/hylo-harness"><b>hylo-harness</b><span data-i18n="repo.harness">Contracts, episode kernel, evaluation, agents, learning, campaigns, store, the hylo CLI</span></a>
+      <a class="repo" href="https://github.com/HyloAI/hylo-bench"><b>hylo-bench</b><span data-i18n="repo.bench">Protocols, scorecards, leaderboards; MuJoCo and LIBERO</span></a>
+      <a class="repo" href="https://github.com/HyloAI/hylo-serve"><b>hylo-serve</b><span data-i18n="repo.serve">Policy server, workcell, real-time runner, robot adapters</span></a>
+      <a class="repo" href="https://github.com/HyloAI/hylo-studio"><b>hylo-studio</b><span data-i18n="repo.studio">Run explorer, live sandbox, campaigns, workcell control</span></a>
+      <a class="repo" href="https://github.com/HyloAI/hylo-plugins"><b>hylo-plugins</b><span data-i18n="repo.plugins">Example plugins, written the way a third party would</span></a>
+      <a class="repo" href="https://github.com/HyloAI/hylo-docs"><b>hylo-docs</b><span data-i18n="repo.docs">Guides, API and CLI reference, design notes</span></a>
+      <a class="repo" href="https://github.com/HyloAI/hylo-deployments-template"><b>hylo-deployments-template</b><span data-i18n="repo.deploy">Template for a lab's private workcell and safety configuration</span></a>
+    </div>
+    <div class="start">
+      <div>
+        <h3 style="font:700 1.2rem var(--font-display);margin:0 0 .6rem" data-i18n="start.title">Start in a minute</h3>
+        <p class="intro" style="margin-bottom:0" data-i18n="start.d">Clone the harness, let it fetch the other repositories into one workspace, and run a MuJoCo experiment. Everything runs on CPU.</p>
+      </div>
+      <div>
+<pre id="cmd"><span class="c"># Python 3.10+ and uv</span>
+git clone https://github.com/HyloAI/hylo-harness.git harness
+HYLO_GIT_BASE=https://github.com/HyloAI harness/dev/bootstrap.sh
+uv run hylo run bench/examples/configs/mujoco_reach.yaml</pre>
+        <button class="copy" id="copy" type="button" data-i18n="start.copy">Copy</button>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Hylo AI · 原觉智能</span>
+    <span><a href="https://hyloai.github.io/hylo-docs/" data-i18n="nav.docs">Docs</a> · <a href="https://github.com/HyloAI">GitHub</a> · <a href="https://hyloai.io">hyloai.io</a></span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var zh = {
+    "company": "原觉智能",
+    "nav.platform": "平台", "nav.loop": "工作原理", "nav.results": "实验结果", "nav.oss": "开源", "nav.docs": "文档",
+    "hero.eyebrow": "可度量的具身智能",
+    "hero.title": "让机器人策略在统计门控下持续变好。",
+    "hero.lede": "Hylo 评测机器人策略，从它们的执行轨迹中学习；只有当一项改动在从未参与训练的回合上通过配对统计检验时，才会被采纳。通过审批的版本随后在机器人上运行，用的正是度量它时的那套回合循环。",
+    "hero.start": "快速上手", "hero.github": "在 GitHub 上查看",
+    "hero.meta": "开源 · Apache-2.0 · Python 3.10+ · MuJoCo、LIBERO、LeRobot、openpi",
+    "viewer.status": "成功 · 355 步", "viewer.task": "任务：",
+    "fig.campaign": "一轮门控改进后的留出集成功率（MuJoCo 到达任务）",
+    "fig.plugins": "个插件，分属 15 个带版本号的契约，其中 59 个已端到端运行",
+    "fig.judge": "从轨迹中学到的成功判定器，在 600 个 LIBERO 回合上校准",
+    "fig.packages": "个包，分布在 7 个仓库，统一命令 hylo",
+    "platform.label": "平台", "platform.title": "从仿真到硬件，同一套契约。",
+    "platform.intro": "环境、策略、学习器和门控都是插件，背后是带版本号的契约。实验度量什么与它在哪里运行彼此分离，所以同一个结果在工作站、GPU 服务器和机器人电脑上含义相同。",
+    "cap.measure.t": "度量", "cap.measure.d": "每个回合都逐步记录轨迹。实验摘要在任何机器上都能标识同一个实验；组件在哪里运行不会改变它。",
+    "cap.bench.t": "跑分", "cap.bench.d": "协议固定回合、随机种子和时序。记分卡带 Wilson 置信区间；两两比较用 McNemar 检验。",
+    "cap.policy.t": "运行任何策略", "cap.policy.d": "一份契约覆盖检索、行为克隆、流匹配、离散动作和基于模型的规划，并通过 LeRobot 和 openpi 接入 SmolVLA 与 pi0。",
+    "cap.learn.t": "学习", "cap.learn.d": "学习器把开发数据变成封存、以摘要锁定的产物：价值模型、记忆、世界模型、成功判定器。门控和留出数据永远不会被读取。",
+    "cap.improve.t": "门控下改进", "cap.improve.d": "改进 campaign 提出配置补丁和学到的产物，逐级筛选，只有通过序贯配对检验并经人工批准后才会晋升。",
+    "cap.deploy.t": "部署", "cap.deploy.d": "workcell 实时运行同一套回合循环，外面有安全护盾，还有支持停止、急停和结果判定的操作员通道。",
+    "loop.label": "工作原理", "loop.title": "改进是一次实验，而不是猜测。",
+    "loop.intro": "每个候选改动都在互不相交的初始状态集合上经过同样的级联流程，所以决定是否晋升的回合，从来没有被用来寻找这个改动。",
+    "s1.t": "诊断", "s1.d": "在 search 划分上运行当前版本，根据轨迹把失败归类。",
+    "s2.t": "提出候选", "s2.d": "生成器只用开发数据提出配置补丁或训练产物。",
+    "s3.t": "选择与确认", "s3.d": "在 search_val 上选择，再在 gate 划分上用序贯配对检验确认，配合 Holm 校正和回退否决。",
+    "s4.t": "报告、批准、部署", "s4.d": "在任何决策都没读过的留出回合上报告结果，等待人工批准，再上线晋升后的版本。回滚只需一条命令。",
+    "loop.caption": "hylo-evolve 中实现的一轮改进循环。",
+    "results.label": "实验结果", "results.title": "可度量，也附带复现命令。",
+    "results.intro": "目前还是小规模研究，每一项都记录了配置、版本和逐回合结果。",
+    "r1.k": "门控改进 · MuJoCo 到达任务",
+    "r1.d": "规则生成器把偏弱的控制器增益调大，候选通过序贯门控检验后晋升。在留出回合上它 24 胜 0 负（p = 6e-8），成功率从 0.40 提升到 1.00。",
+    "r2.k": "参考策略 · 100 个留出回合",
+    "r2.d": "在同一协议下，基于模型的规划、带引导的流匹配和 ACT 式时间集成都领先于普通行为克隆（71%）；IK 专家为 100%。",
+    "r3.k": "部署时序 · SmolVLA 在 LIBERO-10",
+    "r3.d": "同一个策略先在等待每次调用的同步时序下评测，再按实时时序评测（每个动作块 0.5 秒，机械臂持续运动）：每回合 19 步补位。回合数太少，还不能下结论，但足以说明这个差距可以度量。",
+    "r4.k": "成功判定器 · 从轨迹学习",
+    "r4.d": "在 600 个 LIBERO-10 回合上对照模拟器结果校准之后，才允许它给数据打标签；测量工具只有校准后才被信任。",
+    "oss.label": "开源", "oss.title": "七个仓库，一个底座。",
+    "oss.intro": "harness 是唯一的底座。其余每个仓库都只依赖它，彼此之间通过 hylo-core 中定义的格式协作。Apache-2.0 许可。",
+    "repo.harness": "契约、回合内核、评测、智能体、学习、改进 campaign、存储、hylo 命令",
+    "repo.bench": "协议、记分卡、排行榜；MuJoCo 与 LIBERO",
+    "repo.serve": "策略服务器、workcell、实时运行器、机器人适配器",
+    "repo.studio": "运行浏览、实时沙箱、改进 campaign、workcell 控制台",
+    "repo.plugins": "示例插件，按第三方的方式编写",
+    "repo.docs": "使用指南、API 与 CLI 参考、设计说明",
+    "repo.deploy": "实验室私有 workcell 与安全配置的模板",
+    "start.title": "一分钟上手",
+    "start.d": "克隆 harness，让它把其余仓库拉到同一个工作区，然后跑一个 MuJoCo 实验。全部在 CPU 上运行。",
+    "start.copy": "复制"
+  };
+  var en = {};
+  var nodes = document.querySelectorAll("[data-i18n]");
+  nodes.forEach(function (n) { en[n.getAttribute("data-i18n")] = n.innerHTML; });
+  var button = document.getElementById("lang");
+
+  function apply(lang) {
+    var dict = lang === "zh" ? zh : en;
+    nodes.forEach(function (n) { var k = n.getAttribute("data-i18n"); if (dict[k] != null) n.innerHTML = dict[k]; });
+    document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
+    button.textContent = lang === "zh" ? "EN" : "中文";
+    button.setAttribute("aria-label", lang === "zh" ? "Switch to English" : "切换到中文");
+    document.title = lang === "zh" ? "Hylo AI · 原觉智能" : "Hylo AI";
+    current = lang;
+  }
+  var current = "en";
+  var params = new URLSearchParams(location.search);
+  var saved = null;
+  try { saved = localStorage.getItem("hylo-lang"); } catch (e) {}
+  var initial = params.get("lang") || saved || ((navigator.language || "").toLowerCase().indexOf("zh") === 0 ? "zh" : "en");
+  if (initial === "zh") apply("zh");
+  button.addEventListener("click", function () {
+    var next = current === "zh" ? "en" : "zh";
+    apply(next);
+    try { localStorage.setItem("hylo-lang", next); } catch (e) {}
+  });
+
+  // the episode viewer: seven recorded frames of a successful SmolVLA episode
+  var steps = [0, 60, 120, 180, 235, 295, 355];
+  var imgs = document.querySelectorAll("#screen img");
+  var thumbs = document.getElementById("thumbs");
+  var label = document.getElementById("step");
+  var bar = document.getElementById("bar");
+  var i = 0, timer = null;
+  steps.forEach(function (s, k) {
+    var b = document.createElement("button");
+    b.type = "button";
+    b.setAttribute("aria-label", "step " + s);
+    b.innerHTML = '<img src="assets/frame-' + k + '.jpg" alt="" width="400" height="400" loading="lazy">';
+    b.addEventListener("click", function () { show(k); stop(); });
+    thumbs.appendChild(b);
+  });
+  function pad(n) { return ("000" + n).slice(-4); }
+  function show(k) {
+    i = k;
+    imgs.forEach(function (im, j) { im.classList.toggle("on", j === k); });
+    thumbs.querySelectorAll("button").forEach(function (b, j) { b.classList.toggle("on", j === k); });
+    label.textContent = "step " + pad(steps[k]) + " / 0355";
+    bar.style.width = (steps[k] / 355 * 100) + "%";
+  }
+  function stop() { if (timer) { clearInterval(timer); timer = null; } }
+  show(0);
+  var still = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!still) timer = setInterval(function () { show((i + 1) % steps.length); }, 1100);
+
+  document.getElementById("copy").addEventListener("click", function () {
+    var text = document.getElementById("cmd").innerText.split("\n").filter(function (l) { return l.indexOf("#") !== 0; }).join("\n");
+    var btn = this, done = function () { btn.textContent = current === "zh" ? "已复制" : "Copied"; };
+    if (navigator.clipboard) navigator.clipboard.writeText(text).then(done, function () {});
+  });
+})();
+</script>
+</body>
+</html>
