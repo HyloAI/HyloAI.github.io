@@ -1,7 +1,7 @@
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset=".github/assets/banner-dark.svg">
-    <img src=".github/assets/banner-light.svg" width="100%" alt="hyloai.github.io: the Hylo website, in English and Chinese; plain HTML, no build step">
+    <img src=".github/assets/banner-light.svg" width="100%" alt="hyloai.github.io: the Hylo website; plain HTML, no build step">
   </picture>
 </p>
 
