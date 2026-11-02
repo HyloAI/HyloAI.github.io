@@ -16,6 +16,10 @@
 The site at https://hyloai.github.io/ (bilingual: English, 中文). Plain HTML, no build step: edit `index.html`, push to
 `main`, GitHub Pages serves it. Images in `assets/` come from recorded runs (see hylo-docs).
 
+The homepage introduces strategy development alongside execution, evaluation, improvement and deployment. Keep
+English text and the Chinese `data-i18n` entries in sync. Case studies must state their robot, observation conditions
+and measured scope; link detailed results to the documentation. Build and verify the linked docs before publishing.
+
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset=".github/assets/stack-dark.svg">
