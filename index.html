@@ -183,7 +183,8 @@ html[lang="zh-CN"] .panel h3 { letter-spacing: .01em; line-height: 1.35; }
 
 /* ways in */
 #start { background: var(--surface); border-top: 1px solid var(--line); }
-.paths { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+.paths { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; }
+@media (max-width: 1100px) { .paths { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .path { background: var(--bg); border: 1px solid var(--line); border-radius: 18px; padding: 2rem 1.8rem; display: flex;
   flex-direction: column; gap: .9rem; }
 .path h3 { font: 800 1.45rem/1.2 var(--font); letter-spacing: -.02em; margin: 0; }
@@ -270,7 +271,7 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
         <div class="n"><span>06</span></div>
         <h3 data-i18n="l6.t">Workbench</h3>
         <p data-i18n="l6.d">Inspect skill development, validation evidence and deployed execution in one workspace.</p>
-        <div class="names"><a class="name" href="https://hyloai.github.io/hylo-docs/user-guide/studio/">Hylo Studio ↗</a></div>
+        <div class="names"><a class="name" href="https://hyloai.github.io/hylo-docs/user-guide/studio/">Hylo Studio ↗</a><a class="name" href="https://hyloai.github.io/hylo-docs/user-guide/worlds/">World ↗</a></div>
       </div>
       <div class="layer">
         <div class="n"><span>05</span></div>
@@ -288,7 +289,7 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
         <div class="n"><span>03</span></div>
         <h3 data-i18n="l3.t">Cognition</h3>
         <p data-i18n="l3.d">Implement robot skills with tools, programs, policies and memory.</p>
-        <div class="names"><a class="name" href="https://hyloai.github.io/hylo-docs/user-guide/policies/">Memory ↗</a><a class="name" href="https://hyloai.github.io/hylo-docs/user-guide/policies/">Agents ↗</a></div>
+        <div class="names"><a class="name" href="https://hyloai.github.io/hylo-docs/user-guide/policies/">Memory ↗</a><a class="name" href="https://hyloai.github.io/hylo-docs/user-guide/policies/">Agents ↗</a><a class="name" href="https://hyloai.github.io/hylo-docs/user-guide/tool-agents/">Tool agents ↗</a></div>
       </div>
       <div class="layer">
         <div class="n"><span>02</span></div>
@@ -313,12 +314,14 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
   <div class="wrap">
     <div class="head">
       <h2 data-i18n="work.title">Hylo at <em>work</em></h2>
-      <p data-i18n="work.lede">Three examples of execution, evaluation and program improvement, each backed by recorded runs.</p>
+      <p data-i18n="work.lede">Five examples of execution, evaluation, program improvement, robot worlds and tool-calling agents, each backed by recorded runs.</p>
     </div>
     <div class="tabs" role="tablist">
       <button role="tab" aria-selected="true" aria-controls="t1" id="b1" data-i18n="t1.tab">Task replay</button>
       <button role="tab" aria-selected="false" aria-controls="t2" id="b2" data-i18n="t2.tab">Policy comparison</button>
       <button role="tab" aria-selected="false" aria-controls="t3" id="b3" data-i18n="t3.tab">Skill improvement</button>
+      <button role="tab" aria-selected="false" aria-controls="t4" id="b4" data-i18n="t4.tab">Robot worlds</button>
+      <button role="tab" aria-selected="false" aria-controls="t5" id="b5" data-i18n="t5.tab">Tool-calling agent</button>
     </div>
     <div class="panel" role="tabpanel" id="t1" aria-labelledby="b1">
       <div>
@@ -363,6 +366,26 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
         <p class="note" data-i18n="t3.note">One task, 20 held-out pairs; gate p = 0.002. From-scratch local-model research remains unsuccessful.</p>
       </div>
     </div>
+    <div class="panel" role="tabpanel" id="t4" aria-labelledby="b4" hidden>
+      <div>
+        <p class="tag" data-i18n="t4.tag">Example 04 · MuJoCo worlds</p>
+        <h3 data-i18n="t4.h">Any robot, one world</h3>
+        <p data-i18n="t4.d">A stage lists robots from 24 packs, objects, cameras and people; a person or a model builds it into a simulation and runs it. Here the G1 and H1 walk under pretrained policies run on the CPU; elsewhere quadrupeds trot, drones fly and people walk around obstacles.</p>
+        <p class="stat"><span>24</span><small data-i18n="t4.ss">Robot packs: arms, hands, quadrupeds, humanoids, drones</small></p>
+        <a class="more" href="https://hyloai.github.io/hylo-docs/user-guide/worlds/" data-i18n="t4.more">See worlds ↗</a>
+      </div>
+      <div class="shot"><video src="assets/world-humanoids.mp4" poster="assets/world-humanoids.jpg" controls muted loop playsinline preload="none" style="width:100%;display:block" aria-label="Unitree G1 and H1 walking under pretrained policies in a MuJoCo world"></video></div>
+    </div>
+    <div class="panel" role="tabpanel" id="t5" aria-labelledby="b5" hidden>
+      <div>
+        <p class="tag" data-i18n="t5.tag">Example 05 · Panda manipulation simulation</p>
+        <h3 data-i18n="t5.h">A model operating a robot through tools</h3>
+        <p data-i18n="t5.d">A local model calls typed robot tools (locate, grasp options, grasp, place), one checked action at a time; every action runs through the safety shield and comes back as a measured receipt. Push and press tasks are not solved yet.</p>
+        <p class="stat"><span>8 / 9</span><small data-i18n="t5.ss">Zero-shot episodes solved on pick-and-place, put-in-bowl and stack</small></p>
+        <a class="more" href="https://hyloai.github.io/hylo-docs/user-guide/tool-agents/" data-i18n="t5.more">See tool-calling agents ↗</a>
+      </div>
+      <div class="shot"><video src="assets/tools-llm-stack.mp4" poster="assets/tools-llm-stack.jpg" controls muted loop playsinline preload="none" style="width:100%;display:block" aria-label="A stack episode: the model's tool calls captioned over the re-simulated camera view"></video></div>
+    </div>
   </div>
 </section>
 
@@ -387,6 +410,11 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
         <h3 data-i18n="p3.t">Develop a robot skill</h3>
         <p data-i18n="p3.d">Develop a task capability using robot tools and programs, validate its scope, and reuse a promoted program skill.</p>
         <a class="more" href="https://hyloai.github.io/hylo-docs/user-guide/developing-strategies/" data-i18n="p3.more">Develop a skill ↗</a>
+      </div>
+      <div class="path">
+        <h3 data-i18n="p4.t">Build a robot world</h3>
+        <p data-i18n="p4.d">Describe a scene with any of 24 robots, run it by hand or with a chat model, check goals and record camera data.</p>
+        <a class="more" href="https://hyloai.github.io/hylo-docs/user-guide/worlds/" data-i18n="p4.more">Build a world ↗</a>
       </div>
     </div>
     <div class="cmd">
@@ -446,8 +474,14 @@ uv run hylo run bench/examples/configs/mujoco_reach.yaml</pre>
     "l1.t": "内核", "l1.d": "一个执行内核，接入模型、仿真器和机器人。",
     "end.models": "模型", "end.sims": "仿真器", "end.robots": "机器人",
     "work.title": "看 Hylo 如何<em>工作</em>",
-    "work.lede": "执行、评测和程序改进三个实例，每个都有实际运行记录。",
-    "t1.tab": "任务回放", "t2.tab": "策略对比", "t3.tab": "技能改进",
+    "work.lede": "执行、评测、程序改进、机器人世界和工具调用智能体五个实例，每个都有实际运行记录。",
+    "t1.tab": "任务回放", "t2.tab": "策略对比", "t3.tab": "技能改进", "t4.tab": "机器人世界", "t5.tab": "工具调用智能体",
+    "t4.tag": "实例 04 · MuJoCo 世界", "t4.h": "任意机器人，同一个世界",
+    "t4.d": "一个 stage 列出来自 24 个机器人包的机器人、物体、相机和行人；人或模型把它编译成仿真并运行。视频中 G1 和 H1 在 CPU 上由预训练策略驱动行走；此外还有四足机器人小跑、无人机飞行、行人绕开障碍物。",
+    "t4.ss": "个机器人包：机械臂、灵巧手、四足、人形、无人机", "t4.more": "了解机器人世界 ↗",
+    "t5.tag": "实例 05 · Panda 操作仿真", "t5.h": "模型通过工具操作机器人",
+    "t5.d": "本地模型调用类型化的机器人工具（定位、抓取方案、抓取、放置），每次只执行一个经过检查的动作；每个动作都经过安全护栏执行，并返回实测回执。推、按类任务尚未解决。",
+    "t5.ss": "零样本完成的回合（抓取放置、放入碗中、叠块）", "t5.more": "了解工具调用智能体 ↗",
     "t1.tag": "实例 01 · LIBERO-10 仿真", "t1.h": "两样东西，一个篮子",
     "t1.d": "SmolVLA 智能体把字母汤罐头和番茄酱放进篮子。Studio 回放整次运行：两路相机画面、每一个动作、每一次模型调用。",
     "t1.s": "355 步", "t1.ss": "任务完成", "t1.more": "了解 Studio ↗",
@@ -462,6 +496,7 @@ uv run hylo run bench/examples/configs/mujoco_reach.yaml</pre>
     "start.title": "从这里<em>开始</em>", "start.lede": "选一条适合你的路。",
     "p1.t": "运行与评测", "p1.d": "在统一的基准上评测你的策略，发布任何人都能回放的运行记录。", "p1.more": "开始评测 ↗",
     "p2.t": "部署到工作单元", "p2.d": "接入你的机器人，设好安全边界，在一个控制台里运行策略。", "p2.more": "了解 Serve ↗",
+    "p4.t": "搭建机器人世界", "p4.d": "从 24 种机器人中任选，描述一个场景，手动或让聊天模型运行它，检查目标并录制相机数据。", "p4.more": "搭建世界 ↗",
     "p3.t": "开发机器人技能", "p3.d": "通过操作工具和程序开发任务能力，验证其适用范围，并复用已晋升的程序技能。", "p3.more": "开始技能开发 ↗",
     "start.copy": "复制",
     "foot.claim": "让具身智能运转起来。", "foot.products": "产品", "foot.stack": "技术栈", "foot.dev": "开发者",
