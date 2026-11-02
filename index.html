@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Hylo AI</title>
-<meta name="description" content="Develop robot task strategies, run existing policies, evaluate results and deploy tested versions on one execution kernel.">
+<meta name="description" content="Develop, validate, deploy and reuse robot skills, with task scope, executable implementations and measured evidence.">
 <meta property="og:title" content="Hylo AI · The Stack for Physical AI">
 <meta property="og:description" content="Real-time running, cognition, evaluation and evolution, built on one execution kernel.">
 <meta property="og:image" content="https://hyloai.github.io/assets/frame-6.jpg">
@@ -230,10 +230,10 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
 <div class="hero">
   <div class="wrap">
     <h1 data-i18n="hero.title">The Stack for <em>Physical AI</em></h1>
-    <p class="lede" data-i18n="hero.lede">Hylo connects strategy development, execution, evaluation, improvement and deployment on one execution kernel. Robot tools and code agents reduce the programming and integration between a task requirement and an executable strategy.</p>
+    <p class="lede" data-i18n="hero.lede">Develop, validate, deploy and accumulate robot skills with Hylo. Combine robot tools, programs and existing policies on one execution kernel, and keep task scope, implementation versions and measured evidence explicit.</p>
     <div class="cta">
       <a class="btn primary" href="https://hyloai.github.io/hylo-docs/getting-started/quickstart/" data-i18n="hero.start">Get started</a>
-      <a class="btn ghost" href="#stack" data-i18n="hero.stack">Explore the stack</a>
+      <a class="btn ghost" href="https://hyloai.github.io/hylo-docs/user-guide/skills/" data-i18n="hero.stack">Explore robot skills</a>
     </div>
     <figure class="episode" aria-label="A recorded episode">
       <div class="screen" id="screen">
@@ -269,31 +269,31 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
       <div class="layer">
         <div class="n"><span>06</span></div>
         <h3 data-i18n="l6.t">Workbench</h3>
-        <p data-i18n="l6.d">Inspect strategy development, replay episodes and review releases in one workspace.</p>
+        <p data-i18n="l6.d">Inspect skill development, validation evidence and deployed execution in one workspace.</p>
         <div class="names"><a class="name" href="https://hyloai.github.io/hylo-docs/user-guide/studio/">Hylo Studio ↗</a></div>
       </div>
       <div class="layer">
         <div class="n"><span>05</span></div>
         <h3 data-i18n="l5.t">Evolution</h3>
-        <p data-i18n="l5.d">Turn experience into stronger versions, each one tested before release.</p>
+        <p data-i18n="l5.d">Improve skill implementations with learning, experiments and versioned promotion.</p>
         <div class="names"><a class="name" href="https://hyloai.github.io/hylo-docs/user-guide/learning/">Learn ↗</a><a class="name" href="https://hyloai.github.io/hylo-docs/user-guide/campaigns/">Evolve ↗</a></div>
       </div>
       <div class="layer">
         <div class="n"><span>04</span></div>
         <h3 data-i18n="l4.t">Evaluation</h3>
-        <p data-i18n="l4.d">Measure every policy against the same standard.</p>
+        <p data-i18n="l4.d">Validate skill implementations under fixed protocols and stated conditions.</p>
         <div class="names"><a class="name" href="https://hyloai.github.io/hylo-docs/benchmarking/">Hylo Bench ↗</a><a class="name" href="https://hyloai.github.io/hylo-docs/user-guide/experiments/">Eval ↗</a></div>
       </div>
       <div class="layer">
         <div class="n"><span>03</span></div>
         <h3 data-i18n="l3.t">Cognition</h3>
-        <p data-i18n="l3.d">Build and execute task strategies with robot tools, programs, policies and memory.</p>
+        <p data-i18n="l3.d">Implement robot skills with tools, programs, policies and memory.</p>
         <div class="names"><a class="name" href="https://hyloai.github.io/hylo-docs/user-guide/policies/">Memory ↗</a><a class="name" href="https://hyloai.github.io/hylo-docs/user-guide/policies/">Agents ↗</a></div>
       </div>
       <div class="layer">
         <div class="n"><span>02</span></div>
         <h3 data-i18n="l2.t">Runtime</h3>
-        <p data-i18n="l2.d">Run policies on robots in real time, within the safety limits you set.</p>
+        <p data-i18n="l2.d">Run skill implementations on robots within the safety limits you set.</p>
         <div class="names"><a class="name" href="https://hyloai.github.io/hylo-docs/user-guide/deployment/">Hylo Serve ↗</a></div>
       </div>
       <div class="layer kernel">
@@ -318,7 +318,7 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
     <div class="tabs" role="tablist">
       <button role="tab" aria-selected="true" aria-controls="t1" id="b1" data-i18n="t1.tab">Task replay</button>
       <button role="tab" aria-selected="false" aria-controls="t2" id="b2" data-i18n="t2.tab">Policy comparison</button>
-      <button role="tab" aria-selected="false" aria-controls="t3" id="b3" data-i18n="t3.tab">Program improvement</button>
+      <button role="tab" aria-selected="false" aria-controls="t3" id="b3" data-i18n="t3.tab">Skill improvement</button>
     </div>
     <div class="panel" role="tabpanel" id="t1" aria-labelledby="b1">
       <div>
@@ -343,7 +343,7 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
     <div class="panel" role="tabpanel" id="t3" aria-labelledby="b3" hidden>
       <div>
         <p class="tag" data-i18n="t3.tag">Example 03 · Panda stacking simulation</p>
-        <h3 data-i18n="t3.h">A task program, improved and reused</h3>
+        <h3 data-i18n="t3.h">A stacking skill, improved and reused</h3>
         <p data-i18n="t3.d">A local model revises a deliberately weak stacking program using robot tools. The frozen program passes a paired gate, is reported on held-out cases and becomes a reusable skill. This run uses simulator segmentation.</p>
         <p class="stat"><span>60% → 100%</span><small data-i18n="t3.ss">Success rate on the held-out report</small></p>
         <a class="more" href="https://hyloai.github.io/hylo-docs/user-guide/research-and-skills/" data-i18n="t3.more">See research and skills ↗</a>
@@ -384,9 +384,9 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
         <a class="more" href="https://hyloai.github.io/hylo-docs/user-guide/deployment/" data-i18n="p2.more">Explore Serve ↗</a>
       </div>
       <div class="path">
-        <h3 data-i18n="p3.t">Develop a task strategy</h3>
-        <p data-i18n="p3.d">Use robot tools to develop and debug task programs, or improve an existing strategy through research sessions.</p>
-        <a class="more" href="https://hyloai.github.io/hylo-docs/user-guide/developing-strategies/" data-i18n="p3.more">Develop a strategy ↗</a>
+        <h3 data-i18n="p3.t">Develop a robot skill</h3>
+        <p data-i18n="p3.d">Develop a task capability using robot tools and programs, validate its scope, and reuse a promoted program skill.</p>
+        <a class="more" href="https://hyloai.github.io/hylo-docs/user-guide/developing-strategies/" data-i18n="p3.more">Develop a skill ↗</a>
       </div>
     </div>
     <div class="cmd">
@@ -432,29 +432,29 @@ uv run hylo run bench/examples/configs/mujoco_reach.yaml</pre>
   var zh = {
     "nav.stack": "技术栈", "nav.work": "实例", "nav.start": "开始使用", "nav.docs": "文档",
     "hero.title": "让<em>具身智能</em>运转起来",
-    "hero.lede": "Hylo 在同一个执行内核上串联策略开发、执行、评测、改进和部署。机器人操作工具与代码智能体，减少从任务需求到可执行策略之间的编程和集成工作。",
-    "hero.start": "开始使用", "hero.stack": "了解技术栈",
+    "hero.lede": "用 Hylo 开发、验证、部署和积累机器人技能。机器人操作工具、程序与已有模型策略共用一个执行内核，并明确每项任务能力的适用条件、实现版本和验证证据。",
+    "hero.start": "开始使用", "hero.stack": "了解机器人技能",
     "hero.task": "“把字母汤罐头和番茄酱都放进篮子里。”",
     "hero.result": "355 步完成任务",
     "stack.title": "Hylo <em>技术栈</em>",
     "stack.lede": "六层能力，自上而下，全部建在同一个执行内核上。",
-    "l6.t": "工作台", "l6.d": "在一个工作台里查看策略研发过程、回放执行、审核发布。",
-    "l5.t": "进化", "l5.d": "把经验变成更强的版本，每一次都先检验再发布。",
-    "l4.t": "评测", "l4.d": "用同一把尺子衡量每一个策略。",
-    "l3.t": "认知", "l3.d": "结合机器人操作工具、程序、模型策略与记忆，构造并执行任务策略。",
-    "l2.t": "运行", "l2.d": "在你设定的安全边界内，让策略在机器人上实时运行。",
+    "l6.t": "工作台", "l6.d": "在一个工作台里查看技能研发过程、验证证据和部署后的执行记录。",
+    "l5.t": "进化", "l5.d": "通过学习、实验和版本晋升，持续改进技能的实现。",
+    "l4.t": "评测", "l4.d": "在固定协议和明确条件下，验证技能实现的效果。",
+    "l3.t": "认知", "l3.d": "结合操作工具、程序、模型策略与记忆，实现机器人技能。",
+    "l2.t": "运行", "l2.d": "在设定的安全限制内，让技能实现在机器人上运行。",
     "l1.t": "内核", "l1.d": "一个执行内核，接入模型、仿真器和机器人。",
     "end.models": "模型", "end.sims": "仿真器", "end.robots": "机器人",
     "work.title": "看 Hylo 如何<em>工作</em>",
     "work.lede": "执行、评测和程序改进三个实例，每个都有实际运行记录。",
-    "t1.tab": "任务回放", "t2.tab": "策略对比", "t3.tab": "程序改进",
+    "t1.tab": "任务回放", "t2.tab": "策略对比", "t3.tab": "技能改进",
     "t1.tag": "实例 01 · LIBERO-10 仿真", "t1.h": "两样东西，一个篮子",
     "t1.d": "SmolVLA 智能体把字母汤罐头和番茄酱放进篮子。Studio 回放整次运行：两路相机画面、每一个动作、每一次模型调用。",
     "t1.s": "355 步", "t1.ss": "任务完成", "t1.more": "了解 Studio ↗",
     "t2.tag": "实例 02 · MuJoCo 触达仿真", "t2.h": "八种策略，同一把尺子",
     "t2.d": "八种参考策略经同一套流程训练，在同样的 100 个留出回合上评测。",
     "t2.ss": "策略 × 回合，附 95% 置信区间", "t2.more": "查看排行榜 ↗",
-    "t3.tag": "实例 03 · Panda 叠块仿真", "t3.h": "开发、验证并复用任务程序",
+    "t3.tag": "实例 03 · Panda 叠块仿真", "t3.h": "叠块技能的改进与复用",
     "t3.d": "本地模型利用操作工具修改一个刻意弱化的叠块程序。冻结程序通过成对准入评测，并在留出集报告后积累为可复用技能。本次实验使用仿真器分割信息。",
     "t3.ss": "留出集报告上的成功率", "t3.more": "了解研发与技能复用 ↗",
     "t3.parent": "当前版本", "t3.cand": "候选版本",
@@ -462,7 +462,7 @@ uv run hylo run bench/examples/configs/mujoco_reach.yaml</pre>
     "start.title": "从这里<em>开始</em>", "start.lede": "选一条适合你的路。",
     "p1.t": "运行与评测", "p1.d": "在统一的基准上评测你的策略，发布任何人都能回放的运行记录。", "p1.more": "开始评测 ↗",
     "p2.t": "部署到工作单元", "p2.d": "接入你的机器人，设好安全边界，在一个控制台里运行策略。", "p2.more": "了解 Serve ↗",
-    "p3.t": "开发任务策略", "p3.d": "通过机器人操作工具开发和调试任务程序，或在研发会话中优化已有策略。", "p3.more": "开始策略开发 ↗",
+    "p3.t": "开发机器人技能", "p3.d": "通过操作工具和程序开发任务能力，验证其适用范围，并复用已晋升的程序技能。", "p3.more": "开始技能开发 ↗",
     "start.copy": "复制",
     "foot.claim": "让具身智能运转起来。", "foot.products": "产品", "foot.stack": "技术栈", "foot.dev": "开发者",
     "foot.docs": "文档", "foot.quick": "快速上手", "foot.board": "排行榜", "foot.company": "公司",
