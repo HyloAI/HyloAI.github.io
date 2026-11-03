@@ -314,7 +314,7 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
   <div class="wrap">
     <div class="head">
       <h2 data-i18n="work.title">Hylo at <em>work</em></h2>
-      <p data-i18n="work.lede">Five examples of execution, evaluation, program improvement, robot worlds and tool-calling agents, each backed by recorded runs.</p>
+      <p data-i18n="work.lede">Seven examples of execution, evaluation, program improvement, robot worlds, tool-calling agents, self-improvement and memory, each backed by recorded runs.</p>
     </div>
     <div class="tabs" role="tablist">
       <button role="tab" aria-selected="true" aria-controls="t1" id="b1" data-i18n="t1.tab">Task replay</button>
@@ -322,6 +322,8 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
       <button role="tab" aria-selected="false" aria-controls="t3" id="b3" data-i18n="t3.tab">Skill improvement</button>
       <button role="tab" aria-selected="false" aria-controls="t4" id="b4" data-i18n="t4.tab">Robot worlds</button>
       <button role="tab" aria-selected="false" aria-controls="t5" id="b5" data-i18n="t5.tab">Tool-calling agent</button>
+      <button role="tab" aria-selected="false" aria-controls="t6" id="b6" data-i18n="t6.tab">Self-improvement</button>
+      <button role="tab" aria-selected="false" aria-controls="t7" id="b7" data-i18n="t7.tab">Memory</button>
     </div>
     <div class="panel" role="tabpanel" id="t1" aria-labelledby="b1">
       <div>
@@ -385,6 +387,26 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
         <a class="more" href="https://hyloai.github.io/hylo-docs/user-guide/tool-agents/" data-i18n="t5.more">See tool-calling agents ↗</a>
       </div>
       <div class="shot"><video src="assets/tools-llm-stack.mp4" poster="assets/tools-llm-stack.jpg" controls muted loop playsinline preload="none" style="width:100%;display:block" aria-label="A stack episode: the model's tool calls captioned over the re-simulated camera view"></video></div>
+    </div>
+    <div class="panel" role="tabpanel" id="t6" aria-labelledby="b6" hidden>
+      <div>
+        <p class="tag" data-i18n="t6.tag">Example 06 · Studio, MuJoCo and LIBERO campaigns</p>
+        <h3 data-i18n="t6.h">A change is kept only if the gate agrees</h3>
+        <p data-i18n="t6.d">Every candidate is drawn as its path through the cascade: early check, screening, the paired gate, the verdict. A language model's LIBERO proposals failed the gate and nothing was promoted; a reach candidate passed, waited for a person, was approved, and can be rolled back.</p>
+        <p class="stat"><span>40% → 100%</span><small data-i18n="t6.ss">Held-out success, 40 paired episodes, p = 6e-8</small></p>
+        <a class="more" href="https://hyloai.github.io/hylo-docs/user-guide/campaigns/" data-i18n="t6.more">See campaigns ↗</a>
+      </div>
+      <div class="shot"><video src="assets/studio-campaigns.mp4" poster="assets/studio-campaigns.jpg" controls muted loop playsinline preload="none" style="width:100%;display:block" aria-label="The Studio's self-improvement pages: a candidate's cascade, an approval, the rollback form and the A/B arena"></video></div>
+    </div>
+    <div class="panel" role="tabpanel" id="t7" aria-labelledby="b7" hidden>
+      <div>
+        <p class="tag" data-i18n="t7.tag">Example 07 · Studio, experience store</p>
+        <h3 data-i18n="t7.h">What the agent learned, with its evidence</h3>
+        <p data-i18n="t7.d">Skills become verified only through a gate and keep its numbers; lessons gain or lose standing from the outcomes of the changes that cited them; action banks hold only verified motions. Refuted skills stay, so they are not proposed again.</p>
+        <p class="stat"><span>0.47 → 0.86</span><small data-i18n="t7.ss">Fresh scenes with a verified skill applied, 200 pairs</small></p>
+        <a class="more" href="https://hyloai.github.io/hylo-docs/user-guide/memory/" data-i18n="t7.more">See memory ↗</a>
+      </div>
+      <div class="shot"><video src="assets/studio-experience.mp4" poster="assets/studio-experience.jpg" controls muted loop playsinline preload="none" style="width:100%;display:block" aria-label="The Studio's Experience page: skill libraries, lesson books and an action bank"></video></div>
     </div>
   </div>
 </section>
@@ -474,14 +496,20 @@ uv run hylo run bench/examples/configs/mujoco_reach.yaml</pre>
     "l1.t": "内核", "l1.d": "一个执行内核，接入模型、仿真器和机器人。",
     "end.models": "模型", "end.sims": "仿真器", "end.robots": "机器人",
     "work.title": "看 Hylo 如何<em>工作</em>",
-    "work.lede": "执行、评测、程序改进、机器人世界和工具调用智能体五个实例，每个都有实际运行记录。",
-    "t1.tab": "任务回放", "t2.tab": "策略对比", "t3.tab": "技能改进", "t4.tab": "机器人世界", "t5.tab": "工具调用智能体",
+    "work.lede": "执行、评测、程序改进、机器人世界、工具调用智能体、自我改进和记忆七个实例，每个都有实际运行记录。",
+    "t1.tab": "任务回放", "t2.tab": "策略对比", "t3.tab": "技能改进", "t4.tab": "机器人世界", "t5.tab": "工具调用智能体", "t6.tab": "自我改进", "t7.tab": "记忆",
     "t4.tag": "实例 04 · MuJoCo 世界", "t4.h": "任意机器人，同一个世界",
     "t4.d": "一个 stage 列出来自 24 个机器人包的机器人、物体、相机和行人；人或模型把它编译成仿真并运行。视频中 G1 和 H1 在 CPU 上由预训练策略驱动行走；此外还有四足机器人小跑、无人机飞行、行人绕开障碍物。",
     "t4.ss": "个机器人包：机械臂、灵巧手、四足、人形、无人机", "t4.more": "了解机器人世界 ↗",
     "t5.tag": "实例 05 · Panda 操作仿真", "t5.h": "模型通过工具操作机器人",
     "t5.d": "本地模型调用类型化的机器人工具（定位、抓取方案、抓取、放置），每次只执行一个经过检查的动作；每个动作都经过安全护栏执行，并返回实测回执。推、按类任务尚未解决。",
     "t5.ss": "零样本完成的回合（抓取放置、放入碗中、叠块）", "t5.more": "了解工具调用智能体 ↗",
+    "t6.tag": "实例 06 · Studio，MuJoCo 与 LIBERO 改进任务", "t6.h": "只有门控通过的改动才会保留",
+    "t6.d": "每个候选都画成它在级联中的路径：初筛、筛选、配对门控、结论。语言模型在 LIBERO 上的提议没有通过门控，因此没有任何晋级；一个 reach 候选通过门控后等待人工审批，被批准晋级，并且可以回滚。",
+    "t6.ss": "Held-out 成功率，40 对配对回合，p = 6e-8", "t6.more": "了解改进任务 ↗",
+    "t7.tag": "实例 07 · Studio，经验库", "t7.h": "智能体学到了什么，以及证据",
+    "t7.d": "技能只有通过门控才会被验证，并保留门控数据；经验教训的地位取决于引用它们的改动的结果；动作记忆库只存经过验证的动作。被否决的技能会保留，避免再次被提议。",
+    "t7.ss": "应用一条已验证技能后的新场景成功率，200 对", "t7.more": "了解记忆 ↗",
     "t1.tag": "实例 01 · LIBERO-10 仿真", "t1.h": "两样东西，一个篮子",
     "t1.d": "SmolVLA 智能体把字母汤罐头和番茄酱放进篮子。Studio 回放整次运行：两路相机画面、每一个动作、每一次模型调用。",
     "t1.s": "355 步", "t1.ss": "任务完成", "t1.more": "了解 Studio ↗",
