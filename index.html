@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Hylo AI</title>
-<meta name="description" content="Physical RSI: robots that build on their own progress. Build worlds, run tasks, improve, verify against physical outcomes and deploy what passes.">
-<meta property="og:title" content="Hylo AI: Physical RSI">
-<meta property="og:description" content="Robots that build on their own progress: a loop the system drives, with physical outcomes deciding what it keeps.">
+<meta name="description" content="Hylo is the open foundation for physical AI: intelligence that acts, learns and evolves in the physical world. Build worlds, run tasks, improve, verify against physical outcomes and deploy what passes.">
+<meta property="og:title" content="Hylo AI: the open foundation for physical AI">
+<meta property="og:description" content="The next era of intelligence is physical. Hylo closes the loop in which robots build on their own progress, with physical outcomes deciding what is kept.">
 <meta property="og:image" content="https://hyloai.github.io/assets/frame-6.jpg">
 <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -117,6 +117,40 @@ html[lang="zh-CN"] .episode blockquote { letter-spacing: 0; line-height: 1.5; }
 .result { display: flex; align-items: center; gap: .6rem; margin: 1.5rem 0 0; font-weight: 600; }
 .result::before { content: ""; width: .6rem; height: .6rem; border-radius: 50%; background: var(--accent); }
 @media (max-width: 820px) { .episode { grid-template-columns: minmax(0, 1fr); gap: 1.6rem; } .hero { padding-block: 4rem 3.5rem; } }
+
+/* hero: the era claim, then one recorded episode as proof */
+.hero h1 { max-width: 14ch; }
+html[lang="zh-CN"] .hero h1 { max-width: none; }
+
+/* why: three statements that descend from era to loop, each marked with one wave of the logo */
+#why { padding-top: 0; }
+.thesis { border-top: 1px solid var(--line); display: grid; grid-template-columns: 3.2rem minmax(0, 1.05fr) minmax(0, 1fr) minmax(0, 19rem);
+  gap: 2.2rem; padding-block: 3.6rem; align-items: center; }
+.thesis:last-child { border-bottom: 1px solid var(--line); }
+.thesis .mark { width: 2.8rem; height: 2.8rem; align-self: start; margin-top: .3rem; }
+.thesis .mark path { fill: none; stroke: color-mix(in srgb, var(--muted) 35%, transparent); stroke-width: 5; stroke-linecap: round; }
+.thesis .mark path.on { stroke: var(--accent); }
+.thesis h3 { margin: 0; font: 900 clamp(1.7rem, 2.9vw, 2.45rem)/1.08 var(--font); letter-spacing: -.03em; text-wrap: balance; }
+html[lang="zh-CN"] .thesis h3 { letter-spacing: .01em; line-height: 1.3; }
+.thesis .body { min-width: 0; }
+.thesis .body p { margin: 0 0 .9rem; color: var(--muted); font-size: 1.02rem; }
+.thesis .shot { margin: 0; border-radius: 14px; overflow: hidden; border: 1px solid var(--line); aspect-ratio: 4 / 3; background: var(--sunk); }
+.thesis .shot img { width: 100%; height: 100%; object-fit: cover; }
+.thesis .shot figcaption { display: none; }
+@media (max-width: 1000px) { .thesis { grid-template-columns: 2.6rem minmax(0, 1fr) minmax(0, 16rem); }
+  .thesis h3 { grid-column: 2; } .thesis .body { grid-column: 2; } .thesis .shot { grid-column: 3; grid-row: 1 / span 2; } }
+@media (max-width: 720px) { .thesis { grid-template-columns: 2.2rem minmax(0, 1fr); gap: 1.1rem 1.2rem; padding-block: 2.6rem; }
+  .thesis .shot { grid-column: 2; grid-row: auto; max-width: 26rem; } }
+
+/* claim: the one line that does not change */
+.claim-band { background: var(--kernel); color: var(--kernel-ink); padding-block: 6rem; }
+.claim-band .wrap { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 3rem; align-items: end; }
+.claim-band h2 { color: inherit; max-width: 14ch; }
+html[lang="zh-CN"] .claim-band h2 { max-width: none; }
+.claim-band p { margin: 0; font-size: 1.1rem; opacity: .78; max-width: 26rem; }
+.claim-band .waves { width: 4.2rem; height: 4.2rem; margin-bottom: 1.6rem; }
+.claim-band .waves path { fill: none; stroke: currentColor; stroke-width: 5; stroke-linecap: round; }
+@media (max-width: 820px) { .claim-band { padding-block: 4rem; } .claim-band .wrap { grid-template-columns: minmax(0, 1fr); gap: 1.4rem; } }
 
 /* section headings */
 section { padding-block: 7rem; }
@@ -232,6 +266,7 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
   <div class="wrap">
     <a class="brand" href="#"><img src="assets/logo.svg" alt="" width="30" height="30">Hylo</a>
     <nav class="links" aria-label="Sections">
+      <a href="#why" data-i18n="nav.why">Why Hylo</a>
       <a href="#loop" data-i18n="nav.loop">Loop</a>
       <a href="#stack" data-i18n="nav.stack">Stack</a>
       <a href="#work" data-i18n="nav.work">Examples</a>
@@ -245,9 +280,9 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
 <main>
 <div class="hero">
   <div class="wrap">
-    <p class="kicker">Physical RSI</p>
-    <h1 data-i18n="hero.title">Robots that build on their own <em>progress</em></h1>
-    <p class="lede" data-i18n="hero.lede">Hylo turns robot improvement into a loop the system drives: build worlds, run tasks, improve, verify against physical outcomes and deploy what passes. People set the goals and approve what reaches hardware.</p>
+    <p class="kicker" data-i18n="hero.kicker">The open foundation for physical AI</p>
+    <h1 data-i18n="hero.title">The next era of intelligence is physical.</h1>
+    <p class="lede" data-i18n="hero.lede">Hylo is the open foundation for intelligence that acts, learns and evolves in the physical world: build worlds, run tasks, improve, verify against physical outcomes and deploy what passes. People set the goals and approve what reaches hardware.</p>
     <div class="cta">
       <a class="btn primary" href="https://hyloai.github.io/hylo-docs/getting-started/quickstart/" data-i18n="hero.start">Get started</a>
       <a class="btn ghost" href="https://hyloai.github.io/hylo-docs/physical-rsi/" data-i18n="hero.stack">Why Physical RSI</a>
@@ -274,6 +309,38 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
     </figure>
   </div>
 </div>
+
+<section id="why">
+  <div class="wrap">
+    <article class="thesis">
+      <svg class="mark" viewBox="0 0 64 64" aria-hidden="true"><path class="on" d="M10 22c7-7 15 7 22 0s15 7 22 0"/><path d="M10 33c7-7 15 7 22 0s15 7 22 0"/><path d="M10 44c7-7 15 7 22 0s15 7 22 0"/></svg>
+      <h3 data-i18n="w1.t">Intelligence is becoming physical.</h3>
+      <div class="body">
+        <p data-i18n="w1.d">Intelligence that stops at the screen cannot be checked against the world. Hylo gives a model a body, a task and a measured result: a general model with tools, a planner with an action model, or an action model alone, all on one kernel.</p>
+        <a class="more" href="https://hyloai.github.io/hylo-docs/user-guide/tool-agents/" data-i18n="w1.more">How models drive robots ↗</a>
+      </div>
+      <figure class="shot"><img src="assets/tools-llm-stack.jpg" alt="A local model stacking blocks through typed robot tools, its tool calls captioned over the camera view" width="960" height="720" loading="lazy"><figcaption>Tool-calling agent, Panda stacking</figcaption></figure>
+    </article>
+    <article class="thesis">
+      <svg class="mark" viewBox="0 0 64 64" aria-hidden="true"><path d="M10 22c7-7 15 7 22 0s15 7 22 0"/><path class="on" d="M10 33c7-7 15 7 22 0s15 7 22 0"/><path d="M10 44c7-7 15 7 22 0s15 7 22 0"/></svg>
+      <h3 data-i18n="w2.t">The world shapes intelligence.</h3>
+      <div class="body">
+        <p data-i18n="w2.d">Experience, not opinion, decides what a robot keeps. Every change is tested against physical outcomes on cases it was not built on, and only what passes the gate stays.</p>
+        <a class="more" href="https://hyloai.github.io/hylo-docs/benchmarking/" data-i18n="w2.more">How changes are verified ↗</a>
+      </div>
+      <figure class="shot"><img src="assets/program-improvement.jpg" alt="A held-out stacking episode: the hand-written parent program fails, the improved program succeeds" width="1280" height="616" loading="lazy"><figcaption>Held-out verification, Panda stacking</figcaption></figure>
+    </article>
+    <article class="thesis">
+      <svg class="mark" viewBox="0 0 64 64" aria-hidden="true"><path d="M10 22c7-7 15 7 22 0s15 7 22 0"/><path d="M10 33c7-7 15 7 22 0s15 7 22 0"/><path class="on" d="M10 44c7-7 15 7 22 0s15 7 22 0"/></svg>
+      <h3 data-i18n="w3.t">A world where intelligence can evolve.</h3>
+      <div class="body">
+        <p data-i18n="w3.d">Build, run, improve, verify, deploy, and back again: a loop the system drives and the physical world grades. Each round starts from what the last one proved.</p>
+        <a class="more" href="https://hyloai.github.io/hylo-docs/physical-rsi/" data-i18n="w3.more">Why Physical RSI ↗</a>
+      </div>
+      <figure class="shot"><img src="assets/studio-campaigns.jpg" alt="The Studio's self-improvement page listing campaigns, their cycles, candidates and state" width="1280" height="800" loading="lazy"><figcaption>Self-improvement campaigns, Hylo Studio</figcaption></figure>
+    </article>
+  </div>
+</section>
 
 <section id="loop">
   <div class="wrap">
@@ -449,11 +516,21 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
   </div>
 </section>
 
+<section class="claim-band" aria-label="Hylo">
+  <div class="wrap">
+    <div>
+      <svg class="waves" viewBox="0 0 64 64" aria-hidden="true"><path d="M10 22c7-7 15 7 22 0s15 7 22 0"/><path d="M10 33c7-7 15 7 22 0s15 7 22 0" opacity=".7"/><path d="M10 44c7-7 15 7 22 0s15 7 22 0" opacity=".45"/></svg>
+      <h2 data-i18n="claim.t">Intelligence that never stops evolving.</h2>
+    </div>
+    <p data-i18n="claim.d">Physical RSI: robots that build on their own progress, with the physical world deciding what they keep.</p>
+  </div>
+</section>
+
 <section id="start">
   <div class="wrap">
     <div class="head">
-      <h2 data-i18n="start.title">Start <em>building</em></h2>
-      <p data-i18n="start.lede">Pick the path that fits your work.</p>
+      <h2 data-i18n="start.title">Make intelligence <em>real</em></h2>
+      <p data-i18n="start.lede">Pick the path that fits your work and put a model in front of a robot today.</p>
     </div>
     <div class="paths">
       <div class="path">
@@ -492,7 +569,7 @@ uv run hylo run bench/examples/configs/mujoco_reach.yaml</pre>
     <div class="foot">
       <div>
         <a class="brand" href="#"><img src="assets/logo.svg" alt="" width="30" height="30">Hylo AI</a>
-        <p class="claim" data-i18n="foot.claim">Robots that build on their own progress.</p>
+        <p class="claim" data-i18n="foot.claim">Intelligence that never stops evolving.</p>
       </div>
       <div><h4 data-i18n="foot.products">Products</h4><ul>
         <li><a href="https://github.com/HyloAI/hylo-studio">Studio</a></li>
@@ -518,9 +595,21 @@ uv run hylo run bench/examples/configs/mujoco_reach.yaml</pre>
 <script>
 (function () {
   var zh = {
-    "nav.loop": "循环", "nav.stack": "技术栈", "nav.work": "实例", "nav.start": "开始使用", "nav.docs": "文档",
-    "hero.title": "让机器人<em>自己进步</em>",
-    "hero.lede": "Hylo 把机器人的改进变成一个由系统驱动的循环：搭建世界、运行任务、改进、用物理结果检验、部署通过的版本，每一轮都从上一轮的成果出发。人设定目标，并批准上真机。",
+    "nav.why": "理念", "nav.loop": "循环", "nav.stack": "技术栈", "nav.work": "实例", "nav.start": "开始使用", "nav.docs": "文档",
+    "hero.kicker": "物理 AI 的开放基座",
+    "hero.title": "智能的下一个时代，<br>是物理的。",
+    "hero.lede": "Hylo 是让智能在物理世界中行动、学习、进化的开放基座：搭建世界、运行任务、改进、用物理结果检验、部署通过的版本。人设定目标，并批准上真机。",
+    "w1.t": "智能，正走向物理世界。",
+    "w1.d": "停在屏幕上的智能，无法接受世界的检验。Hylo 给模型一个身体、一项任务和一个实测结果：通用模型加工具、规划器加动作模型，或单独的动作模型，都跑在同一个内核上。",
+    "w1.more": "了解模型如何驱动机器人 ↗",
+    "w2.t": "世界塑造智能。",
+    "w2.d": "决定机器人保留什么的是经验，不是判断。每一个改动都要在开发时没见过的情况上接受物理结果的检验，只有通过门控的才会留下。",
+    "w2.more": "了解改动如何被检验 ↗",
+    "w3.t": "一个让智能<br>不断进化的世界。",
+    "w3.d": "搭建、运行、改进、检验、部署，再回到起点：一个由系统驱动、由物理世界打分的循环。每一轮都从上一轮证明过的成果出发。",
+    "w3.more": "了解 Physical RSI ↗",
+    "claim.t": "让智能永不停止进化。",
+    "claim.d": "Physical RSI：让机器人自己进步，由物理世界决定它们保留什么。",
     "hero.start": "开始使用", "hero.stack": "了解 Physical RSI",
     "loop.title": "改进<em>循环</em>",
     "loop.lede": "过去，机器人变强的速度取决于推动改进的人。Hylo 把这个循环交给系统，由物理结果决定保留什么。",
@@ -566,13 +655,13 @@ uv run hylo run bench/examples/configs/mujoco_reach.yaml</pre>
     "t3.ss": "留出集报告上的成功率", "t3.more": "了解研发与技能复用 ↗",
     "t3.parent": "当前版本", "t3.cand": "候选版本",
     "t3.r1": "筛选评测", "t3.r2": "准入评测", "t3.r3": "留出集报告", "t3.note": "单个任务，20 对留出集案例；准入评测 p = 0.002。本地模型从零研发尚未成功。",
-    "start.title": "从这里<em>开始</em>", "start.lede": "选一条适合你的路。",
+    "start.title": "让智能<em>成为现实</em>", "start.lede": "选一条适合你的路，今天就让模型站到机器人前面。",
     "p1.t": "运行与评测", "p1.d": "在统一的基准上评测你的策略，发布任何人都能回放的运行记录。", "p1.more": "开始评测 ↗",
     "p2.t": "部署到工作单元", "p2.d": "接入你的机器人，设好安全边界，在一个控制台里运行策略。", "p2.more": "了解 Serve ↗",
     "p4.t": "搭建机器人世界", "p4.d": "从 24 种机器人中任选，描述一个场景，手动或让聊天模型运行它，检查目标并录制相机数据。", "p4.more": "搭建世界 ↗",
     "p3.t": "开发机器人技能", "p3.d": "通过操作工具和程序开发任务能力，验证其适用范围，并复用已晋升的程序技能。", "p3.more": "开始技能开发 ↗",
     "start.copy": "复制",
-    "foot.claim": "让机器人自己进步。", "foot.products": "产品", "foot.stack": "技术栈", "foot.dev": "开发者",
+    "foot.claim": "让智能永不停止进化。", "foot.products": "产品", "foot.stack": "技术栈", "foot.dev": "开发者",
     "foot.docs": "文档", "foot.quick": "快速上手", "foot.board": "排行榜", "foot.company": "公司",
     "foot.open": "以 Apache-2.0 许可开源"
   };
