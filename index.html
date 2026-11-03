@@ -124,6 +124,11 @@ html[lang="zh-CN"] .episode blockquote { letter-spacing: 0; line-height: 1.5; }
 
 /* hero: the era claim, then one recorded episode as proof */
 .hero h1 { max-width: none; font-size: clamp(2.6rem, 6.4vw, 5.2rem); }
+/* wide screens: the whole claim on one line */
+@media (min-width: 1000px) {
+  .hero h1, html[lang="zh-CN"] .hero h1 { font-size: clamp(2.6rem, 4.6vw, 3.8rem); white-space: nowrap; }
+  .hero h1 br { display: none; }
+}
 html[lang="zh-CN"] .hero h1 { max-width: none; }
 
 /* why: three statements that descend from era to loop, each marked with one wave of the logo */
@@ -289,7 +294,7 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
 <div class="hero">
   <div class="wrap">
     <p class="kicker" data-i18n="hero.kicker">The open foundation for physical AI</p>
-    <h1 data-i18n="hero.title">The next era of intelligence<br>is physical.</h1>
+    <h1 data-i18n="hero.title">The next era of intelligence <br>is physical.</h1>
     <p class="lede" data-i18n="hero.lede">Hylo is the open foundation for intelligence that acts, learns and evolves in the physical world: build worlds, run tasks, improve, verify against physical outcomes and deploy what passes. People set the goals and approve what reaches hardware.</p>
     <div class="cta">
       <a class="btn primary" href="https://hyloai.github.io/hylo-docs/getting-started/quickstart/" data-i18n="hero.start">Get started</a>
