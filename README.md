@@ -16,15 +16,12 @@
 The site at https://hyloai.github.io/ (bilingual: English, 中文). Plain HTML, no build step: edit `index.html`, push to
 `main`, GitHub Pages serves it. Images in `assets/` come from recorded runs (see hylo-docs).
 
-The homepage introduces robot skills through development, validation, deployment, reuse and improvement. Keep
-English text and the Chinese `data-i18n` entries in sync. Case studies must state their robot, observation conditions
+The homepage and docs share five core concepts: Physical RSI, Worlds, Agents, Memory and Skills. Physical RSI
+connects the other four; Studio, deployment and architecture are supporting entry points. The homepage keeps its
+brand headline while using the docs' product introduction and concept descriptions. Keep English text, Chinese
+`data-i18n` entries and metadata aligned with the [docs wording guide](https://github.com/HyloAI/hylo-docs/blob/main/docs/developer-guide/docs.md#shared-website-wording). Case studies must state their robot, observation conditions
 and measured scope; link detailed results to the documentation. Build and verify the linked docs before publishing.
 
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset=".github/assets/stack-dark.svg">
-    <img src=".github/assets/stack-light.svg" width="100%" alt="The six layers of the Hylo stack and the repositories that implement them">
-  </picture>
-</p>
+After changing Chinese text, regenerate the MiSans subsets with `tools/subset_fonts.py` and check both languages.
 
 Apache License 2.0. Copyright 2026 Hylo AI.

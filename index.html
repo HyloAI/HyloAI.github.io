@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Hylo AI</title>
-<meta name="description" content="Hylo is the open foundation for physical AI: intelligence that acts, learns and evolves in the physical world. Build worlds, run tasks, improve, verify against physical outcomes and deploy what passes.">
+<meta name="description" content="Agents act in worlds, learn from experience and reuse verified skills. Hylo connects those capabilities through a measured improvement loop.">
 <meta property="og:title" content="Hylo AI: the open foundation for physical AI">
-<meta property="og:description" content="The next era of intelligence is physical. Hylo closes the loop in which robots build on their own progress, with physical outcomes deciding what is kept.">
+<meta property="og:description" content="Agents act in worlds, learn from experience and reuse verified skills. Hylo connects those capabilities through a measured improvement loop.">
 <meta property="og:image" content="https://hyloai.github.io/assets/frame-6.jpg">
 <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,8 +19,7 @@
 @font-face { font-family: "MiSans"; src: url("assets/fonts/misans-600.woff2") format("woff2"); font-weight: 600; font-display: swap; }
 @font-face { font-family: "MiSans"; src: url("assets/fonts/misans-700.woff2") format("woff2"); font-weight: 700; font-display: swap; }
 @font-face { font-family: "MiSans"; src: url("assets/fonts/misans-900.woff2") format("woff2"); font-weight: 800 900; font-display: swap; }
-/* The page descends the way the company does: the claim, the Physical RSI loop, the six layers of the stack down
-   to the kernel, real results, then a way in. Warm white, graphite, one cinnabar accent; few words per block. */
+/* The page introduces the claim, the Physical RSI loop, five core concepts, recorded results, then a way in. Warm white, graphite, one cinnabar accent; few words per block. */
 :root {
   --bg: #f7f6f2;
   --surface: #ffffff;
@@ -190,7 +189,7 @@ html[lang="zh-CN"] h2 { letter-spacing: .01em; line-height: 1.25; }
 @media (max-width: 1000px) { .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 560px) { .steps { grid-template-columns: minmax(0, 1fr); } }
 
-/* the stack: six layers on one spine that ends in the kernel */
+/* five core concepts; retain #stack for existing links */
 #stack { background: var(--surface); border-block: 1px solid var(--line); }
 .stack { display: grid; gap: .7rem; position: relative; }
 .layer { display: grid; grid-template-columns: 3rem minmax(0, 12rem) minmax(0, 1fr) auto; gap: 1.6rem; align-items: center;
@@ -205,11 +204,11 @@ a.name:hover { border-color: var(--accent); color: var(--accent); }
 .layer .n { position: relative; z-index: 1; text-align: center; }
 .layer .n span { display: inline-grid; place-items: center; width: 2rem; height: 2rem; border-radius: 50%; background: var(--surface);
   border: 2px solid var(--accent); font: 500 .74rem var(--mono); }
-.layer.kernel { background: var(--kernel); border-color: var(--kernel); color: var(--kernel-ink); }
-.layer.kernel p { color: color-mix(in srgb, var(--kernel-ink) 72%, transparent); }
-.layer.kernel .name { background: transparent; border-color: color-mix(in srgb, var(--kernel-ink) 35%, transparent); }
-.layer.kernel a.name:hover { border-color: var(--accent); color: var(--accent); }
-.layer.kernel .n span { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.layer.primary { background: var(--kernel); border-color: var(--kernel); color: var(--kernel-ink); }
+.layer.primary p { color: color-mix(in srgb, var(--kernel-ink) 72%, transparent); }
+.layer.primary .name { background: transparent; border-color: color-mix(in srgb, var(--kernel-ink) 35%, transparent); }
+.layer.primary a.name:hover { border-color: var(--accent); color: var(--accent); }
+.layer.primary .n span { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
 .spine { position: absolute; left: calc(1.2rem + 1.5rem); top: 2.5rem; bottom: 2.5rem; width: 2px; background: var(--accent);
   transform: translateX(-1px); }
 .ends { display: flex; flex-wrap: wrap; justify-content: center; gap: .7rem; margin-top: 1.2rem; }
@@ -286,8 +285,8 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
     <a class="brand" href="#"><img src="assets/logo.svg" alt="" width="30" height="30">Hylo</a>
     <nav class="links" aria-label="Sections">
       <a href="#why" data-i18n="nav.why">Why Hylo</a>
-      <a href="#loop" data-i18n="nav.loop">Loop</a>
-      <a href="#stack" data-i18n="nav.stack">Stack</a>
+      <a href="#loop" data-i18n="nav.loop">Physical RSI</a>
+      <a href="#stack" data-i18n="nav.stack">Concepts</a>
       <a href="#work" data-i18n="nav.work">Examples</a>
       <a href="#start" data-i18n="nav.start">Get started</a>
       <a href="https://hyloai.github.io/hylo-docs/" data-i18n="nav.docs">Docs</a>
@@ -301,10 +300,10 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
   <div class="wrap">
     <p class="kicker" data-i18n="hero.kicker">The open foundation for physical AI</p>
     <h1 data-i18n="hero.title">The next era of intelligence <br>is physical.</h1>
-    <p class="lede" data-i18n="hero.lede">Hylo is the open foundation for intelligence that acts, learns and evolves in the physical world: build worlds, run tasks, improve, verify against physical outcomes and deploy what passes. People set the goals and approve what reaches hardware.</p>
+    <p class="lede" data-i18n="hero.lede">Agents act in worlds, learn from experience and reuse verified skills. Hylo connects those capabilities through a measured improvement loop.</p>
     <div class="cta">
-      <a class="btn primary" href="https://hyloai.github.io/hylo-docs/getting-started/quickstart/" data-i18n="hero.start">Get started</a>
-      <a class="btn ghost" href="https://hyloai.github.io/hylo-docs/physical-rsi/" data-i18n="hero.stack">Why Physical RSI</a>
+      <a class="btn primary" href="https://hyloai.github.io/hylo-docs/getting-started/quickstart/" data-i18n="hero.start">Quickstart</a>
+      <a class="btn ghost" href="https://hyloai.github.io/hylo-docs/physical-rsi/" data-i18n="hero.stack">Explore Physical RSI</a>
     </div>
     <figure class="episode" aria-label="A recorded episode">
       <div class="screen" id="screen">
@@ -335,8 +334,8 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
       <svg class="mark" viewBox="0 0 64 64" aria-hidden="true"><path class="on" d="M10 22c7-7 15 7 22 0s15 7 22 0"/><path d="M10 33c7-7 15 7 22 0s15 7 22 0"/><path d="M10 44c7-7 15 7 22 0s15 7 22 0"/></svg>
       <h3 data-i18n="w1.t">Intelligence is becoming physical.</h3>
       <div class="body">
-        <p data-i18n="w1.d">Intelligence that stops at the screen cannot be checked against the world. Hylo gives a model a body, a task and a measured result: a general model with tools, a planner with an action model, or an action model alone, all on one kernel.</p>
-        <a class="more" href="https://hyloai.github.io/hylo-docs/user-guide/tool-agents/" data-i18n="w1.more">How models drive robots ↗</a>
+        <p data-i18n="w1.d">Agents act through a policy, a task program or a model calling robot tools. Hylo records their actions and outcomes under explicit task and observation conditions.</p>
+        <a class="more" href="https://hyloai.github.io/hylo-docs/user-guide/agents/" data-i18n="w1.more">Explore agents ↗</a>
       </div>
       <figure class="shot"><img src="assets/tools-llm-stack.jpg" alt="A local model stacking blocks through typed robot tools, its tool calls captioned over the camera view" width="960" height="720" loading="lazy"><figcaption>Tool-calling agent, Panda stacking</figcaption></figure>
     </article>
@@ -344,8 +343,8 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
       <svg class="mark" viewBox="0 0 64 64" aria-hidden="true"><path d="M10 22c7-7 15 7 22 0s15 7 22 0"/><path class="on" d="M10 33c7-7 15 7 22 0s15 7 22 0"/><path d="M10 44c7-7 15 7 22 0s15 7 22 0"/></svg>
       <h3 data-i18n="w2.t">The world shapes intelligence.</h3>
       <div class="body">
-        <p data-i18n="w2.d">Experience, not opinion, decides what a robot keeps. Every change is tested against physical outcomes on cases it was not built on, and only what passes the gate stays.</p>
-        <a class="more" href="https://hyloai.github.io/hylo-docs/benchmarking/" data-i18n="w2.more">How changes are verified ↗</a>
+        <p data-i18n="w2.d">Measured outcomes support what the system keeps. Campaigns compare candidate changes with the current version on cases kept separate from development and selection.</p>
+        <a class="more" href="https://hyloai.github.io/hylo-docs/user-guide/campaigns/" data-i18n="w2.more">How changes are verified ↗</a>
       </div>
       <figure class="shot"><img src="assets/program-improvement.jpg" alt="A held-out stacking episode: the hand-written parent program fails, the improved program succeeds" width="1280" height="616" loading="lazy"><figcaption>Held-out verification, Panda stacking</figcaption></figure>
     </article>
@@ -353,7 +352,7 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
       <svg class="mark" viewBox="0 0 64 64" aria-hidden="true"><path d="M10 22c7-7 15 7 22 0s15 7 22 0"/><path d="M10 33c7-7 15 7 22 0s15 7 22 0"/><path class="on" d="M10 44c7-7 15 7 22 0s15 7 22 0"/></svg>
       <h3 data-i18n="w3.t">A world where intelligence can evolve.</h3>
       <div class="body">
-        <p data-i18n="w3.d">Build, run, improve, verify, deploy, and back again: a loop the system drives and the physical world grades. Each round starts from what the last one proved.</p>
+        <p data-i18n="w3.d">Build, run, improve, verify and deploy. Agents act in worlds, memory carries experience forward, and skills make verified capabilities reusable. Each round builds on adopted changes.</p>
         <a class="more" href="https://hyloai.github.io/hylo-docs/physical-rsi/" data-i18n="w3.more">Why Physical RSI ↗</a>
       </div>
       <figure class="shot"><img src="assets/studio-campaigns.jpg" alt="The Studio's self-improvement page listing campaigns, their cycles, candidates and state" width="1280" height="800" loading="lazy"><figcaption>Self-improvement campaigns, Hylo Studio</figcaption></figure>
@@ -364,8 +363,8 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
 <section id="loop">
   <div class="wrap">
     <div class="head">
-      <h2 data-i18n="loop.title">The <em>loop</em></h2>
-      <p data-i18n="loop.lede">Robots improve only as fast as the people driving their improvement. Hylo hands that loop to the system, and physical outcomes decide what it keeps.</p>
+      <h2 data-i18n="loop.title">Physical <em>RSI</em></h2>
+      <p data-i18n="loop.lede">Use task outcomes to propose changes, verify their effects and carry adopted changes into later rounds. People define the goals and boundaries.</p>
     </div>
     <figure class="loopfig">
       <picture>
@@ -374,11 +373,11 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
       </picture>
     </figure>
     <div class="steps">
-      <div class="step-card"><h3><span class="num">01</span><span data-i18n="s1.t">Build</span></h3><p data-i18n="s1.d">Worlds from a sentence, benchmarks and recorded data.</p></div>
-      <div class="step-card"><h3><span class="num">02</span><span data-i18n="s2.t">Run</span></h3><p data-i18n="s2.d">General models, planners and action models on one kernel.</p></div>
-      <div class="step-card"><h3><span class="num">03</span><span data-i18n="s3.t">Improve</span></h3><p data-i18n="s3.d">Training, memory, programs and skills.</p></div>
-      <div class="step-card"><h3><span class="num">04</span><span data-i18n="s4.t">Verify</span></h3><p data-i18n="s4.d">Tested on cases it was not built on. Only what passes is kept.</p></div>
-      <div class="step-card"><h3><span class="num">05</span><span data-i18n="s5.t">Deploy</span></h3><p data-i18n="s5.d">Approved versions go to robots and back into the loop.</p></div>
+      <div class="step-card"><h3><span class="num">01</span><span data-i18n="s1.t">Build</span></h3><p data-i18n="s1.d">Build scenes and task conditions for agents to act in.</p></div>
+      <div class="step-card"><h3><span class="num">02</span><span data-i18n="s2.t">Run</span></h3><p data-i18n="s2.d">Run policies, programs or models calling robot tools.</p></div>
+      <div class="step-card"><h3><span class="num">03</span><span data-i18n="s3.t">Improve</span></h3><p data-i18n="s3.d">Learn from runs; update programs, memory and skills.</p></div>
+      <div class="step-card"><h3><span class="num">04</span><span data-i18n="s4.t">Verify</span></h3><p data-i18n="s4.d">Match checks to the claim, using cases separate from development.</p></div>
+      <div class="step-card"><h3><span class="num">05</span><span data-i18n="s5.t">Deploy</span></h3><p data-i18n="s5.d">Deploy selected versions after review and target validation.</p></div>
     </div>
   </div>
 </section>
@@ -386,50 +385,45 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
 <section id="stack">
   <div class="wrap">
     <div class="head">
-      <h2 data-i18n="stack.title">The Hylo <em>Stack</em></h2>
-      <p data-i18n="stack.lede">Six layers on one execution kernel. Together they turn the loop.</p>
+      <h2 data-i18n="stack.title">Five core <em>concepts</em></h2>
+      <p data-i18n="stack.lede">Physical RSI connects Worlds, Agents, Memory and Skills. The same concepts organise the documentation.</p>
     </div>
     <div class="stack">
-      <div class="spine" aria-hidden="true"></div>
-      <div class="layer">
-        <div class="n"><span>06</span></div>
-        <h3 data-i18n="l6.t">Workbench</h3>
-        <p data-i18n="l6.d">Watch and steer the loop: worlds, runs, campaigns and workcells in one place.</p>
-        <div class="names"><a class="name" href="https://hyloai.github.io/hylo-docs/user-guide/studio/">Hylo Studio ↗</a><a class="name" href="https://hyloai.github.io/hylo-docs/user-guide/worlds/">World ↗</a></div>
-      </div>
-      <div class="layer">
-        <div class="n"><span>05</span></div>
-        <h3 data-i18n="l5.t">Evolution</h3>
-        <p data-i18n="l5.d">Improve through training, memory, programs and skills, and keep only what passes the gate.</p>
-        <div class="names"><a class="name" href="https://hyloai.github.io/hylo-docs/user-guide/learning/">Learn ↗</a><a class="name" href="https://hyloai.github.io/hylo-docs/user-guide/memory/">Memory ↗</a><a class="name" href="https://hyloai.github.io/hylo-docs/user-guide/campaigns/">Evolve ↗</a></div>
-      </div>
-      <div class="layer">
-        <div class="n"><span>04</span></div>
-        <h3 data-i18n="l4.t">Evaluation</h3>
-        <p data-i18n="l4.d">Verify every change against physical outcomes, on cases it was not built on.</p>
-        <div class="names"><a class="name" href="https://hyloai.github.io/hylo-docs/benchmarking/">Hylo Bench ↗</a><a class="name" href="https://hyloai.github.io/hylo-docs/user-guide/experiments/">Eval ↗</a></div>
-      </div>
-      <div class="layer">
-        <div class="n"><span>03</span></div>
-        <h3 data-i18n="l3.t">Cognition</h3>
-        <p data-i18n="l3.d">Drive the robot with a general model and tools, a planner with an action model, or an action model alone.</p>
-        <div class="names"><a class="name" href="https://hyloai.github.io/hylo-docs/user-guide/tool-agents/">Tool agents ↗</a><a class="name" href="https://hyloai.github.io/hylo-docs/user-guide/policies/">Policies ↗</a><a class="name" href="https://hyloai.github.io/hylo-docs/user-guide/skills/">Skills ↗</a></div>
+      <div class="layer primary">
+        <div class="n"><span>01</span></div>
+        <h3 data-i18n="c1.t">Physical RSI</h3>
+        <p data-i18n="c1.d">Use task outcomes to propose changes, verify their effects and carry adopted changes into later rounds.</p>
+        <div class="names"><a class="name" href="https://hyloai.github.io/hylo-docs/physical-rsi/" data-i18n="c1.more">Explore RSI ↗</a></div>
       </div>
       <div class="layer">
         <div class="n"><span>02</span></div>
-        <h3 data-i18n="l2.t">Runtime</h3>
-        <p data-i18n="l2.d">Serve models and run approved versions on robots, within the safety limits you set.</p>
-        <div class="names"><a class="name" href="https://hyloai.github.io/hylo-docs/user-guide/deployment/">Hylo Serve ↗</a></div>
+        <h3 data-i18n="c2.t">Worlds</h3>
+        <p data-i18n="c2.d">Build scenes with robots, objects and people. Run actions and check goals against physical outcomes.</p>
+        <div class="names"><a class="name" href="https://hyloai.github.io/hylo-docs/user-guide/worlds/" data-i18n="c2.more">Explore worlds ↗</a></div>
       </div>
-      <div class="layer kernel">
-        <div class="n"><span>01</span></div>
-        <h3 data-i18n="l1.t">Kernel</h3>
-        <p data-i18n="l1.d">One execution kernel connects models, simulators and robots.</p>
-        <div class="names"><a class="name" href="https://hyloai.github.io/hylo-docs/getting-started/concepts/">Hylo Core ↗</a><a class="name" href="https://github.com/HyloAI/hylo-plugins">Plugins ↗</a></div>
+      <div class="layer">
+        <div class="n"><span>03</span></div>
+        <h3 data-i18n="c3.t">Agents</h3>
+        <p data-i18n="c3.d">Run a policy, execute a task program or let a model call robot tools. Choose the approach that fits the task.</p>
+        <div class="names"><a class="name" href="https://hyloai.github.io/hylo-docs/user-guide/agents/" data-i18n="c3.more">Explore agents ↗</a></div>
+      </div>
+      <div class="layer">
+        <div class="n"><span>04</span></div>
+        <h3 data-i18n="c4.t">Memory</h3>
+        <p data-i18n="c4.d">Recall spatial observations, retrieve successful actions and use lessons from earlier attempts.</p>
+        <div class="names"><a class="name" href="https://hyloai.github.io/hylo-docs/user-guide/memory/" data-i18n="c4.more">Explore memory ↗</a></div>
+      </div>
+      <div class="layer">
+        <div class="n"><span>05</span></div>
+        <h3 data-i18n="c5.t">Skills</h3>
+        <p data-i18n="c5.d">Keep reusable task capabilities with their applicability and evidence. Retrieve verified programs, recipes and other supported skill kinds for later tasks.</p>
+        <div class="names"><a class="name" href="https://hyloai.github.io/hylo-docs/user-guide/skills/" data-i18n="c5.more">Explore skills ↗</a></div>
       </div>
     </div>
-    <div class="ends" aria-label="What the kernel connects">
-      <span data-i18n="end.models">Models</span><span data-i18n="end.sims">Simulators</span><span data-i18n="end.robots">Robots</span>
+    <div class="ends" aria-label="Supporting tools and architecture">
+      <a class="name" href="https://hyloai.github.io/hylo-docs/user-guide/studio/" data-i18n="support.studio">Studio ↗</a>
+      <a class="name" href="https://hyloai.github.io/hylo-docs/user-guide/deployment/" data-i18n="support.deployment">Deployment ↗</a>
+      <a class="name" href="https://hyloai.github.io/hylo-docs/design/overview/" data-i18n="support.architecture">Architecture ↗</a>
     </div>
   </div>
 </section>
@@ -438,7 +432,7 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
   <div class="wrap">
     <div class="head">
       <h2 data-i18n="work.title">Hylo at <em>work</em></h2>
-      <p data-i18n="work.lede">Seven examples of execution, evaluation, program improvement, robot worlds, tool-calling agents, self-improvement and memory, each backed by recorded runs.</p>
+      <p data-i18n="work.lede">Recorded examples of agents acting in worlds, verified improvement, memory and skill reuse. Each result applies to its stated task and observation conditions.</p>
     </div>
     <div class="tabs" role="tablist">
       <button role="tab" aria-selected="true" aria-controls="t1" id="b1" data-i18n="t1.tab">Task replay</button>
@@ -473,9 +467,9 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
       <div>
         <p class="tag" data-i18n="t3.tag">Example 03 · Panda stacking simulation</p>
         <h3 data-i18n="t3.h">A stacking skill, improved and reused</h3>
-        <p data-i18n="t3.d">A local model revises a deliberately weak stacking program using robot tools. The frozen program passes a paired gate, is reported on held-out cases and becomes a reusable skill. This run uses simulator segmentation.</p>
+        <p data-i18n="t3.d">A local model revises a deliberately weak stacking program using robot tools. The frozen program passes a paired gate, is reported on held-out cases and becomes a reusable program skill. This run uses simulator segmentation.</p>
         <p class="stat"><span>60% → 100%</span><small data-i18n="t3.ss">Success rate on the held-out report</small></p>
-        <a class="more" href="https://hyloai.github.io/hylo-docs/user-guide/research-and-skills/" data-i18n="t3.more">See research and skills ↗</a>
+        <a class="more" href="https://hyloai.github.io/hylo-docs/user-guide/research-and-skills/" data-i18n="t3.more">Explore program research ↗</a>
       </div>
       <div class="bars">
         <video src="assets/program-improvement.mp4" poster="assets/program-improvement.jpg" controls muted loop playsinline preload="none" style="width:100%;border-radius:8px" aria-label="Recorded held-out stacking episode: parent and improved program"></video>
@@ -495,7 +489,7 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
     <div class="panel" role="tabpanel" id="t4" aria-labelledby="b4" hidden>
       <div>
         <p class="tag" data-i18n="t4.tag">Example 04 · MuJoCo worlds</p>
-        <h3 data-i18n="t4.h">Any robot, one world</h3>
+        <h3 data-i18n="t4.h">Robot packs in a shared world</h3>
         <p data-i18n="t4.d">A stage lists robots from 24 packs, objects, cameras and people; a person or a model builds it into a simulation and runs it. Here the G1 and H1 walk under pretrained policies run on the CPU; elsewhere quadrupeds trot, drones fly and people walk around obstacles.</p>
         <p class="stat"><span>24</span><small data-i18n="t4.ss">Robot packs: arms, hands, quadrupeds, humanoids, drones</small></p>
         <a class="more" href="https://hyloai.github.io/hylo-docs/user-guide/worlds/" data-i18n="t4.more">See worlds ↗</a>
@@ -526,7 +520,7 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
       <div>
         <p class="tag" data-i18n="t7.tag">Example 07 · Studio, experience store</p>
         <h3 data-i18n="t7.h">What the agent learned, with its evidence</h3>
-        <p data-i18n="t7.d">Skills become verified only through a gate and keep its numbers; lessons gain or lose standing from the outcomes of the changes that cited them; action banks hold only verified motions. Refuted skills stay, so they are not proposed again.</p>
+        <p data-i18n="t7.d">Skill verification follows its evidence: a campaign gate for promoted programs and changes, or a model-free replay for recipes. Lessons track outcomes, action banks store successful development motions, and refuted skills remain in the record.</p>
         <p class="stat"><span>0.47 → 0.86</span><small data-i18n="t7.ss">Fresh scenes with a verified skill applied, 200 pairs</small></p>
         <a class="more" href="https://hyloai.github.io/hylo-docs/user-guide/memory/" data-i18n="t7.more">See memory ↗</a>
       </div>
@@ -539,9 +533,9 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
   <div class="wrap">
     <div>
       <svg class="waves" viewBox="0 0 64 64" aria-hidden="true"><path d="M10 22c7-7 15 7 22 0s15 7 22 0"/><path d="M10 33c7-7 15 7 22 0s15 7 22 0" opacity=".7"/><path d="M10 44c7-7 15 7 22 0s15 7 22 0" opacity=".45"/></svg>
-      <h2 data-i18n="claim.t">Intelligence that never stops evolving.</h2>
+      <h2 data-i18n="claim.t">Robots that build on their own progress.</h2>
     </div>
-    <p data-i18n="claim.d">Physical RSI: robots that build on their own progress, with the physical world deciding what they keep.</p>
+    <p data-i18n="claim.d">Physical RSI connects Worlds, Agents, Memory and Skills through measured improvement.</p>
   </div>
 </section>
 
@@ -549,7 +543,7 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
   <div class="wrap">
     <div class="head">
       <h2 data-i18n="start.title">Make intelligence <em>real</em></h2>
-      <p data-i18n="start.lede">Pick the path that fits your work and put a model in front of a robot today.</p>
+      <p data-i18n="start.lede">Start in simulation, inspect the evidence and validate the target setup before hardware deployment.</p>
     </div>
     <div class="paths">
       <div class="path">
@@ -559,17 +553,17 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
       </div>
       <div class="path">
         <h3 data-i18n="p2.t">Deploy on a workcell</h3>
-        <p data-i18n="p2.d">Connect your robot, set its safety limits and run policies from one console.</p>
-        <a class="more" href="https://hyloai.github.io/hylo-docs/user-guide/deployment/" data-i18n="p2.more">Explore Serve ↗</a>
+        <p data-i18n="p2.d">Bring up a simulated workcell, then configure and validate your robot. The recorded bring-up uses a simulated arm.</p>
+        <a class="more" href="https://hyloai.github.io/hylo-docs/user-guide/deployment/" data-i18n="p2.more">Explore deployment ↗</a>
       </div>
       <div class="path">
-        <h3 data-i18n="p3.t">Develop a robot skill</h3>
-        <p data-i18n="p3.d">Develop a task capability using robot tools and programs, validate its scope, and reuse a promoted program skill.</p>
-        <a class="more" href="https://hyloai.github.io/hylo-docs/user-guide/developing-strategies/" data-i18n="p3.more">Develop a skill ↗</a>
+        <h3 data-i18n="p3.t">Develop a task program</h3>
+        <p data-i18n="p3.d">Write a program with robot tools, evaluate it beyond development cases, and reuse a promoted version as a program skill.</p>
+        <a class="more" href="https://hyloai.github.io/hylo-docs/user-guide/developing-strategies/" data-i18n="p3.more">Develop a program ↗</a>
       </div>
       <div class="path">
         <h3 data-i18n="p4.t">Build a robot world</h3>
-        <p data-i18n="p4.d">Describe a scene with any of 24 robots, run it by hand or with a chat model, check goals and record camera data.</p>
+        <p data-i18n="p4.d">Describe a scene using the available robot packs, run it by hand or with a chat model, check goals and record camera data.</p>
         <a class="more" href="https://hyloai.github.io/hylo-docs/user-guide/worlds/" data-i18n="p4.more">Build a world ↗</a>
       </div>
     </div>
@@ -588,18 +582,19 @@ uv run hylo run bench/examples/configs/mujoco_reach.yaml</pre>
     <div class="foot">
       <div>
         <a class="brand" href="#"><img src="assets/logo.svg" alt="" width="30" height="30">Hylo AI</a>
-        <p class="claim" data-i18n="foot.claim">Intelligence that never stops evolving.</p>
+        <p class="claim" data-i18n="foot.claim">Robots that build on their own progress.</p>
       </div>
       <div><h4 data-i18n="foot.products">Products</h4><ul>
         <li><a href="https://github.com/HyloAI/hylo-studio">Studio</a></li>
         <li><a href="https://github.com/HyloAI/hylo-bench">Bench</a></li>
         <li><a href="https://github.com/HyloAI/hylo-serve">Serve</a></li></ul></div>
-      <div><h4 data-i18n="foot.stack">Stack</h4><ul>
-        <li><a href="https://github.com/HyloAI/hylo-harness">Core</a></li>
-        <li><a href="https://github.com/HyloAI/hylo-harness">Memory</a></li>
-        <li><a href="https://github.com/HyloAI/hylo-harness">Learn</a></li>
-        <li><a href="https://github.com/HyloAI/hylo-harness">Evolve</a></li>
-        <li><a href="https://github.com/HyloAI/hylo-plugins">Plugins</a></li></ul></div>
+      <div><h4 data-i18n="foot.stack">Core concepts</h4><ul>
+        <li><a href="https://hyloai.github.io/hylo-docs/physical-rsi/" data-i18n="foot.c1">Physical RSI</a></li>
+        <li><a href="https://hyloai.github.io/hylo-docs/user-guide/worlds/" data-i18n="foot.c2">Worlds</a></li>
+        <li><a href="https://hyloai.github.io/hylo-docs/user-guide/agents/" data-i18n="foot.c3">Agents</a></li>
+        <li><a href="https://hyloai.github.io/hylo-docs/user-guide/memory/" data-i18n="foot.c4">Memory</a></li>
+        <li><a href="https://hyloai.github.io/hylo-docs/user-guide/skills/" data-i18n="foot.c5">Skills</a></li>
+      </ul></div>
       <div><h4 data-i18n="foot.dev">Developers</h4><ul>
         <li><a href="https://hyloai.github.io/hylo-docs/" data-i18n="foot.docs">Documentation</a></li>
         <li><a href="https://hyloai.github.io/hylo-docs/getting-started/quickstart/" data-i18n="foot.quick">Quickstart</a></li>
@@ -614,76 +609,143 @@ uv run hylo run bench/examples/configs/mujoco_reach.yaml</pre>
 <script>
 (function () {
   var zh = {
-    "nav.why": "理念", "nav.loop": "循环", "nav.stack": "技术栈", "nav.work": "实例", "nav.start": "开始使用", "nav.docs": "文档",
+    "nav.why": "理念",
+    "nav.loop": "Physical RSI",
+    "nav.stack": "核心概念",
+    "nav.work": "实例",
+    "nav.start": "开始使用",
+    "nav.docs": "文档",
     "hero.kicker": "物理 AI 的开放基座",
     "hero.title": "智能的下一个时代，<br>是物理的。",
-    "hero.lede": "Hylo 是让智能在物理世界中行动、学习、进化的开放基座：搭建世界、运行任务、改进、用物理结果检验、部署通过的版本。人设定目标，并批准上真机。",
+    "hero.lede": "智能体在世界中行动，从经验中学习，并复用已验证的技能。Hylo 通过有实测依据的改进循环，将这些能力连接起来。",
     "w1.t": "智能，正走向物理世界。",
-    "w1.d": "停在屏幕上的智能，无法接受世界的检验。Hylo 给模型一个身体、一项任务和一个实测结果：通用模型加工具、规划器加动作模型，或单独的动作模型，都跑在同一个内核上。",
-    "w1.more": "了解模型如何驱动机器人 ↗",
+    "w1.d": "智能体可以运行策略、执行任务程序，或让模型调用机器人工具。Hylo 在明确的任务和观测条件下记录动作与结果。",
+    "w1.more": "了解智能体 ↗",
     "w2.t": "世界塑造智能。",
-    "w2.d": "决定机器人保留什么的是经验，不是判断。每一个改动都要在开发时没见过的情况上接受物理结果的检验，只有通过门控的才会留下。",
+    "w2.d": "系统依据实测结果决定保留哪些改动。改进任务在独立于开发和筛选的案例上，将候选改动与当前版本进行比较。",
     "w2.more": "了解改动如何被检验 ↗",
     "w3.t": "一个让智能<br>不断进化的世界。",
-    "w3.d": "搭建、运行、改进、检验、部署，再回到起点：一个由系统驱动、由物理世界打分的循环。每一轮都从上一轮证明过的成果出发。",
+    "w3.d": "搭建、运行、改进、验证、部署。智能体在世界中行动，记忆积累经验，技能让已验证的能力可以复用。每一轮都从已采用的改动继续推进。",
     "w3.more": "了解 Physical RSI ↗",
-    "claim.t": "让智能永不停止进化。",
-    "claim.d": "Physical RSI：让机器人自己进步，由物理世界决定它们保留什么。",
-    "hero.start": "开始使用", "hero.stack": "了解 Physical RSI",
-    "loop.title": "改进<em>循环</em>",
-    "loop.lede": "过去，机器人变强的速度取决于推动改进的人。Hylo 把这个循环交给系统，由物理结果决定保留什么。",
-    "s1.t": "搭建", "s1.d": "一句话搭建世界，也可以用 benchmark 和录制的数据。",
-    "s2.t": "运行", "s2.d": "通用模型、规划器和动作模型，跑在同一个内核上。",
-    "s3.t": "改进", "s3.d": "训练模型、积累记忆、改写程序、形成技能。",
-    "s4.t": "检验", "s4.d": "在开发时没见过的情况上检验，只保留通过的改动。",
-    "s5.t": "部署", "s5.d": "通过的版本上到机器人，再回到循环里。",
+    "claim.t": "让机器人在已有成果上持续进步。",
+    "claim.d": "Physical RSI 通过有实测依据的改进，将世界、智能体、记忆与技能连接起来。",
+    "hero.start": "快速上手",
+    "hero.stack": "了解 Physical RSI",
+    "loop.title": "Physical <em>RSI</em>",
+    "loop.lede": "利用任务结果提出改动、验证效果，并将已采用的改动带入后续轮次。人来设定目标与边界。",
+    "s1.t": "搭建",
+    "s1.d": "搭建场景与任务条件，让智能体在其中行动。",
+    "s2.t": "运行",
+    "s2.d": "运行策略、程序，或让模型调用机器人工具。",
+    "s3.t": "改进",
+    "s3.d": "从运行记录中学习，更新程序、记忆与技能。",
+    "s4.t": "验证",
+    "s4.d": "按能力声明选择检验方式，使用与开发分开的案例。",
+    "s5.t": "部署",
+    "s5.d": "经过审核和目标环境验证后，部署选定版本。",
     "hero.task": "“把字母汤罐头和番茄酱都放进篮子里”",
     "hero.result": "355 步完成任务",
-    "stack.title": "Hylo <em>技术栈</em>",
-    "stack.lede": "六层能力，全部建在同一个执行内核上，共同驱动这个循环。",
-    "l6.t": "工作台", "l6.d": "在一个地方观察和操控整个循环：世界、运行、改进任务和工作单元。",
-    "l5.t": "进化", "l5.d": "通过训练、记忆、程序和技能来改进，只保留通过门控的改动。",
-    "l4.t": "评测", "l4.d": "用物理结果检验每一个改动，检验用的情况不参与开发。",
-    "l3.t": "认知", "l3.d": "用通用模型加工具、规划器加动作模型，或单独的动作模型来驱动机器人。",
-    "l2.t": "运行", "l2.d": "提供模型服务，并在你设定的安全限制内，把通过的版本运行到机器人上。",
-    "l1.t": "内核", "l1.d": "一个执行内核，接入模型、仿真器和机器人。",
-    "end.models": "模型", "end.sims": "仿真器", "end.robots": "机器人",
+    "stack.title": "五个核心<em>概念</em>",
+    "stack.lede": "Physical RSI 将世界、智能体、记忆与技能连接起来，文档也围绕这五个概念展开。",
     "work.title": "看 Hylo 如何<em>工作</em>",
-    "work.lede": "执行、评测、程序改进、机器人世界、工具调用智能体、自我改进和记忆七个实例，每个都有实际运行记录。",
-    "t1.tab": "任务回放", "t2.tab": "策略对比", "t3.tab": "技能改进", "t4.tab": "机器人世界", "t5.tab": "工具调用智能体", "t6.tab": "自我改进", "t7.tab": "记忆",
-    "t4.tag": "实例 04 · MuJoCo 世界", "t4.h": "任意机器人，同一个世界",
+    "work.lede": "这些运行记录展示了智能体在世界中行动、经验证的改进、记忆与技能复用。每项结果都有明确的任务和观测条件。",
+    "t1.tab": "任务回放",
+    "t2.tab": "策略对比",
+    "t3.tab": "技能改进",
+    "t4.tab": "机器人世界",
+    "t5.tab": "工具调用智能体",
+    "t6.tab": "自我改进",
+    "t7.tab": "记忆",
+    "t4.tag": "实例 04 · MuJoCo 世界",
+    "t4.h": "不同机器人包，共用一个世界",
     "t4.d": "一个 stage 列出来自 24 个机器人包的机器人、物体、相机和行人；人或模型把它编译成仿真并运行。视频中 G1 和 H1 在 CPU 上由预训练策略驱动行走；此外还有四足机器人小跑、无人机飞行、行人绕开障碍物。",
-    "t4.ss": "个机器人包：机械臂、灵巧手、四足、人形、无人机", "t4.more": "了解机器人世界 ↗",
-    "t5.tag": "实例 05 · Panda 操作仿真", "t5.h": "模型通过工具操作机器人",
+    "t4.ss": "个机器人包：机械臂、灵巧手、四足、人形、无人机",
+    "t4.more": "了解机器人世界 ↗",
+    "t5.tag": "实例 05 · Panda 操作仿真",
+    "t5.h": "模型通过工具操作机器人",
     "t5.d": "本地模型调用类型化的机器人工具（定位、抓取方案、抓取、放置），每次只执行一个经过检查的动作；每个动作都经过安全护栏执行，并返回实测回执。推、按类任务尚未解决。",
-    "t5.ss": "零样本完成的回合（抓取放置、放入碗中、叠块）", "t5.more": "了解工具调用智能体 ↗",
-    "t6.tag": "实例 06 · Studio，MuJoCo 与 LIBERO 改进任务", "t6.h": "只有门控通过的改动才会保留",
-    "t6.d": "每个候选都画成它在级联中的路径：初筛、筛选、配对门控、结论。语言模型在 LIBERO 上的提议没有通过门控，因此没有任何晋级；一个 reach 候选通过门控后等待人工审批，被批准晋级，并且可以回滚。",
-    "t6.ss": "Held-out 成功率，40 对配对回合，p = 6e-8", "t6.more": "了解改进任务 ↗",
-    "t7.tag": "实例 07 · Studio，经验库", "t7.h": "智能体学到了什么，以及证据",
-    "t7.d": "技能只有通过门控才会被验证，并保留门控数据；经验教训的地位取决于引用它们的改动的结果；动作记忆库只存经过验证的动作。被否决的技能会保留，避免再次被提议。",
-    "t7.ss": "应用一条已验证技能后的新场景成功率，200 对", "t7.more": "了解记忆 ↗",
-    "t1.tag": "实例 01 · LIBERO-10 仿真", "t1.h": "两样东西，一个篮子",
+    "t5.ss": "零样本完成的回合（抓取放置、放入碗中、叠块）",
+    "t5.more": "了解工具调用智能体 ↗",
+    "t6.tag": "实例 06 · Studio，MuJoCo 与 LIBERO 改进任务（Campaigns）",
+    "t6.h": "候选改动通过准入评测后才能晋升",
+    "t6.d": "每个候选都展示其级联路径：初步检查、筛选、配对准入评测、结论。语言模型在 LIBERO 上的提议没有通过准入评测，因此没有晋升；一个 reach 候选通过后等待人工审批，获批晋升，并且可以回滚。",
+    "t6.ss": "留出集成功率，40 对配对回合，p = 6e-8",
+    "t6.more": "了解改进任务 ↗",
+    "t7.tag": "实例 07 · Studio，经验库",
+    "t7.h": "智能体学到了什么，以及证据",
+    "t7.d": "技能按各自的证据路径验证：晋升的程序和改动通过准入评测（gate），动作配方（recipe）通过不调用模型的回放验证。经验教训关联结果，动作记忆库保存成功的开发动作，被否决的技能也保留记录。",
+    "t7.ss": "应用一条已验证技能后的新场景成功率，200 对",
+    "t7.more": "了解记忆 ↗",
+    "t1.tag": "实例 01 · LIBERO-10 仿真",
+    "t1.h": "两样东西，一个篮子",
     "t1.d": "SmolVLA 智能体把字母汤罐头和番茄酱放进篮子。Studio 回放整次运行：两路相机画面、每一个动作、每一次模型调用。",
-    "t1.s": "355 步", "t1.ss": "任务完成", "t1.more": "了解 Studio ↗",
-    "t2.tag": "实例 02 · MuJoCo 触达仿真", "t2.h": "八种策略，同一把尺子",
+    "t1.s": "355 步",
+    "t1.ss": "任务完成",
+    "t1.more": "了解 Studio ↗",
+    "t2.tag": "实例 02 · MuJoCo 触达仿真",
+    "t2.h": "八种策略，同一把尺子",
     "t2.d": "八种参考策略经同一套流程训练，在同样的 100 个留出回合上评测。",
-    "t2.ss": "策略 × 回合，附 95% 置信区间", "t2.more": "查看排行榜 ↗",
-    "t3.tag": "实例 03 · Panda 叠块仿真", "t3.h": "叠块技能的改进与复用",
-    "t3.d": "本地模型利用操作工具修改一个刻意弱化的叠块程序。冻结程序通过成对准入评测，并在留出集报告后积累为可复用技能。本次实验使用仿真器分割信息。",
-    "t3.ss": "留出集报告上的成功率", "t3.more": "了解研发与技能复用 ↗",
-    "t3.parent": "当前版本", "t3.cand": "候选版本",
-    "t3.r1": "筛选评测", "t3.r2": "准入评测", "t3.r3": "留出集报告", "t3.note": "单个任务，20 对留出集案例；准入评测 p = 0.002。本地模型从零研发尚未成功。",
-    "start.title": "让智能<em>成为现实</em>", "start.lede": "选一条适合你的路，今天就让模型站到机器人前面。",
-    "p1.t": "运行与评测", "p1.d": "在统一的基准上评测你的策略，发布任何人都能回放的运行记录。", "p1.more": "开始评测 ↗",
-    "p2.t": "部署到工作单元", "p2.d": "接入你的机器人，设好安全边界，在一个控制台里运行策略。", "p2.more": "了解 Serve ↗",
-    "p4.t": "搭建机器人世界", "p4.d": "从 24 种机器人中任选，描述一个场景，手动或让聊天模型运行它，检查目标并录制相机数据。", "p4.more": "搭建世界 ↗",
-    "p3.t": "开发机器人技能", "p3.d": "通过操作工具和程序开发任务能力，验证其适用范围，并复用已晋升的程序技能。", "p3.more": "开始技能开发 ↗",
+    "t2.ss": "策略 × 回合，附 95% 置信区间",
+    "t2.more": "查看排行榜 ↗",
+    "t3.tag": "实例 03 · Panda 叠块仿真",
+    "t3.h": "叠块技能的改进与复用",
+    "t3.d": "本地模型利用机器人工具修改一个刻意弱化的叠块程序。冻结程序通过配对准入评测（gate），在留出集上报告结果，并形成可复用的程序技能。本次实验使用仿真器分割信息。",
+    "t3.ss": "留出集报告上的成功率",
+    "t3.more": "了解程序研发 ↗",
+    "t3.parent": "当前版本",
+    "t3.cand": "候选版本",
+    "t3.r1": "筛选评测",
+    "t3.r2": "准入评测（gate）",
+    "t3.r3": "留出集报告",
+    "t3.note": "单个任务，20 对留出集案例；准入评测 p = 0.002。本地模型从零开发尚未成功。",
+    "start.title": "让智能<em>成为现实</em>",
+    "start.lede": "从仿真开始，检查运行证据，并在部署到真机前验证目标环境。",
+    "p1.t": "运行与评测",
+    "p1.d": "在统一的基准上评测你的策略，发布任何人都能回放的运行记录。",
+    "p1.more": "开始评测 ↗",
+    "p2.t": "部署到工作单元",
+    "p2.d": "先启动仿真工作单元，再配置并验证你的机器人。已有运行记录使用的是仿真机械臂。",
+    "p2.more": "了解部署 ↗",
+    "p4.t": "搭建机器人世界",
+    "p4.d": "使用已有机器人包描述场景，手动或让聊天模型运行它，检查目标并录制相机数据。",
+    "p4.more": "搭建世界 ↗",
+    "p3.t": "开发任务程序",
+    "p3.d": "使用机器人工具编写程序，在开发案例之外评估它，并将已晋升的版本作为程序技能复用。",
+    "p3.more": "开发程序 ↗",
     "start.copy": "复制",
-    "foot.claim": "让智能永不停止进化。", "foot.products": "产品", "foot.stack": "技术栈", "foot.dev": "开发者",
-    "foot.docs": "文档", "foot.quick": "快速上手", "foot.board": "排行榜", "foot.company": "公司",
-    "foot.open": "以 Apache-2.0 许可开源"
-  };
+    "foot.claim": "让机器人在已有成果上持续进步。",
+    "foot.products": "产品",
+    "foot.stack": "核心概念",
+    "foot.dev": "开发者",
+    "foot.docs": "文档",
+    "foot.quick": "快速上手",
+    "foot.board": "排行榜",
+    "foot.company": "公司",
+    "foot.open": "以 Apache-2.0 许可开源",
+    "c1.t": "Physical RSI",
+    "c1.d": "利用任务结果提出改动、验证效果，并将已采用的改动带入后续轮次。",
+    "c1.more": "了解 RSI ↗",
+    "c2.t": "世界",
+    "c2.d": "搭建包含机器人、物体和行人的场景，执行动作，并依据物理结果检查目标。",
+    "c2.more": "了解世界 ↗",
+    "c3.t": "智能体",
+    "c3.d": "运行策略、执行任务程序，或让模型调用机器人工具，选择适合任务的方式。",
+    "c3.more": "了解智能体 ↗",
+    "c4.t": "记忆",
+    "c4.d": "回忆空间观测、检索成功动作，并利用之前尝试积累的经验教训。",
+    "c4.more": "了解记忆 ↗",
+    "c5.t": "技能",
+    "c5.d": "保存可复用的任务能力及其适用条件和证据，在后续任务中检索已验证的程序、动作配方及其他受支持的技能。",
+    "c5.more": "了解技能 ↗",
+    "support.studio": "Studio ↗",
+    "support.deployment": "部署 ↗",
+    "support.architecture": "架构 ↗",
+    "foot.c1": "Physical RSI",
+    "foot.c2": "世界",
+    "foot.c3": "智能体",
+    "foot.c4": "记忆",
+    "foot.c5": "技能"
+};
   var en = {};
   var nodes = document.querySelectorAll("[data-i18n]");
   nodes.forEach(function (n) { en[n.getAttribute("data-i18n")] = n.innerHTML; });
