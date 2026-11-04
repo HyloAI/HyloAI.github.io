@@ -1,0 +1,22 @@
+{
+  "source_video_sha256": "545f8062e6927e6c0b3a5ca52f116f34ef1317853ef9237570522bb42e5308b6",
+  "homepage_excerpt_seconds": [
+    [
+      1,
+      24
+    ],
+    [
+      63,
+      78
+    ],
+    [
+      125,
+      129
+    ]
+  ],
+  "homepage_duration_seconds": 42,
+  "full_video_seconds": 129.84,
+  "mode": "Recorded AI session replay; excerpt is edited; waits shortened",
+  "scene_objects": 23,
+  "robots": 2
+}

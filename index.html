@@ -489,22 +489,24 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
     <div class="panel" role="tabpanel" id="t4" aria-labelledby="b4" hidden>
       <div>
         <p class="tag" data-i18n="t4.tag">Example 04 · MuJoCo worlds</p>
-        <h3 data-i18n="t4.h">Robot packs in a shared world</h3>
-        <p data-i18n="t4.d">A stage lists robots from 24 packs, objects, cameras and people; a person or a model builds it into a simulation and runs it. Here the G1 and H1 walk under pretrained policies run on the CPU; elsewhere quadrupeds trot, drones fly and people walk around obstacles.</p>
-        <p class="stat"><span>24</span><small data-i18n="t4.ss">Robot packs: arms, hands, quadrupeds, humanoids, drones</small></p>
-        <a class="more" href="https://hyloai.github.io/hylo-docs/user-guide/worlds/" data-i18n="t4.more">See worlds ↗</a>
+        <h3 data-i18n="t4.h">Build worlds through conversation</h3>
+        <p data-i18n="t4.d">Describe a robotics workbench in English, then refine its layout through chat. This recorded AI session shows tool-driven scene edits and builds in MuJoCo, followed by camera and object inspection in World Studio.</p>
+        <p class="stat"><span>23</span><small data-i18n="t4.ss">Scene objects, including two Panda arms</small></p>
+        <p class="note" data-i18n="t4.note">42-second highlights · Recorded AI session replay, with waits shortened. Demonstrates scene construction.</p>
+        <a class="more" href="https://hyloai.github.io/hylo-docs/user-guide/worlds/#chat-to-world-demo" data-i18n="t4.more">Watch the full demo · 2:10 ↗</a>
       </div>
-      <div class="shot"><video src="assets/world-humanoids.mp4" poster="assets/world-humanoids.jpg" controls muted loop playsinline preload="none" style="width:100%;display:block" aria-label="Unitree G1 and H1 walking under pretrained policies in a MuJoCo world"></video></div>
+      <div class="shot"><video src="assets/world-chat.mp4" poster="assets/world-chat.jpg" controls muted playsinline preload="none" style="width:100%;display:block" aria-label="Recorded AI session replay: English chat builds and refines a dual-arm workbench in World Studio"></video></div>
     </div>
     <div class="panel" role="tabpanel" id="t5" aria-labelledby="b5" hidden>
       <div>
         <p class="tag" data-i18n="t5.tag">Example 05 · Panda manipulation simulation</p>
-        <h3 data-i18n="t5.h">A model operating a robot through tools</h3>
-        <p data-i18n="t5.d">A local model calls typed robot tools (locate, grasp options, grasp, place), one checked action at a time; every action runs through the safety shield and comes back as a measured receipt. Push and press tasks are not solved yet.</p>
-        <p class="stat"><span>8 / 9</span><small data-i18n="t5.ss">Zero-shot episodes solved on pick-and-place, put-in-bowl and stack</small></p>
-        <a class="more" href="https://hyloai.github.io/hylo-docs/user-guide/tool-agents/" data-i18n="t5.more">See tool-calling agents ↗</a>
+        <h3 data-i18n="t5.h">An AI agent operating a robot</h3>
+        <p data-i18n="t5.d">“Stack the purple block on the green block.” Watch a local model locate the objects, choose a grasp, pick up the block and place it on its target. Camera views, tool calls and measured receipts follow the same recorded episode; the task check reports success.</p>
+        <p class="stat"><span>5 → 2</span><small data-i18n="t5.ss">Model calls → robot actions in this episode</small></p>
+        <p class="note" data-i18n="t5.note">42-second highlights · Recorded run, replayed in MuJoCo. Model waits shortened; robot motion slowed for clarity.</p>
+        <a class="more" href="https://hyloai.github.io/hylo-docs/user-guide/tool-agents/#recorded-robot-control-demo" data-i18n="t5.more">Watch the full demo · 1:45 ↗</a>
       </div>
-      <div class="shot"><video src="assets/tools-llm-stack.mp4" poster="assets/tools-llm-stack.jpg" controls muted loop playsinline preload="none" style="width:100%;display:block" aria-label="A stack episode: the model's tool calls captioned over the re-simulated camera view"></video></div>
+      <div class="shot"><video src="assets/tools-llm-stack.mp4" poster="assets/tools-llm-stack.jpg" controls muted playsinline preload="none" style="width:100%;display:block" aria-label="Recorded AI robot-control walkthrough: a Panda arm stacks a purple block on a green block, with tool calls and task verification"></video></div>
     </div>
     <div class="panel" role="tabpanel" id="t6" aria-labelledby="b6" hidden>
       <div>
@@ -657,15 +659,17 @@ uv run hylo run bench/examples/configs/mujoco_reach.yaml</pre>
     "t6.tab": "自我改进",
     "t7.tab": "记忆",
     "t4.tag": "实例 04 · MuJoCo 世界",
-    "t4.h": "不同机器人包，共用一个世界",
-    "t4.d": "一个 stage 列出来自 24 个机器人包的机器人、物体、相机和行人；人或模型把它编译成仿真并运行。视频中 G1 和 H1 在 CPU 上由预训练策略驱动行走；此外还有四足机器人小跑、无人机飞行、行人绕开障碍物。",
-    "t4.ss": "个机器人包：机械臂、灵巧手、四足、人形、无人机",
-    "t4.more": "了解机器人世界 ↗",
+    "t4.h": "通过对话，构建机器人世界",
+    "t4.d": "用英文描述机器人工作台，再通过对话调整布局。这段真实 AI 会话回放展示了模型调用工具编辑场景、构建 MuJoCo 仿真，以及在 World Studio 中切换视角和检查对象的过程。",
+    "t4.ss": "个场景对象，包含两台 Panda 机械臂",
+    "t4.note": "42 秒精华片段 · 真实 AI 会话回放，已缩短等待时间。展示场景构建过程。",
+    "t4.more": "观看完整演示 · 2:10 ↗",
     "t5.tag": "实例 05 · Panda 操作仿真",
-    "t5.h": "模型通过工具操作机器人",
-    "t5.d": "本地模型调用类型化的机器人工具（定位、抓取方案、抓取、放置），每次只执行一个经过检查的动作；每个动作都经过安全护栏执行，并返回实测回执。推、按类任务尚未解决。",
-    "t5.ss": "零样本完成的回合（抓取放置、放入碗中、叠块）",
-    "t5.more": "了解工具调用智能体 ↗",
+    "t5.h": "让 AI 操作机器人",
+    "t5.d": "“把紫色方块叠到绿色方块上。”观看本地模型定位物体、选择抓取方式、抓起方块并放到目标上。相机画面、工具调用和实测回执来自同一次运行，最终由任务检查判定成功。",
+    "t5.ss": "本次运行中的模型调用 → 机器人动作",
+    "t5.note": "42 秒精华片段 · 真实运行记录的 MuJoCo 回放。已缩短模型等待时间，并放慢机器人动作以便观看。",
+    "t5.more": "观看完整演示 · 1:45 ↗",
     "t6.tag": "实例 06 · Studio，MuJoCo 与 LIBERO 改进任务（Campaigns）",
     "t6.h": "候选改动通过准入评测后才能晋升",
     "t6.d": "每个候选都展示其级联路径：初步检查、筛选、配对准入评测、结论。语言模型在 LIBERO 上的提议没有通过准入评测，因此没有晋升；一个 reach 候选通过后等待人工审批，获批晋升，并且可以回滚。",
