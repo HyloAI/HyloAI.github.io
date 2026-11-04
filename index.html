@@ -465,26 +465,14 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
     </div>
     <div class="panel" role="tabpanel" id="t3" aria-labelledby="b3" hidden>
       <div>
-        <p class="tag" data-i18n="t3.tag">Example 03 · Panda stacking simulation</p>
-        <h3 data-i18n="t3.h">A stacking skill, improved and reused</h3>
-        <p data-i18n="t3.d">A local model revises a deliberately weak stacking program using robot tools. The frozen program passes a paired gate, is reported on held-out cases and becomes a reusable program skill. This run uses simulator segmentation.</p>
-        <p class="stat"><span>60% → 100%</span><small data-i18n="t3.ss">Success rate on the held-out report</small></p>
-        <a class="more" href="https://hyloai.github.io/hylo-docs/user-guide/research-and-skills/" data-i18n="t3.more">Explore program research ↗</a>
+        <p class="tag" data-i18n="t3.tag">Example 03 · Panda sorting simulation</p>
+        <h3 data-i18n="t3.h">From experience to verified skills</h3>
+        <p data-i18n="t3.d">An AI model extends a one-object-per-colour starter to sort multiple instances. Watch the real source revision, independent program execution, paired verification and a later agent calling the saved skill on new layouts.</p>
+        <p class="stat"><span>8% → 83%</span><small data-i18n="t3.ss">Held-out success · 12 paired sorting scenes</small></p>
+        <p class="note" data-i18n="t3.note">45-second highlights · Recorded research and physics replay. Explicitly limited starter; simulator segmentation; program development, no weight updates.</p>
+        <a class="more" href="https://hyloai.github.io/hylo-docs/user-guide/research-and-skills/#recorded-skill-development-demo" data-i18n="t3.more">Watch the full demo · 2:33 ↗</a>
       </div>
-      <div class="bars">
-        <video src="assets/program-improvement.mp4" poster="assets/program-improvement.jpg" controls muted loop playsinline preload="none" style="width:100%;border-radius:8px" aria-label="Recorded held-out stacking episode: parent and improved program"></video>
-        <div class="legend"><span><i class="parent"></i><span data-i18n="t3.parent">Current version</span></span><span><i class="cand"></i><span data-i18n="t3.cand">Candidate</span></span></div>
-        <div class="row"><h4 data-i18n="t3.r1">Selection</h4>
-          <div class="bar"><div><span class="parent" style="width:30%"></span></div><b>30%</b></div>
-          <div class="bar"><div><span class="cand" style="width:100%"></span></div><b>100%</b></div></div>
-        <div class="row"><h4 data-i18n="t3.r2">Gate</h4>
-          <div class="bar"><div><span class="parent" style="width:50%"></span></div><b>50%</b></div>
-          <div class="bar"><div><span class="cand" style="width:95%"></span></div><b>95%</b></div></div>
-        <div class="row"><h4 data-i18n="t3.r3">Held-out report</h4>
-          <div class="bar"><div><span class="parent" style="width:60%"></span></div><b>60%</b></div>
-          <div class="bar"><div><span class="cand" style="width:100%"></span></div><b>100%</b></div></div>
-        <p class="note" data-i18n="t3.note">One task, 20 held-out pairs; gate p = 0.002. From-scratch local-model research remains unsuccessful.</p>
-      </div>
+      <div class="shot"><video src="assets/skills-sorting.mp4" poster="assets/skills-sorting.jpg" controls muted playsinline preload="none" style="width:100%;display:block" aria-label="Recorded skill development: AI revises a sorting program, the frozen candidate passes independent verification, and a later agent reuses the verified skill"></video></div>
     </div>
     <div class="panel" role="tabpanel" id="t4" aria-labelledby="b4" hidden>
       <div>
@@ -691,17 +679,17 @@ uv run hylo run bench/examples/configs/mujoco_reach.yaml</pre>
     "t2.d": "八种参考策略经同一套流程训练，在同样的 100 个留出回合上评测。",
     "t2.ss": "策略 × 回合，附 95% 置信区间",
     "t2.more": "查看排行榜 ↗",
-    "t3.tag": "实例 03 · Panda 叠块仿真",
-    "t3.h": "叠块技能的改进与复用",
-    "t3.d": "本地模型利用机器人工具修改一个刻意弱化的叠块程序。冻结程序通过配对准入评测（gate），在留出集上报告结果，并形成可复用的程序技能。本次实验使用仿真器分割信息。",
-    "t3.ss": "留出集报告上的成功率",
-    "t3.more": "了解程序研发 ↗",
+    "t3.tag": "实例 03 · Panda 分拣仿真",
+    "t3.h": "从执行经验到经过验证的技能",
+    "t3.d": "AI 将“每种颜色处理一个物体”的基础程序扩展为同色多物体分拣。观看真实代码修改、程序独立执行、配对验证，以及后续智能体在新布局中调用已保存的技能。",
+    "t3.ss": "留出集成功率 · 12 对分拣场景",
+    "t3.more": "观看完整演示 · 2:33 ↗",
     "t3.parent": "当前版本",
     "t3.cand": "候选版本",
     "t3.r1": "筛选评测",
     "t3.r2": "准入评测（gate）",
     "t3.r3": "留出集报告",
-    "t3.note": "单个任务，20 对留出集案例；准入评测 p = 0.002。本地模型从零开发尚未成功。",
+    "t3.note": "45 秒精华片段 · 真实研发记录与物理回放。起点为明确受限的基础程序，使用仿真器分割信息；改进程序，不更新模型权重。",
     "start.title": "让智能<em>成为现实</em>",
     "start.lede": "从仿真开始，检查运行证据，并在部署到真机前验证目标环境。",
     "p1.t": "运行与评测",
@@ -815,6 +803,8 @@ uv run hylo run bench/examples/configs/mujoco_reach.yaml</pre>
       });
     });
   });
+
+  if (params.get("demo") === "skills") document.getElementById("b3").click();
 
   document.getElementById("copy").addEventListener("click", function () {
     var btn = this;
