@@ -18,6 +18,7 @@ The site at https://hyloai.github.io/ (bilingual: English, 中文). Plain HTML, 
 
 The homepage and docs share five core concepts: Physical RSI, Worlds, Agents, Memory and Skills. Physical RSI
 connects the other four. The homepage pairs a circular five-step loop with a four-layer capability stack.
+A shared Engine foundation beneath both links to the unified execution architecture.
 Keep labels brief; hover and keyboard focus highlight related stages and capabilities. Preserve the `#loop` and `#stack` anchors. Studio,
 deployment and architecture are supporting entry points. Keep homepage copy concise and aligned with the docs'
 concept definitions. Keep English text, Chinese
