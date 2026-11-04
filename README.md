@@ -17,8 +17,10 @@ The site at https://hyloai.github.io/ (bilingual: English, 中文). Plain HTML, 
 `main`, GitHub Pages serves it. Images in `assets/` come from recorded runs (see hylo-docs).
 
 The homepage and docs share five core concepts: Physical RSI, Worlds, Agents, Memory and Skills. Physical RSI
-connects the other four; Studio, deployment and architecture are supporting entry points. The homepage keeps its
-brand headline while using the docs' product introduction and concept descriptions. Keep English text, Chinese
+connects the other four. The homepage presents the five-step loop and four supporting capabilities in one section,
+with stage links and highlights showing their relationships. Preserve the `#loop` and `#stack` anchors. Studio,
+deployment and architecture are supporting entry points. Keep homepage copy concise and aligned with the docs'
+concept definitions. Keep English text, Chinese
 `data-i18n` entries and metadata aligned with the [docs wording guide](https://github.com/HyloAI/hylo-docs/blob/main/docs/developer-guide/docs.md#shared-website-wording). Case studies must state their robot, observation conditions
 and measured scope; link detailed results to the documentation. Build and verify the linked docs before publishing.
 
