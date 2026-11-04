@@ -58,7 +58,7 @@ img { max-width: 100%; height: auto; display: block; }
 /* keep a lone word or character off the last line of every paragraph */
 p { text-wrap: pretty; }
 /* short blocks: even lines, which also catches a lone Chinese character that pretty leaves behind */
-.head p, .claim-band p, .stat small { text-wrap: balance; }
+.head p, .stat small { text-wrap: balance; }
 [hidden] { display: none !important; }
 .wrap { max-width: var(--wrap); margin: 0 auto; padding-left: max(20px, env(safe-area-inset-left, 0px));
   padding-right: max(20px, env(safe-area-inset-right, 0px)); }
@@ -159,16 +159,6 @@ html[lang="zh-CN"] .thesis h3 { letter-spacing: .01em; line-height: 1.3; font-si
 @media (max-width: 720px) { .thesis { grid-template-columns: 2.2rem minmax(0, 1fr); grid-template-rows: auto; column-gap: 1.2rem; padding-block: 2.6rem; }
   .thesis .mark, .thesis h3 { grid-row: 1; } .thesis .body { grid-row: 2; margin-top: .6rem; }
   .thesis .shot { grid-column: 2; grid-row: 3; max-width: 26rem; margin-top: 1.1rem; } }
-
-/* claim: the one line that does not change */
-.claim-band { background: var(--kernel); color: var(--kernel-ink); padding-block: 6rem; }
-.claim-band .wrap { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 3rem; align-items: end; }
-.claim-band h2 { color: inherit; max-width: 14ch; }
-html[lang="zh-CN"] .claim-band h2 { max-width: none; }
-.claim-band p { margin: 0; font-size: 1.1rem; opacity: .78; max-width: 26rem; }
-.claim-band .waves { width: 4.2rem; height: 4.2rem; margin-bottom: 1.6rem; }
-.claim-band .waves path { fill: none; stroke: currentColor; stroke-width: 5; stroke-linecap: round; }
-@media (max-width: 820px) { .claim-band { padding-block: 4rem; } .claim-band .wrap { grid-template-columns: minmax(0, 1fr); gap: 1.4rem; } }
 
 /* section headings */
 section { padding-block: 7rem; }
@@ -497,16 +487,6 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
   </div>
 </section>
 
-<section class="claim-band" aria-label="Hylo">
-  <div class="wrap">
-    <div>
-      <svg class="waves" viewBox="0 0 64 64" aria-hidden="true"><path d="M10 22c7-7 15 7 22 0s15 7 22 0"/><path d="M10 33c7-7 15 7 22 0s15 7 22 0" opacity=".7"/><path d="M10 44c7-7 15 7 22 0s15 7 22 0" opacity=".45"/></svg>
-      <h2 data-i18n="claim.t">Robots that build on their own progress.</h2>
-    </div>
-    <p data-i18n="claim.d">Make today’s experience the starting point for tomorrow’s progress.</p>
-  </div>
-</section>
-
 <section id="start">
   <div class="wrap">
     <div class="head">
@@ -595,8 +575,6 @@ uv run hylo run bench/examples/configs/mujoco_reach.yaml</pre>
     "w3.t": "一个让智能<br>不断进化的世界。",
     "w3.d": "让经验持续积累，让能力不断生长。",
     "w3.more": "了解 Physical RSI ↗",
-    "claim.t": "让机器人在已有成果上持续进步。",
-    "claim.d": "让今天积累的经验，成为下一次进步的起点。",
     "hero.start": "快速上手",
     "hero.stack": "了解 Physical RSI",
     "loop.title": "Physical <em>RSI</em>",
