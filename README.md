@@ -17,8 +17,8 @@ The site at https://hyloai.github.io/ (bilingual: English, 中文). Plain HTML, 
 `main`, GitHub Pages serves it. Images in `assets/` come from recorded runs (see hylo-docs).
 
 The homepage and docs share five core concepts: Physical RSI, Worlds, Agents, Memory and Skills. Physical RSI
-connects the other four. The homepage pairs a circular five-step loop with a four-layer capability stack.
-An Inference Engine foundation beneath both represents model serving and links to the policy-serving guide.
+connects the other four. The homepage pairs a circular five-step loop with a capability stack.
+Inference Engine is its bottom layer, representing model serving and linking to the policy-serving guide.
 Keep labels brief; hover and keyboard focus highlight related stages and capabilities. Preserve the `#loop` and `#stack` anchors. Studio,
 deployment and architecture are supporting entry points. Keep homepage copy concise and aligned with the docs'
 concept definitions. Keep English text, Chinese

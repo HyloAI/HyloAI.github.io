@@ -167,7 +167,7 @@ html[lang="zh-CN"] h2 { letter-spacing: .01em; line-height: 1.25; }
 .stack-panel { position: relative; display: flex; flex-direction: column; padding-block: 1.6rem; }
 .stack-panel::before { content: "↔"; position: absolute; left: calc(clamp(2rem, 5vw, 4.5rem) / -2); top: 50%; transform: translate(-50%, -50%); color: var(--muted); font-size: 1.3rem; }
 .stack-panel .diagram-label { color: var(--muted); }
-.stack-layers { display: flex; flex-direction: column; align-items: center; gap: 1.1rem; margin: auto 0; padding-block: 2rem 1rem; }
+.stack-layers { display: flex; flex-direction: column; align-items: center; gap: .8rem; margin: auto 0; padding-block: 1.4rem .5rem; }
 .stack-layer { width: var(--width); min-height: 5rem; display: grid; grid-template-columns: 1.6rem minmax(0, 1fr) auto; column-gap: 1rem; align-items: center;
   padding: 1rem 1.3rem; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); text-decoration: none;
   box-shadow: 0 5px 0 var(--sunk), 0 6px 0 var(--line); transition: transform .18s, border-color .18s; }
@@ -177,6 +177,8 @@ html[lang="zh-CN"] h2 { letter-spacing: .01em; line-height: 1.25; }
 .stack-layer .layer-arrow { color: var(--muted); font-size: 1.1rem; }
 .stack-layer:first-child { background: color-mix(in srgb, var(--accent) 5%, var(--surface)); }
 .stack-layer:first-child svg { color: var(--accent); }
+.stack-layer.engine-layer { background: var(--sunk); }
+.stack-layer.engine-layer svg { color: var(--accent); }
 .stack-layer:hover, .stack-layer:focus-visible { border-color: var(--accent); transform: translateY(-3px); }
 .stack-layer:hover .layer-name, .stack-layer:focus-visible .layer-name { color: var(--accent); }
 .rsi-more { margin: 1.8rem 0 0; }
@@ -209,33 +211,6 @@ html[lang="zh-CN"] h2 { letter-spacing: .01em; line-height: 1.25; }
 .rsi-system:has(.stack-layer[data-stages~="deploy"]:is(:hover, :focus-visible)) #rsi-deploy { border-color: var(--accent); background: var(--accent); color: var(--accent-ink); }
 .rsi-system:has(#rsi-deploy:is(:hover, :focus-visible, :target)) .stack-layer[data-stages~="deploy"] { border-color: var(--accent); }
 @media (prefers-reduced-motion: reduce) { .orbit-step, .stack-layer { transition: none; } .stack-layer:hover, .stack-layer:focus-visible { transform: none; } }
-
-/* Model inference powers the intelligence in the loop and capability stack. */
-.engine-foundation { position: relative; margin-top: 2rem; }
-.engine-foundation::before, .engine-foundation::after { content: ""; position: absolute; top: -2rem; height: 2rem; width: 1px;
-  background: var(--line); pointer-events: none; }
-.engine-foundation::before { left: 25%; }
-.engine-foundation::after { left: 75%; }
-.engine-base { position: relative; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 1.5rem;
-  padding: 1.4rem 1.8rem; border: 1px solid var(--line); border-radius: 14px; background: var(--sunk); text-decoration: none;
-  box-shadow: 0 5px 0 var(--line); transition: border-color .18s; }
-.engine-base:hover, .engine-base:focus-visible { border-color: var(--accent); }
-.engine-identity { display: flex; align-items: center; gap: 1rem; min-width: 0; }
-.engine-identity svg { width: 2rem; height: 2rem; flex-shrink: 0; color: var(--accent); }
-.engine-identity strong { font: 800 1.55rem/1.2 var(--font); letter-spacing: -.025em; }
-.engine-description { color: var(--muted); font-size: 1rem; }
-.engine-arrow { color: var(--accent); font-size: 1.2rem; }
-@media (max-width: 820px) {
-  .engine-foundation { margin-top: 1.7rem; }
-  .engine-foundation::before { left: 50%; top: -1.7rem; height: 1.7rem; }
-  .engine-foundation::after { display: none; }
-  .engine-base { padding: 1.2rem; gap: .6rem 1rem; grid-template-columns: minmax(0, 1fr) auto; }
-  .engine-description { grid-column: 1; grid-row: 2; font-size: .9rem; }
-  .engine-arrow { grid-column: 2; grid-row: 1 / 3; }
-  .engine-identity { gap: .8rem; }
-  .engine-identity strong { font-size: 1.35rem; }
-}
-@media (prefers-reduced-motion: reduce) { .engine-base { transition: none; } }
 
 /* examples */
 .tabs { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 2.2rem; }
@@ -392,38 +367,33 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
       <div class="stack-panel" id="stack">
         <h3 class="diagram-label" data-i18n="loop.stack">The stack</h3>
         <div class="stack-layers">
-          <a class="stack-layer" data-stages="run improve verify deploy" style="--width:85%" href="https://hyloai.github.io/hylo-docs/user-guide/skills/">
+          <a class="stack-layer" data-stages="run improve verify deploy" style="--width:80%" href="https://hyloai.github.io/hylo-docs/user-guide/skills/">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l3 6 6 3-6 3-3 6-3-6-6-3 6-3Z"/></svg>
             <span><span class="layer-name" data-i18n="c5.t">Skills</span><span class="layer-role" data-i18n="c5.d">Verified capability</span></span>
             <span class="layer-arrow" aria-hidden="true">↗</span>
           </a>
-          <a class="stack-layer" data-stages="run improve" style="--width:90%" href="https://hyloai.github.io/hylo-docs/user-guide/memory/">
+          <a class="stack-layer" data-stages="run improve" style="--width:85%" href="https://hyloai.github.io/hylo-docs/user-guide/memory/">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/><path d="M7 4v4M17 10v4M10 16v4"/></svg>
             <span><span class="layer-name" data-i18n="c4.t">Memory</span><span class="layer-role" data-i18n="c4.d">Experience</span></span>
             <span class="layer-arrow" aria-hidden="true">↗</span>
           </a>
-          <a class="stack-layer" data-stages="run improve verify deploy" style="--width:95%" href="https://hyloai.github.io/hylo-docs/user-guide/agents/">
+          <a class="stack-layer" data-stages="run improve verify deploy" style="--width:90%" href="https://hyloai.github.io/hylo-docs/user-guide/agents/">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>
             <span><span class="layer-name" data-i18n="c3.t">Agents</span><span class="layer-role" data-i18n="c3.d">Perception &amp; action</span></span>
             <span class="layer-arrow" aria-hidden="true">↗</span>
           </a>
-          <a class="stack-layer" data-stages="build run verify" style="--width:100%" href="https://hyloai.github.io/hylo-docs/user-guide/worlds/">
+          <a class="stack-layer" data-stages="build run verify" style="--width:95%" href="https://hyloai.github.io/hylo-docs/user-guide/worlds/">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l9 5v9l-9 5-9-5V8Z"/><path d="M3 8l9 5 9-5M12 13v9M12 3v10"/></svg>
             <span><span class="layer-name" data-i18n="c2.t">Worlds</span><span class="layer-role" data-i18n="c2.d">Interaction &amp; feedback</span></span>
             <span class="layer-arrow" aria-hidden="true">↗</span>
           </a>
+          <a class="stack-layer engine-layer" data-stages="run verify deploy" style="--width:100%" href="https://hyloai.github.io/hylo-docs/user-guide/deployment/#3-serving-a-policy">
+            <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><rect x="8" y="8" width="16" height="16" rx="3"/><rect x="12" y="12" width="8" height="8" rx="1"/><path d="M12 3v5M20 3v5M12 24v5M20 24v5M3 12h5M3 20h5M24 12h5M24 20h5"/></svg>
+            <span><span class="layer-name" data-i18n="engine.t">Inference Engine</span><span class="layer-role" data-i18n="engine.d">Efficient inference</span></span>
+            <span class="layer-arrow" aria-hidden="true">↗</span>
+          </a>
         </div>
       </div>
-    </div>
-    <div class="engine-foundation">
-      <a class="engine-base" href="https://hyloai.github.io/hylo-docs/user-guide/deployment/#3-serving-a-policy">
-        <span class="engine-identity">
-          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><rect x="8" y="8" width="16" height="16" rx="3"/><rect x="12" y="12" width="8" height="8" rx="1"/><path d="M12 3v5M20 3v5M12 24v5M20 24v5M3 12h5M3 20h5M24 12h5M24 20h5"/></svg>
-          <strong data-i18n="engine.t">Inference Engine</strong>
-        </span>
-        <span class="engine-description" data-i18n="engine.d">Efficient inference for physical intelligence.</span>
-        <span class="engine-arrow" aria-hidden="true">↗</span>
-      </a>
     </div>
     <p class="rsi-more"><a class="more" href="https://hyloai.github.io/hylo-docs/physical-rsi/" data-i18n="loop.more">Explore Physical RSI ↗</a></p>
   </div>
@@ -593,7 +563,7 @@ uv run hylo run bench/examples/configs/mujoco_reach.yaml</pre>
     "loop.stack": "能力基座",
     "loop.evolve": "持续进化",
     "engine.t": "推理引擎",
-    "engine.d": "高效推理，驱动物理智能。",
+    "engine.d": "高效推理",
     "loop.more": "了解 Physical RSI ↗",
     "s1.t": "搭建",
     "s2.t": "运行",
