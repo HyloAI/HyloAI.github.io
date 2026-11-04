@@ -435,48 +435,15 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
       <p data-i18n="work.lede">Recorded examples of agents acting in worlds, verified improvement, memory and skill reuse. Each result applies to its stated task and observation conditions.</p>
     </div>
     <div class="tabs" role="tablist">
-      <button role="tab" aria-selected="true" aria-controls="t1" id="b1" data-i18n="t1.tab">Task replay</button>
-      <button role="tab" aria-selected="false" aria-controls="t2" id="b2" data-i18n="t2.tab">Policy comparison</button>
+      <button role="tab" aria-selected="true" aria-controls="t4" id="b4" data-i18n="t4.tab">Worlds</button>
       <button role="tab" aria-selected="false" aria-controls="t3" id="b3" data-i18n="t3.tab">Skill improvement</button>
-      <button role="tab" aria-selected="false" aria-controls="t4" id="b4" data-i18n="t4.tab">Robot worlds</button>
       <button role="tab" aria-selected="false" aria-controls="t5" id="b5" data-i18n="t5.tab">Tool-calling agent</button>
-      <button role="tab" aria-selected="false" aria-controls="t6" id="b6" data-i18n="t6.tab">Self-improvement</button>
       <button role="tab" aria-selected="false" aria-controls="t7" id="b7" data-i18n="t7.tab">Memory</button>
+      <button role="tab" aria-selected="false" aria-controls="t6" id="b6" data-i18n="t6.tab">Self-improvement</button>
     </div>
-    <div class="panel" role="tabpanel" id="t1" aria-labelledby="b1">
+    <div class="panel" role="tabpanel" id="t4" aria-labelledby="b4">
       <div>
-        <p class="tag" data-i18n="t1.tag">Example 01 · LIBERO-10 simulation</p>
-        <h3 data-i18n="t1.h">Two objects, one basket</h3>
-        <p data-i18n="t1.d">A SmolVLA agent puts the alphabet soup and the tomato sauce in the basket. Studio replays the run with both cameras, every action and every model call.</p>
-        <p class="stat"><span data-i18n="t1.s">355 steps</span><small data-i18n="t1.ss">Task complete</small></p>
-        <a class="more" href="https://hyloai.github.io/hylo-docs/user-guide/studio/" data-i18n="t1.more">See Studio ↗</a>
-      </div>
-      <div class="shot"><img src="assets/studio-replay.jpg" alt="Hylo Studio replaying the episode: scene and wrist cameras, action curves and run details" width="1192" height="804" loading="lazy"></div>
-    </div>
-    <div class="panel" role="tabpanel" id="t2" aria-labelledby="b2" hidden>
-      <div>
-        <p class="tag" data-i18n="t2.tag">Example 02 · MuJoCo reach simulation</p>
-        <h3 data-i18n="t2.h">Eight policies, one standard</h3>
-        <p data-i18n="t2.d">Eight reference policies, trained through the same pipeline, each evaluated on the same 100 held-out episodes.</p>
-        <p class="stat"><span>8 × 100</span><small data-i18n="t2.ss">Policies × episodes, with 95% intervals</small></p>
-        <a class="more" href="https://hyloai.github.io/hylo-docs/benchmarking/leaderboard/" data-i18n="t2.more">See the leaderboard ↗</a>
-      </div>
-      <div class="shot pad"><img src="assets/leaderboard-mujoco-reach.png" alt="Success rates of eight policies with 95% confidence intervals" width="1664" height="851" loading="lazy"></div>
-    </div>
-    <div class="panel" role="tabpanel" id="t3" aria-labelledby="b3" hidden>
-      <div>
-        <p class="tag" data-i18n="t3.tag">Example 03 · Panda sorting simulation</p>
-        <h3 data-i18n="t3.h">From experience to verified skills</h3>
-        <p data-i18n="t3.d">An AI model extends a one-object-per-colour starter to sort multiple instances. Watch the real source revision, independent program execution, paired verification and a later agent calling the saved skill on new layouts.</p>
-        <p class="stat"><span>8% → 83%</span><small data-i18n="t3.ss">Held-out success · 12 paired sorting scenes</small></p>
-        <p class="note" data-i18n="t3.note">45-second highlights · Recorded research and physics replay. Explicitly limited starter; simulator segmentation; program development, no weight updates.</p>
-        <a class="more" href="https://hyloai.github.io/hylo-docs/user-guide/research-and-skills/#recorded-skill-development-demo" data-i18n="t3.more">Watch the full demo · 2:33 ↗</a>
-      </div>
-      <div class="shot"><video src="assets/skills-sorting.mp4" poster="assets/skills-sorting.jpg" controls muted playsinline preload="none" style="width:100%;display:block" aria-label="Recorded skill development: AI revises a sorting program, the frozen candidate passes independent verification, and a later agent reuses the verified skill"></video></div>
-    </div>
-    <div class="panel" role="tabpanel" id="t4" aria-labelledby="b4" hidden>
-      <div>
-        <p class="tag" data-i18n="t4.tag">Example 04 · MuJoCo worlds</p>
+        <p class="tag" data-i18n="t4.tag">Example 01 · MuJoCo worlds</p>
         <h3 data-i18n="t4.h">Build worlds through conversation</h3>
         <p data-i18n="t4.d">Describe a robotics workbench in English, then refine its layout through chat. This recorded AI session shows tool-driven scene edits and builds in MuJoCo, followed by camera and object inspection in World Studio.</p>
         <p class="stat"><span>23</span><small data-i18n="t4.ss">Scene objects, including two Panda arms</small></p>
@@ -485,9 +452,20 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
       </div>
       <div class="shot"><video src="assets/world-chat.mp4" poster="assets/world-chat.jpg" controls muted playsinline preload="none" style="width:100%;display:block" aria-label="Recorded AI session replay: English chat builds and refines a dual-arm workbench in World Studio"></video></div>
     </div>
+    <div class="panel" role="tabpanel" id="t3" aria-labelledby="b3" hidden>
+      <div>
+        <p class="tag" data-i18n="t3.tag">Example 02 · Panda sorting simulation</p>
+        <h3 data-i18n="t3.h">From experience to verified skills</h3>
+        <p data-i18n="t3.d">An AI model extends a one-object-per-colour starter to sort multiple instances. Watch the real source revision, independent program execution, paired verification and a later agent calling the saved skill on new layouts.</p>
+        <p class="stat"><span>8% → 83%</span><small data-i18n="t3.ss">Held-out success · 12 paired sorting scenes</small></p>
+        <p class="note" data-i18n="t3.note">45-second highlights · Recorded research and physics replay. Explicitly limited starter; simulator segmentation; program development, no weight updates.</p>
+        <a class="more" href="https://hyloai.github.io/hylo-docs/user-guide/research-and-skills/#recorded-skill-development-demo" data-i18n="t3.more">Watch the full demo · 2:33 ↗</a>
+      </div>
+      <div class="shot"><video src="assets/skills-sorting.mp4" poster="assets/skills-sorting.jpg" controls muted playsinline preload="none" style="width:100%;display:block" aria-label="Recorded skill development: AI revises a sorting program, the frozen candidate passes independent verification, and a later agent reuses the verified skill"></video></div>
+    </div>
     <div class="panel" role="tabpanel" id="t5" aria-labelledby="b5" hidden>
       <div>
-        <p class="tag" data-i18n="t5.tag">Example 05 · Panda manipulation simulation</p>
+        <p class="tag" data-i18n="t5.tag">Example 03 · Panda manipulation simulation</p>
         <h3 data-i18n="t5.h">An AI agent operating a robot</h3>
         <p data-i18n="t5.d">“Stack the purple block on the green block.” Watch a local model locate the objects, choose a grasp, pick up the block and place it on its target. Camera views, tool calls and measured receipts follow the same recorded episode; the task check reports success.</p>
         <p class="stat"><span>5 → 2</span><small data-i18n="t5.ss">Model calls → robot actions in this episode</small></p>
@@ -496,25 +474,25 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
       </div>
       <div class="shot"><video src="assets/tools-llm-stack.mp4" poster="assets/tools-llm-stack.jpg" controls muted playsinline preload="none" style="width:100%;display:block" aria-label="Recorded AI robot-control walkthrough: a Panda arm stacks a purple block on a green block, with tool calls and task verification"></video></div>
     </div>
-    <div class="panel" role="tabpanel" id="t6" aria-labelledby="b6" hidden>
-      <div>
-        <p class="tag" data-i18n="t6.tag">Example 06 · Studio, MuJoCo and LIBERO campaigns</p>
-        <h3 data-i18n="t6.h">A change is kept only if the gate agrees</h3>
-        <p data-i18n="t6.d">Every candidate is drawn as its path through the cascade: early check, screening, the paired gate, the verdict. A language model's LIBERO proposals failed the gate and nothing was promoted; a reach candidate passed, waited for a person, was approved, and can be rolled back.</p>
-        <p class="stat"><span>40% → 100%</span><small data-i18n="t6.ss">Held-out success, 40 paired episodes, p = 6e-8</small></p>
-        <a class="more" href="https://hyloai.github.io/hylo-docs/user-guide/campaigns/" data-i18n="t6.more">See campaigns ↗</a>
-      </div>
-      <div class="shot"><video src="assets/studio-campaigns.mp4" poster="assets/studio-campaigns.jpg" controls muted loop playsinline preload="none" style="width:100%;display:block" aria-label="The Studio's self-improvement pages: a candidate's cascade, an approval, the rollback form and the A/B arena"></video></div>
-    </div>
     <div class="panel" role="tabpanel" id="t7" aria-labelledby="b7" hidden>
       <div>
-        <p class="tag" data-i18n="t7.tag">Example 07 · Studio, experience store</p>
+        <p class="tag" data-i18n="t7.tag">Example 04 · Studio, experience store</p>
         <h3 data-i18n="t7.h">What the agent learned, with its evidence</h3>
         <p data-i18n="t7.d">Skill verification follows its evidence: a campaign gate for promoted programs and changes, or a model-free replay for recipes. Lessons track outcomes, action banks store successful development motions, and refuted skills remain in the record.</p>
         <p class="stat"><span>0.47 → 0.86</span><small data-i18n="t7.ss">Fresh scenes with a verified skill applied, 200 pairs</small></p>
         <a class="more" href="https://hyloai.github.io/hylo-docs/user-guide/memory/" data-i18n="t7.more">See memory ↗</a>
       </div>
       <div class="shot"><video src="assets/studio-experience.mp4" poster="assets/studio-experience.jpg" controls muted loop playsinline preload="none" style="width:100%;display:block" aria-label="The Studio's Experience page: skill libraries, lesson books and an action bank"></video></div>
+    </div>
+    <div class="panel" role="tabpanel" id="t6" aria-labelledby="b6" hidden>
+      <div>
+        <p class="tag" data-i18n="t6.tag">Example 05 · Studio, MuJoCo and LIBERO campaigns</p>
+        <h3 data-i18n="t6.h">A change is kept only if the gate agrees</h3>
+        <p data-i18n="t6.d">Every candidate is drawn as its path through the cascade: early check, screening, the paired gate, the verdict. A language model's LIBERO proposals failed the gate and nothing was promoted; a reach candidate passed, waited for a person, was approved, and can be rolled back.</p>
+        <p class="stat"><span>40% → 100%</span><small data-i18n="t6.ss">Held-out success, 40 paired episodes, p = 6e-8</small></p>
+        <a class="more" href="https://hyloai.github.io/hylo-docs/user-guide/campaigns/" data-i18n="t6.more">See campaigns ↗</a>
+      </div>
+      <div class="shot"><video src="assets/studio-campaigns.mp4" poster="assets/studio-campaigns.jpg" controls muted loop playsinline preload="none" style="width:100%;display:block" aria-label="The Studio's self-improvement pages: a candidate's cascade, an approval, the rollback form and the A/B arena"></video></div>
     </div>
   </div>
 </section>
@@ -639,47 +617,34 @@ uv run hylo run bench/examples/configs/mujoco_reach.yaml</pre>
     "stack.lede": "Physical RSI 将世界、智能体、记忆与技能连接起来，文档也围绕这五个概念展开。",
     "work.title": "看 Hylo 如何<em>工作</em>",
     "work.lede": "这些运行记录展示了智能体在世界中行动、经验证的改进、记忆与技能复用。每项结果都有明确的任务和观测条件。",
-    "t1.tab": "任务回放",
-    "t2.tab": "策略对比",
     "t3.tab": "技能改进",
-    "t4.tab": "机器人世界",
+    "t4.tab": "世界",
     "t5.tab": "工具调用智能体",
     "t6.tab": "自我改进",
     "t7.tab": "记忆",
-    "t4.tag": "实例 04 · MuJoCo 世界",
+    "t4.tag": "实例 01 · MuJoCo 世界",
     "t4.h": "通过对话，构建机器人世界",
     "t4.d": "用英文描述机器人工作台，再通过对话调整布局。这段真实 AI 会话回放展示了模型调用工具编辑场景、构建 MuJoCo 仿真，以及在 World Studio 中切换视角和检查对象的过程。",
     "t4.ss": "个场景对象，包含两台 Panda 机械臂",
     "t4.note": "42 秒精华片段 · 真实 AI 会话回放，已缩短等待时间。展示场景构建过程。",
     "t4.more": "观看完整演示 · 2:10 ↗",
-    "t5.tag": "实例 05 · Panda 操作仿真",
+    "t5.tag": "实例 03 · Panda 操作仿真",
     "t5.h": "让 AI 操作机器人",
     "t5.d": "“把紫色方块叠到绿色方块上。”观看本地模型定位物体、选择抓取方式、抓起方块并放到目标上。相机画面、工具调用和实测回执来自同一次运行，最终由任务检查判定成功。",
     "t5.ss": "本次运行中的模型调用 → 机器人动作",
     "t5.note": "42 秒精华片段 · 真实运行记录的 MuJoCo 回放。已缩短模型等待时间，并放慢机器人动作以便观看。",
     "t5.more": "观看完整演示 · 1:45 ↗",
-    "t6.tag": "实例 06 · Studio，MuJoCo 与 LIBERO 改进任务（Campaigns）",
+    "t6.tag": "实例 05 · Studio，MuJoCo 与 LIBERO 改进任务（Campaigns）",
     "t6.h": "候选改动通过准入评测后才能晋升",
     "t6.d": "每个候选都展示其级联路径：初步检查、筛选、配对准入评测、结论。语言模型在 LIBERO 上的提议没有通过准入评测，因此没有晋升；一个 reach 候选通过后等待人工审批，获批晋升，并且可以回滚。",
     "t6.ss": "留出集成功率，40 对配对回合，p = 6e-8",
     "t6.more": "了解改进任务 ↗",
-    "t7.tag": "实例 07 · Studio，经验库",
+    "t7.tag": "实例 04 · Studio，经验库",
     "t7.h": "智能体学到了什么，以及证据",
     "t7.d": "技能按各自的证据路径验证：晋升的程序和改动通过准入评测（gate），动作配方（recipe）通过不调用模型的回放验证。经验教训关联结果，动作记忆库保存成功的开发动作，被否决的技能也保留记录。",
     "t7.ss": "应用一条已验证技能后的新场景成功率，200 对",
     "t7.more": "了解记忆 ↗",
-    "t1.tag": "实例 01 · LIBERO-10 仿真",
-    "t1.h": "两样东西，一个篮子",
-    "t1.d": "SmolVLA 智能体把字母汤罐头和番茄酱放进篮子。Studio 回放整次运行：两路相机画面、每一个动作、每一次模型调用。",
-    "t1.s": "355 步",
-    "t1.ss": "任务完成",
-    "t1.more": "了解 Studio ↗",
-    "t2.tag": "实例 02 · MuJoCo 触达仿真",
-    "t2.h": "八种策略，同一把尺子",
-    "t2.d": "八种参考策略经同一套流程训练，在同样的 100 个留出回合上评测。",
-    "t2.ss": "策略 × 回合，附 95% 置信区间",
-    "t2.more": "查看排行榜 ↗",
-    "t3.tag": "实例 03 · Panda 分拣仿真",
+    "t3.tag": "实例 02 · Panda 分拣仿真",
     "t3.h": "从执行经验到经过验证的技能",
     "t3.d": "AI 将“每种颜色处理一个物体”的基础程序扩展为同色多物体分拣。观看真实代码修改、程序独立执行、配对验证，以及后续智能体在新布局中调用已保存的技能。",
     "t3.ss": "留出集成功率 · 12 对分拣场景",
