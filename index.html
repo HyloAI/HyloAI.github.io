@@ -144,82 +144,71 @@ html[lang="zh-CN"] h2 { letter-spacing: .01em; line-height: 1.25; }
 .head p { margin: 0; color: var(--muted); font-size: 1.08rem; border-left: 2px solid var(--accent); padding-left: 1.2rem; }
 @media (max-width: 820px) { .head { grid-template-columns: minmax(0, 1fr); gap: 1.4rem; } section { padding-block: 4.5rem; } }
 
-/* Physical RSI: one loop, supported by four capabilities. */
-#loop { scroll-margin-top: 5rem; }
-.rsi-system { border: 1px solid var(--line); border-radius: 24px; overflow: hidden; background: var(--surface); }
-.rsi-cycle { padding: 2.2rem 2rem 1.6rem; }
-.steps { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 1.4rem; padding: 0; margin: 0; list-style: none; }
-.step-card { position: relative; min-width: 0; border-top: 2px solid var(--line); padding: 1.2rem .7rem .7rem;
-  scroll-margin-top: 6rem; transition: border-color .15s, background .15s; }
-.step-card:not(:last-child)::after { content: "→"; position: absolute; right: -1.15rem; top: 2.8rem; color: var(--muted); }
-.step-card .num { display: block; font: 500 .75rem var(--mono); color: var(--accent); margin-bottom: .8rem; }
-.step-card h3 { font: 800 1.25rem/1.2 var(--font); letter-spacing: -.01em; margin: 0 0 .65rem; }
-.step-card p { margin: 0; color: var(--muted); font-size: .94rem; }
-.step-card:target { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 7%, var(--surface)); }
-.cycle-return { display: flex; align-items: center; gap: .8rem; color: var(--muted); font-size: .9rem; margin: 1.6rem 0 0; }
-.cycle-return::before { content: "↺"; color: var(--accent); font-size: 1.4rem; }
-.cycle-return::after { content: ""; flex: 1; height: 1px; background: var(--line); }
-.capability-group { border-top: 1px solid var(--line); background: var(--bg); padding: 1.8rem 2rem 2rem; scroll-margin-top: 6rem; }
-.capability-heading { font: 600 .88rem var(--font); color: var(--muted); margin: 0 0 1.6rem; }
-.capabilities { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.6rem; }
-.capability { min-width: 0; display: flex; flex-direction: column; align-items: flex-start; }
-.capability + .capability { border-left: 1px solid var(--line); padding-left: 1.6rem; }
-.capability h4 { margin: 0 0 .65rem; font: 800 1.5rem/1.2 var(--font); letter-spacing: -.02em; }
-.capability p { margin: 0 0 1.1rem; color: var(--muted); font-size: .97rem; flex: 1; }
-.stage-links { display: flex; flex-wrap: wrap; gap: .35rem; margin: 0 0 1.3rem; }
-.stage-links a { font: 500 .74rem var(--font); padding: .25rem .5rem; border: 1px solid var(--line); border-radius: 5px;
-  text-decoration: none; background: var(--surface); color: var(--muted); }
-.stage-links a:hover, .stage-links a:focus-visible { color: var(--accent); border-color: var(--accent); }
-.capability .more { font-size: .88rem; }
-.rsi-resources { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.2rem; margin-top: 1.5rem; }
-.ends { display: flex; flex-wrap: wrap; gap: .7rem; }
-.name { font: 600 .88rem var(--font); padding: .42rem .85rem; border-radius: 999px; background: var(--surface);
-  border: 1px solid var(--line); text-decoration: none; white-space: nowrap; }
-a.name:hover { border-color: var(--accent); color: var(--accent); }
-@media (max-width: 1000px) {
-  .rsi-cycle, .capability-group { padding-inline: 1.4rem; }
-  .steps { gap: .8rem; }
-  .step-card { padding-inline: .35rem; }
-  .step-card:not(:last-child)::after { right: -.8rem; }
-  .capabilities { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.8rem; }
-  .capability + .capability { padding-left: 0; border-left: 0; }
-  .capability:nth-child(even) { padding-left: 1.8rem; border-left: 1px solid var(--line); }
+/* Physical RSI: a closed loop beside a layered capability stack. */
+#loop, #stack { scroll-margin-top: 6rem; }
+.rsi-system { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 5vw, 4.5rem); align-items: stretch; }
+.orbit-panel { background: var(--kernel); color: var(--kernel-ink); border-radius: 24px; padding: 1.6rem; }
+.diagram-label { margin: 0; font: 500 .8rem var(--mono); letter-spacing: .08em; }
+.orbit-panel .diagram-label { opacity: .65; }
+.orbit { position: relative; width: 100%; max-width: 460px; aspect-ratio: 1; margin: .5rem auto 0; }
+.orbit-track { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.orbit-track .guide { fill: none; stroke: currentColor; opacity: .06; stroke-width: 1; }
+.orbit-track .arc { fill: none; stroke: currentColor; opacity: .6; stroke-width: 1.5; }
+.orbit-track marker path { fill: var(--accent); }
+.orbit-center { position: absolute; inset: 34%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .9rem; text-align: center; pointer-events: none; }
+.orbit-center svg { width: 3rem; height: 3rem; color: var(--accent); }
+.orbit-center strong { font: 800 clamp(1.15rem, 2.3vw, 1.65rem)/1.25 var(--font); white-space: nowrap; letter-spacing: -.02em; }
+.orbit-steps { list-style: none; margin: 0; padding: 0; }
+.orbit-steps li { position: absolute; left: var(--x); top: var(--y); transform: translate(-50%, -50%); }
+.orbit-step { display: grid; place-items: center; min-height: 2.8rem; min-width: 6.1rem; padding: .5rem .7rem; border-radius: 8px;
+  border: 1px solid color-mix(in srgb, var(--kernel-ink) 23%, transparent); background: var(--kernel); color: var(--kernel-ink);
+  text-decoration: none; font: 600 .97rem var(--font); scroll-margin-top: 6rem; transition: color .18s, border-color .18s, background .18s; }
+.orbit-step:hover, .orbit-step:focus-visible, .orbit-step:target { border-color: var(--accent); background: var(--accent); color: var(--accent-ink); }
+.stack-panel { position: relative; display: flex; flex-direction: column; padding-block: 1.6rem; }
+.stack-panel::before { content: "↔"; position: absolute; left: calc(clamp(2rem, 5vw, 4.5rem) / -2); top: 50%; transform: translate(-50%, -50%); color: var(--muted); font-size: 1.3rem; }
+.stack-panel .diagram-label { color: var(--muted); }
+.stack-layers { display: flex; flex-direction: column; align-items: center; gap: 1.1rem; margin: auto 0; padding-block: 2rem 1rem; }
+.stack-layer { width: var(--width); min-height: 5rem; display: grid; grid-template-columns: 1.6rem minmax(0, 1fr) auto; column-gap: 1rem; align-items: center;
+  padding: 1rem 1.3rem; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); text-decoration: none;
+  box-shadow: 0 5px 0 var(--sunk), 0 6px 0 var(--line); transition: transform .18s, border-color .18s; }
+.stack-layer svg { width: 1.6rem; height: 1.6rem; color: var(--muted); }
+.stack-layer .layer-name { font: 800 1.3rem/1.2 var(--font); letter-spacing: -.02em; }
+.stack-layer .layer-role { display: block; color: var(--muted); font: 400 .85rem/1.5 var(--font); margin-top: .25rem; }
+.stack-layer .layer-arrow { color: var(--muted); font-size: 1.1rem; }
+.stack-layer:first-child { background: color-mix(in srgb, var(--accent) 5%, var(--surface)); }
+.stack-layer:first-child svg { color: var(--accent); }
+.stack-layer:hover, .stack-layer:focus-visible { border-color: var(--accent); transform: translateY(-3px); }
+.stack-layer:hover .layer-name, .stack-layer:focus-visible .layer-name { color: var(--accent); }
+.rsi-more { margin: 1.8rem 0 0; }
+@media (max-width: 820px) {
+  .rsi-system { grid-template-columns: minmax(0, 1fr); gap: 2.2rem; }
+  .orbit-panel { padding: 1.4rem; }
+  .orbit { max-width: 430px; }
+  .stack-panel { padding: 0; max-width: 520px; width: 100%; margin-inline: auto; }
+  .stack-panel::before { display: none; }
+  .stack-layers { padding-block: 1.4rem .5rem; }
+  .rsi-more { margin-top: 2rem; }
 }
-@media (max-width: 700px) {
-  .rsi-cycle, .capability-group { padding: 1.4rem; }
-  .steps { grid-template-columns: minmax(0, 1fr); gap: 0; }
-  .step-card { display: grid; grid-template-columns: 1.8rem minmax(0, 1fr); column-gap: .8rem;
-    border-top: 0; border-left: 2px solid var(--line); padding: 1rem 0 1rem 1rem; }
-  .step-card .num { grid-column: 1; grid-row: 1 / 3; margin: .2rem 0 0; }
-  .step-card h3, .step-card p { grid-column: 2; }
-  .step-card h3 { font-size: 1.15rem; margin-bottom: .35rem; }
-  .step-card:not(:last-child)::after { content: "↓"; right: auto; left: -.45rem; top: auto; bottom: -.6rem;
-    background: var(--surface); z-index: 1; font-size: .85rem; }
-  .cycle-return { margin-top: 1rem; font-size: .85rem; }
+@media (max-width: 420px) {
+  .orbit-panel { padding: 1rem; border-radius: 18px; }
+  .orbit-step { min-width: 4.7rem; min-height: 2.4rem; padding: .4rem .5rem; font-size: .8rem; }
+  .orbit-center { gap: .5rem; }
+  .orbit-center svg { width: 2.2rem; height: 2.2rem; }
+  .orbit-center strong { font-size: 1rem; }
+  .stack-layer { min-height: 4.6rem; padding: .9rem 1rem; column-gap: .8rem; }
+  .stack-layer .layer-name { font-size: 1.15rem; }
 }
-@media (max-width: 520px) {
-  .capabilities { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; }
-  .capability:nth-child(even) { padding-left: 0; border-left: 0; }
-  .capability + .capability { border-top: 1px solid var(--line); padding-top: 1.5rem; }
-  .capability p { margin-bottom: .8rem; }
-  .stage-links { margin-bottom: .8rem; }
-}
-.rsi-system:has(.capability[data-stages~="build"]:hover) #rsi-build,
-.rsi-system:has(.capability[data-stages~="build"]:focus-within) #rsi-build { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 7%, var(--surface)); }
-.rsi-system:has(.capability[data-stages~="run"]:hover) #rsi-run,
-.rsi-system:has(.capability[data-stages~="run"]:focus-within) #rsi-run { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 7%, var(--surface)); }
-.rsi-system:has(.capability[data-stages~="improve"]:hover) #rsi-improve,
-.rsi-system:has(.capability[data-stages~="improve"]:focus-within) #rsi-improve { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 7%, var(--surface)); }
-.rsi-system:has(.capability[data-stages~="verify"]:hover) #rsi-verify,
-.rsi-system:has(.capability[data-stages~="verify"]:focus-within) #rsi-verify { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 7%, var(--surface)); }
-.rsi-system:has(.capability[data-stages~="deploy"]:hover) #rsi-deploy,
-.rsi-system:has(.capability[data-stages~="deploy"]:focus-within) #rsi-deploy { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 7%, var(--surface)); }
-.rsi-system:has(#rsi-build:is(:hover, :focus-visible, :target)) .capability[data-stages~="build"] h4 { color: var(--accent); }
-.rsi-system:has(#rsi-run:is(:hover, :focus-visible, :target)) .capability[data-stages~="run"] h4 { color: var(--accent); }
-.rsi-system:has(#rsi-improve:is(:hover, :focus-visible, :target)) .capability[data-stages~="improve"] h4 { color: var(--accent); }
-.rsi-system:has(#rsi-verify:is(:hover, :focus-visible, :target)) .capability[data-stages~="verify"] h4 { color: var(--accent); }
-.rsi-system:has(#rsi-deploy:is(:hover, :focus-visible, :target)) .capability[data-stages~="deploy"] h4 { color: var(--accent); }
-@media (prefers-reduced-motion: reduce) { .step-card { transition: none; } }
+.rsi-system:has(.stack-layer[data-stages~="build"]:is(:hover, :focus-visible)) #rsi-build { border-color: var(--accent); background: var(--accent); color: var(--accent-ink); }
+.rsi-system:has(#rsi-build:is(:hover, :focus-visible, :target)) .stack-layer[data-stages~="build"] { border-color: var(--accent); }
+.rsi-system:has(.stack-layer[data-stages~="run"]:is(:hover, :focus-visible)) #rsi-run { border-color: var(--accent); background: var(--accent); color: var(--accent-ink); }
+.rsi-system:has(#rsi-run:is(:hover, :focus-visible, :target)) .stack-layer[data-stages~="run"] { border-color: var(--accent); }
+.rsi-system:has(.stack-layer[data-stages~="improve"]:is(:hover, :focus-visible)) #rsi-improve { border-color: var(--accent); background: var(--accent); color: var(--accent-ink); }
+.rsi-system:has(#rsi-improve:is(:hover, :focus-visible, :target)) .stack-layer[data-stages~="improve"] { border-color: var(--accent); }
+.rsi-system:has(.stack-layer[data-stages~="verify"]:is(:hover, :focus-visible)) #rsi-verify { border-color: var(--accent); background: var(--accent); color: var(--accent-ink); }
+.rsi-system:has(#rsi-verify:is(:hover, :focus-visible, :target)) .stack-layer[data-stages~="verify"] { border-color: var(--accent); }
+.rsi-system:has(.stack-layer[data-stages~="deploy"]:is(:hover, :focus-visible)) #rsi-deploy { border-color: var(--accent); background: var(--accent); color: var(--accent-ink); }
+.rsi-system:has(#rsi-deploy:is(:hover, :focus-visible, :target)) .stack-layer[data-stages~="deploy"] { border-color: var(--accent); }
+@media (prefers-reduced-motion: reduce) { .orbit-step, .stack-layer { transition: none; } .stack-layer:hover, .stack-layer:focus-visible { transform: none; } }
 
 /* examples */
 .tabs { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 2.2rem; }
@@ -345,74 +334,61 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
   <div class="wrap">
     <div class="head">
       <h2 id="rsi-title" data-i18n="loop.title">Physical <em>RSI</em></h2>
-      <p data-i18n="loop.lede">Agents act in worlds. Experience becomes memory and skills, carrying progress into the next round.</p>
+      <p data-i18n="loop.lede">Experience becomes capability. Capability keeps evolving.</p>
     </div>
     <div class="rsi-system">
-      <div class="rsi-cycle">
-        <ol class="steps">
-          <li class="step-card" id="rsi-build" tabindex="-1"><span class="num" aria-hidden="true">01</span><h3 data-i18n="s1.t">Build</h3><p data-i18n="s1.d">Create scenes and define tasks.</p></li>
-          <li class="step-card" id="rsi-run" tabindex="-1"><span class="num" aria-hidden="true">02</span><h3 data-i18n="s2.t">Run</h3><p data-i18n="s2.d">Act in the world and gather experience.</p></li>
-          <li class="step-card" id="rsi-improve" tabindex="-1"><span class="num" aria-hidden="true">03</span><h3 data-i18n="s3.t">Improve</h3><p data-i18n="s3.d">Turn experience into improvements.</p></li>
-          <li class="step-card" id="rsi-verify" tabindex="-1"><span class="num" aria-hidden="true">04</span><h3 data-i18n="s4.t">Verify</h3><p data-i18n="s4.d">Test on cases beyond development.</p></li>
-          <li class="step-card" id="rsi-deploy" tabindex="-1"><span class="num" aria-hidden="true">05</span><h3 data-i18n="s5.t">Deploy</h3><p data-i18n="s5.d">Review, validate the target, then deploy.</p></li>
-        </ol>
-        <p class="cycle-return"><span data-i18n="loop.return">Each verified improvement feeds the next run.</span></p>
+      <div class="orbit-panel">
+        <h3 class="diagram-label" data-i18n="loop.orbit">The loop</h3>
+        <div class="orbit">
+          <svg class="orbit-track" viewBox="0 0 500 500" aria-hidden="true">
+            <defs><marker id="rsi-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M1 1L9 5L1 9Z"/></marker></defs>
+            <circle class="guide" cx="250" cy="250" r="116"/>
+            <path class="arc" d="M317.11 99.26 A165 165 0 0 1 372.62 139.59" marker-end="url(#rsi-arrow)"/>
+            <path class="arc" d="M414.10 267.25 A165 165 0 0 1 392.89 332.50" marker-end="url(#rsi-arrow)"/>
+            <path class="arc" d="M284.31 411.39 A165 165 0 0 1 215.69 411.39" marker-end="url(#rsi-arrow)"/>
+            <path class="arc" d="M107.11 332.50 A165 165 0 0 1 85.90 267.25" marker-end="url(#rsi-arrow)"/>
+            <path class="arc" d="M127.38 139.59 A165 165 0 0 1 182.89 99.26" marker-end="url(#rsi-arrow)"/>
+          </svg>
+          <div class="orbit-center">
+            <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" aria-hidden="true"><path d="M10 22c7-7 15 7 22 0s15 7 22 0"/><path d="M10 33c7-7 15 7 22 0s15 7 22 0" opacity=".7"/><path d="M10 44c7-7 15 7 22 0s15 7 22 0" opacity=".4"/></svg>
+            <strong data-i18n="loop.evolve">Keep evolving</strong>
+          </div>
+          <ol class="orbit-steps">
+            <li style="--x:50.00%;--y:17.00%"><a class="orbit-step" id="rsi-build" href="https://hyloai.github.io/hylo-docs/user-guide/worlds/" data-i18n="s1.t">Build</a></li>
+            <li style="--x:81.38%;--y:39.80%"><a class="orbit-step" id="rsi-run" href="https://hyloai.github.io/hylo-docs/user-guide/agents/" data-i18n="s2.t">Run</a></li>
+            <li style="--x:69.40%;--y:76.70%"><a class="orbit-step" id="rsi-improve" href="https://hyloai.github.io/hylo-docs/user-guide/learning/" data-i18n="s3.t">Improve</a></li>
+            <li style="--x:30.60%;--y:76.70%"><a class="orbit-step" id="rsi-verify" href="https://hyloai.github.io/hylo-docs/user-guide/campaigns/" data-i18n="s4.t">Verify</a></li>
+            <li style="--x:18.62%;--y:39.80%"><a class="orbit-step" id="rsi-deploy" href="https://hyloai.github.io/hylo-docs/user-guide/deployment/" data-i18n="s5.t">Deploy</a></li>
+          </ol>
+        </div>
       </div>
-      <div class="capability-group" id="stack">
-        <h3 class="capability-heading" data-i18n="loop.capabilities">Four capabilities across the loop</h3>
-        <div class="capabilities">
-          <article class="capability" data-stages="build run verify">
-            <h4 data-i18n="c2.t">Worlds</h4>
-            <p data-i18n="c2.d">Environments for interaction, exploration and verification.</p>
-            <div class="stage-links">
-              <a href="#rsi-build" data-i18n="s1.t">Build</a>
-              <a href="#rsi-run" data-i18n="s2.t">Run</a>
-              <a href="#rsi-verify" data-i18n="s4.t">Verify</a>
-            </div>
-            <a class="more" href="https://hyloai.github.io/hylo-docs/user-guide/worlds/" data-i18n="c2.more">Explore worlds ↗</a>
-          </article>
-          <article class="capability" data-stages="run improve verify deploy">
-            <h4 data-i18n="c3.t">Agents</h4>
-            <p data-i18n="c3.d">Perceive the environment, make decisions and act.</p>
-            <div class="stage-links">
-              <a href="#rsi-run" data-i18n="s2.t">Run</a>
-              <a href="#rsi-improve" data-i18n="s3.t">Improve</a>
-              <a href="#rsi-verify" data-i18n="s4.t">Verify</a>
-              <a href="#rsi-deploy" data-i18n="s5.t">Deploy</a>
-            </div>
-            <a class="more" href="https://hyloai.github.io/hylo-docs/user-guide/agents/" data-i18n="c3.more">Explore agents ↗</a>
-          </article>
-          <article class="capability" data-stages="run improve">
-            <h4 data-i18n="c4.t">Memory</h4>
-            <p data-i18n="c4.d">Carry past experience into future decisions.</p>
-            <div class="stage-links">
-              <a href="#rsi-run" data-i18n="s2.t">Run</a>
-              <a href="#rsi-improve" data-i18n="s3.t">Improve</a>
-            </div>
-            <a class="more" href="https://hyloai.github.io/hylo-docs/user-guide/memory/" data-i18n="c4.more">Explore memory ↗</a>
-          </article>
-          <article class="capability" data-stages="run improve verify deploy">
-            <h4 data-i18n="c5.t">Skills</h4>
-            <p data-i18n="c5.d">Bring verified capabilities to new tasks where they apply.</p>
-            <div class="stage-links">
-              <a href="#rsi-run" data-i18n="s2.t">Run</a>
-              <a href="#rsi-improve" data-i18n="s3.t">Improve</a>
-              <a href="#rsi-verify" data-i18n="s4.t">Verify</a>
-              <a href="#rsi-deploy" data-i18n="s5.t">Deploy</a>
-            </div>
-            <a class="more" href="https://hyloai.github.io/hylo-docs/user-guide/skills/" data-i18n="c5.more">Explore skills ↗</a>
-          </article>
+      <div class="stack-panel" id="stack">
+        <h3 class="diagram-label" data-i18n="loop.stack">The stack</h3>
+        <div class="stack-layers">
+          <a class="stack-layer" data-stages="run improve verify deploy" style="--width:85%" href="https://hyloai.github.io/hylo-docs/user-guide/skills/">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l3 6 6 3-6 3-3 6-3-6-6-3 6-3Z"/></svg>
+            <span><span class="layer-name" data-i18n="c5.t">Skills</span><span class="layer-role" data-i18n="c5.d">Verified capability</span></span>
+            <span class="layer-arrow" aria-hidden="true">↗</span>
+          </a>
+          <a class="stack-layer" data-stages="run improve" style="--width:90%" href="https://hyloai.github.io/hylo-docs/user-guide/memory/">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/><path d="M7 4v4M17 10v4M10 16v4"/></svg>
+            <span><span class="layer-name" data-i18n="c4.t">Memory</span><span class="layer-role" data-i18n="c4.d">Experience</span></span>
+            <span class="layer-arrow" aria-hidden="true">↗</span>
+          </a>
+          <a class="stack-layer" data-stages="run improve verify deploy" style="--width:95%" href="https://hyloai.github.io/hylo-docs/user-guide/agents/">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>
+            <span><span class="layer-name" data-i18n="c3.t">Agents</span><span class="layer-role" data-i18n="c3.d">Perception &amp; action</span></span>
+            <span class="layer-arrow" aria-hidden="true">↗</span>
+          </a>
+          <a class="stack-layer" data-stages="build run verify" style="--width:100%" href="https://hyloai.github.io/hylo-docs/user-guide/worlds/">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l9 5v9l-9 5-9-5V8Z"/><path d="M3 8l9 5 9-5M12 13v9M12 3v10"/></svg>
+            <span><span class="layer-name" data-i18n="c2.t">Worlds</span><span class="layer-role" data-i18n="c2.d">Interaction &amp; feedback</span></span>
+            <span class="layer-arrow" aria-hidden="true">↗</span>
+          </a>
         </div>
       </div>
     </div>
-    <div class="rsi-resources">
-      <a class="more" href="https://hyloai.github.io/hylo-docs/physical-rsi/" data-i18n="loop.more">Explore Physical RSI ↗</a>
-      <div class="ends" aria-label="Supporting tools and architecture">
-        <a class="name" href="https://hyloai.github.io/hylo-docs/user-guide/studio/" data-i18n="support.studio">Studio ↗</a>
-        <a class="name" href="https://hyloai.github.io/hylo-docs/user-guide/deployment/" data-i18n="support.deployment">Deployment ↗</a>
-        <a class="name" href="https://hyloai.github.io/hylo-docs/design/overview/" data-i18n="support.architecture">Architecture ↗</a>
-      </div>
-    </div>
+    <p class="rsi-more"><a class="more" href="https://hyloai.github.io/hylo-docs/physical-rsi/" data-i18n="loop.more">Explore Physical RSI ↗</a></p>
   </div>
 </section>
 
@@ -575,20 +551,16 @@ uv run hylo run bench/examples/configs/mujoco_reach.yaml</pre>
     "hero.start": "快速上手",
     "hero.stack": "了解 Physical RSI",
     "loop.title": "Physical <em>RSI</em>",
-    "loop.lede": "智能体在世界中行动，将经验积累为记忆与技能，推动下一轮进化。",
-    "loop.return": "每一次经验证的改进，进入下一轮行动。",
-    "loop.capabilities": "贯穿循环的四种能力",
+    "loop.lede": "从经验到能力，从能力到进化。",
+    "loop.orbit": "进化循环",
+    "loop.stack": "能力基座",
+    "loop.evolve": "持续进化",
     "loop.more": "了解 Physical RSI ↗",
     "s1.t": "搭建",
-    "s1.d": "搭建场景，定义任务。",
     "s2.t": "运行",
-    "s2.d": "执行任务，积累交互经验。",
     "s3.t": "改进",
-    "s3.d": "从经验中寻找改进。",
     "s4.t": "验证",
-    "s4.d": "用开发之外的案例检验效果。",
     "s5.t": "部署",
-    "s5.d": "审核并验证目标环境后部署。",
     "work.title": "看 Hylo 如何<em>工作</em>",
     "work.lede": "从构建世界到改进技能，看自我进化如何一步步实现。",
     "t3.tab": "技能改进",
@@ -654,20 +626,13 @@ uv run hylo run bench/examples/configs/mujoco_reach.yaml</pre>
     "foot.company": "公司",
     "foot.open": "以 Apache-2.0 许可开源",
     "c2.t": "世界",
-    "c2.d": "为智能提供交互、探索与验证的环境。",
-    "c2.more": "了解世界 ↗",
+    "c2.d": "交互与反馈",
     "c3.t": "智能体",
-    "c3.d": "感知环境、作出决策，并付诸行动。",
-    "c3.more": "了解智能体 ↗",
+    "c3.d": "感知与行动",
     "c4.t": "记忆",
-    "c4.d": "积累经验，让过去的探索启发未来的决策。",
-    "c4.more": "了解记忆 ↗",
+    "c4.d": "经验积累",
     "c5.t": "技能",
-    "c5.d": "将经过验证的能力，带入适用的新任务。",
-    "c5.more": "了解技能 ↗",
-    "support.studio": "Studio ↗",
-    "support.deployment": "部署 ↗",
-    "support.architecture": "架构 ↗",
+    "c5.d": "经验证的能力",
     "foot.c1": "Physical RSI",
     "foot.c2": "世界",
     "foot.c3": "智能体",
