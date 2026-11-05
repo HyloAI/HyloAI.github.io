@@ -1,0 +1,58 @@
+{
+  "kind": "homepage-statement-stills",
+  "created": "2026-11-05",
+  "purpose": "One still per opening statement (Agents, Worlds, Memory and skills); labels, rings and cards are HTML/SVG overlays in index.html, placed from projected 3D points.",
+  "source": "BitRobot/HIW-500-LeRobot (Hugging Face), CC BY 4.0, episode 151 'sweep floor' (295 frames, 30 fps)",
+  "twin": "MuJoCo Menagerie unitree_g1 (commit b0655057a9df) with the 29 recorded joint angles (observation.state, radians); base placed by stance-foot odometry so the supporting foot stays fixed on the floor",
+  "staged": "broom and dustpan follow the recorded hand positions; room, bucket and debris are a staged set",
+  "textures": "Poly Haven laminate_floor_02 and painted_plaster_wall (CC0)",
+  "render": "Blender Cycles (CPU), 1536x1024, 64 samples",
+  "stills": [
+    {
+      "file": "thesis-act.webp",
+      "frame": 116,
+      "camera": {
+        "azimuth": 222,
+        "elevation": -16,
+        "distance": 2.9,
+        "lookat": [
+          0.45,
+          0.0,
+          0.48
+        ],
+        "fovy": 38
+      },
+      "inset": "thesis-act-headcam.webp: frame 116 of observation.images.head, left eye"
+    },
+    {
+      "file": "thesis-feedback.webp",
+      "frame": 160,
+      "camera": {
+        "azimuth": 245,
+        "elevation": -32,
+        "distance": 1.55,
+        "lookat": [
+          0.42,
+          0.08,
+          0.1
+        ],
+        "fovy": 38
+      }
+    },
+    {
+      "file": "thesis-evolve.webp",
+      "frames": [
+        100,
+        130,
+        160,
+        190,
+        220,
+        250,
+        280
+      ],
+      "camera": "as thesis-act",
+      "composite": "the last frame solid; earlier frames blended in where they differ from the static room, fading with age"
+    }
+  ],
+  "scripts": "scratchpad g1traj.py (trajectory) and shots.py (renders and overlay anchors); not kept in the repository"
+}

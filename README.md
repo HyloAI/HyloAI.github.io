@@ -14,7 +14,12 @@
 # Hylo AI website
 
 The site at https://hyloai.github.io/ (bilingual: English, 中文). Plain HTML, no build step: edit `index.html`, push to
-`main`, GitHub Pages serves it. Images in `assets/` come from recorded runs (see hylo-docs).
+`main`, GitHub Pages serves it. Case-study images in `assets/` come from recorded runs (see hylo-docs).
+Each of the three opening statements names the core concept it rests on (Agents, Worlds, Memory and skills, with
+the same icon as the capability stack) and shows a Unitree G1 twin posed from a real sweeping episode (HIW-500,
+CC BY 4.0) in a rendered room: the robot sees the room and acts, its contacts with the floor answer each stroke, and
+layered strokes grow into a skill. Labels, rings and cards are HTML/SVG overlays, so both languages stay crisp.
+Sources, frames and cameras are in `assets/thesis-stills.provenance.json`.
 
 The homepage and docs share five core concepts: Physical RSI, Worlds, Agents, Memory and Skills. Physical RSI
 connects the other four. The homepage pairs a circular five-step loop with a capability stack.

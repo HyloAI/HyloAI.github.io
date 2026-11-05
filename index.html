@@ -112,29 +112,68 @@ html[lang="zh-CN"] h1 { letter-spacing: .01em; line-height: 1.18; max-width: non
 }
 html[lang="zh-CN"] .hero h1 { max-width: none; }
 
-/* why: three statements that descend from era to loop, each marked with one wave of the logo */
+/* Why: each statement names the core concept it rests on (same icon as the stack below) and shows one recorded
+   moment of the same Panda stacking task, from one camera: an agent acts, the world answers, a skill carries forward. */
 #why { padding-top: 0; padding-bottom: 0; }
-/* heading over body in one wide text column, the picture beside both */
-.thesis { border-top: 1px solid var(--line); display: grid; grid-template-columns: 3.2rem minmax(0, 1fr) minmax(0, 24rem);
-  grid-template-rows: 1fr auto auto 1fr; column-gap: 3rem; padding-block: 3.6rem; }
-.thesis:last-child { border-bottom: 1px solid var(--line); }
-.thesis .mark { width: 2.8rem; height: 2.8rem; grid-column: 1; grid-row: 2; align-self: start; margin-top: -.1rem; }
-.thesis h3 { grid-column: 2; grid-row: 2; }
-.thesis .body { grid-column: 2; grid-row: 3; max-width: 40rem; margin-top: 1.1rem; }
-.thesis .shot { grid-column: 3; grid-row: 1 / -1; align-self: center; }
-.thesis .mark path { fill: none; stroke: color-mix(in srgb, var(--muted) 35%, transparent); stroke-width: 5; stroke-linecap: round; }
-.thesis .mark path.on { stroke: var(--accent); }
+.thesis { border-top: 1px solid var(--line); display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.2fr);
+  column-gap: clamp(2rem, 4vw, 3.5rem); align-items: center; padding-block: 3.6rem; }
+.thesis .text { min-width: 0; max-width: 34rem; }
+.concept { display: inline-flex; align-items: center; gap: .6rem; margin: 0 0 1.1rem; font: 600 .8rem var(--mono);
+  letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
+.concept svg { width: 1.35rem; height: 1.35rem; flex: none; }
 .thesis h3 { margin: 0; font: 900 clamp(1.7rem, 2.9vw, 2.45rem)/1.08 var(--font); letter-spacing: -.03em; text-wrap: balance; }
 html[lang="zh-CN"] .thesis h3 { letter-spacing: .01em; line-height: 1.3; font-size: clamp(1.45rem, 2.9vw, 2.45rem); }
-.thesis .body { min-width: 0; }
-.thesis .body p { margin: 0 0 .9rem; color: var(--muted); font-size: 1.02rem; }
-.thesis .shot { margin: 0; border-radius: 14px; overflow: hidden; border: 1px solid var(--line); aspect-ratio: 4 / 3; background: var(--sunk); }
-.thesis .shot img { width: 100%; height: 100%; object-fit: cover; }
-.thesis .shot figcaption { display: none; }
-@media (max-width: 1000px) { .thesis { grid-template-columns: 2.6rem minmax(0, 1fr) minmax(0, 16rem); column-gap: 2rem; } }
-@media (max-width: 720px) { .thesis { grid-template-columns: 2.2rem minmax(0, 1fr); grid-template-rows: auto; column-gap: 1.2rem; padding-block: 2.6rem; }
-  .thesis .mark, .thesis h3 { grid-row: 1; } .thesis .body { grid-row: 2; margin-top: .6rem; }
-  .thesis .shot { grid-column: 2; grid-row: 3; max-width: 26rem; margin-top: 1.1rem; } }
+.thesis .body p { margin: 1.1rem 0 1.3rem; color: var(--muted); font-size: 1.02rem; }
+.thesis .shot { margin: 0; border: 0; background: transparent; border-radius: 0; overflow: visible; }
+.thesis .frame { position: relative; border-radius: 16px; overflow: hidden; border: 1px solid var(--line); }
+.thesis .frame img, .thesis .frame video { display: block; width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; }
+/* overlays: marks drawn in image pixels, labels placed in percent of the frame */
+.marks { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.marks .dot { fill: #c8442d; stroke: #fff; stroke-width: 4; }
+.marks .lead { stroke: #fff; stroke-width: 3; }
+.marks .dash { stroke-dasharray: 6 8; }
+.marks .ring { fill: rgba(200, 68, 45, .14); stroke: #c8442d; stroke-width: 4; }
+.marks .flow { fill: none; stroke: #c8442d; stroke-width: 6; stroke-linecap: round; stroke-dasharray: 2 14; }
+.tag { position: absolute; left: var(--x); top: var(--y); transform: translate(-50%, -50%); padding: .28rem .65rem; border-radius: 999px;
+  background: rgba(255, 255, 255, .94); color: #171c22; font: 600 .78rem/1.3 var(--font); white-space: nowrap;
+  box-shadow: 0 2px 10px rgba(23, 28, 34, .12); }
+.inset { position: absolute; right: 1rem; top: 1rem; width: 30%; margin: 0; }
+.inset img { width: 100%; height: auto; border-radius: 10px; border: 3px solid #fff; box-shadow: 0 4px 16px rgba(23, 28, 34, .22); }
+.inset span { position: absolute; left: .5rem; bottom: .5rem; padding: .2rem .55rem; border-radius: 999px; background: #c8442d; color: #fff;
+  font: 600 .72rem/1.3 var(--font); }
+.cards { position: absolute; right: 1rem; top: 1rem; width: 30%; display: grid; gap: .3rem; }
+.card { margin: 0; padding: .45rem .7rem; border-radius: 8px; background: rgba(255, 255, 255, .82); color: #5b6168; font: 500 .74rem/1.35 var(--font);
+  box-shadow: 0 2px 8px rgba(23, 28, 34, .08); }
+.card.skill { background: #fff; color: #171c22; border-left: 3px solid #c8442d; padding: .6rem .75rem; }
+.card.skill b { display: block; font-weight: 700; font-size: .86rem; }
+.card.skill small { color: #5b6168; font-size: .72rem; }
+.cards .count { margin: .15rem 0 0; color: #171c22; font: 700 .74rem var(--mono); text-align: right; text-shadow: 0 1px 6px rgba(255, 255, 255, .9); }
+@media (max-width: 720px) {
+  .tag { font-size: .6rem; padding: .18rem .45rem; }
+  .inset { right: .5rem; top: .5rem; width: 32%; } .inset span { font-size: .58rem; left: .3rem; bottom: .3rem; }
+  .cards { right: .5rem; top: .5rem; width: 42%; gap: .2rem; } .card { font-size: .58rem; padding: .25rem .45rem; }
+  .card.skill b { font-size: .64rem; } .card.skill small { display: none; } .cards .count { font-size: .58rem; }
+}
+/* the image is light in both themes, so the chip keeps fixed light colours */
+.chip { position: absolute; left: 1rem; bottom: 1rem; max-width: calc(100% - 2rem); margin: 0; padding: .65rem .85rem;
+  border-radius: 10px; background: rgba(255, 255, 255, .93); color: #171c22; box-shadow: 0 2px 12px rgba(23, 28, 34, .1);
+  font: 600 .9rem/1.4 var(--font); }
+.chip.top { top: 1rem; bottom: auto; }
+.chip small { display: block; margin-top: .2rem; font: 400 .8rem/1.45 var(--font); color: #5b6168; }
+.chip code { font: 500 .78rem var(--mono); color: #5b6168; }
+.chip .verdict { display: inline-flex; align-items: center; gap: .45rem; }
+.chip .verdict::before { content: ""; width: .55rem; height: .55rem; border-radius: 50%; background: var(--dot); }
+.chip .fail { --dot: #b23030; }
+.chip .pass { --dot: #228b54; }
+.thesis figcaption { margin-top: .65rem; color: var(--muted); font-size: .8rem; }
+.thesis-bridge { border-top: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between;
+  gap: 1.5rem; padding-block: 1.6rem; }
+.thesis-bridge small { color: var(--muted); font-size: .75rem; }
+@media (max-width: 720px) { .thesis { grid-template-columns: minmax(0, 1fr); row-gap: 1.6rem; padding-block: 2.6rem; }
+  .chip { left: .6rem; bottom: .6rem; max-width: calc(100% - 1.2rem); padding: .5rem .65rem; font-size: .8rem; }
+  .chip.top { top: .6rem; bottom: auto; }
+  .chip { max-width: 56%; } .chip small { display: none; }
+  .thesis-bridge { align-items: flex-start; flex-direction: column; gap: .5rem; } }
 
 /* section headings */
 section { padding-block: 7rem; }
@@ -303,32 +342,74 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
 <section id="why">
   <div class="wrap">
     <article class="thesis">
-      <svg class="mark" viewBox="0 0 64 64" aria-hidden="true"><path class="on" d="M10 22c7-7 15 7 22 0s15 7 22 0"/><path d="M10 33c7-7 15 7 22 0s15 7 22 0"/><path d="M10 44c7-7 15 7 22 0s15 7 22 0"/></svg>
-      <h3 data-i18n="w1.t">Intelligence is becoming physical.</h3>
-      <div class="body">
-        <p data-i18n="w1.d">From understanding the world to acting within it.</p>
-        <a class="more" href="https://hyloai.github.io/hylo-docs/user-guide/agents/" data-i18n="w1.more">Explore agents ↗</a>
+      <div class="text">
+        <p class="concept"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg><span data-i18n="w1.c">Agents</span></p>
+        <h3 data-i18n="w1.t">Intelligence is becoming physical.</h3>
+        <div class="body">
+          <p data-i18n="w1.d">From understanding the world to acting within it.</p>
+          <a class="more" href="https://hyloai.github.io/hylo-docs/user-guide/agents/" data-i18n="w1.more">Explore agents ↗</a>
+        </div>
       </div>
-      <figure class="shot"><img src="assets/tools-llm-stack.jpg" alt="A local model stacking blocks through typed robot tools, its tool calls captioned over the camera view" width="960" height="720" loading="lazy"><figcaption>Tool-calling agent, Panda stacking</figcaption></figure>
+      <figure class="shot">
+        <div class="frame">
+          <img src="assets/thesis-act.webp" data-i18n-alt="w1.alt" alt="A G1 humanoid sweeps a room; its broom, dustpan and the debris on the floor are labelled, and an inset shows the real robot's head camera." width="1536" height="1024" loading="lazy" decoding="async">
+          <svg class="marks" viewBox="0 0 1536 1024" aria-hidden="true"><defs><marker id="a1" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#c8442d"/></marker></defs><line class="lead" x1="698" y1="816" x2="476" y2="717"/><circle class="dot" cx="698" cy="816" r="9"/><line class="lead" x1="785" y1="741" x2="1014" y2="655"/><circle class="dot" cx="785" cy="741" r="9"/><line class="lead" x1="658" y1="862" x2="445" y2="942"/><circle class="dot" cx="658" cy="862" r="9"/><line class="lead dash" x1="934" y1="97" x2="1037" y2="143"/><circle class="dot" cx="934" cy="97" r="9"/></svg>
+          <span class="tag" style="--x:31%;--y:70%" data-i18n="w1.t1">Broom</span><span class="tag" style="--x:66%;--y:64%" data-i18n="w1.t2">Dustpan</span><span class="tag" style="--x:29%;--y:92%" data-i18n="w1.t3">Debris, 6 pieces</span>
+          <div class="inset"><img src="assets/thesis-act-headcam.webp" alt="" width="640" height="480" loading="lazy"><span data-i18n="w1.t4">What it sees</span></div>
+          <p class="chip top"><span data-i18n="w1.chip">“Sweep the floor”</span><small data-i18n="w1.chips">See the room, find the tools, then act</small></p>
+        </div>
+        <figcaption data-i18n="w1.cap">A G1 twin posed from a real sweeping episode. Inset: the real robot's head camera (<a href="https://huggingface.co/datasets/BitRobot/HIW-500-LeRobot">HIW-500</a>, CC BY 4.0).</figcaption>
+      </figure>
     </article>
     <article class="thesis">
-      <svg class="mark" viewBox="0 0 64 64" aria-hidden="true"><path d="M10 22c7-7 15 7 22 0s15 7 22 0"/><path class="on" d="M10 33c7-7 15 7 22 0s15 7 22 0"/><path d="M10 44c7-7 15 7 22 0s15 7 22 0"/></svg>
-      <h3 data-i18n="w2.t">The world shapes intelligence.</h3>
-      <div class="body">
-        <p data-i18n="w2.d">Action brings feedback. Feedback drives learning.</p>
-        <a class="more" href="https://hyloai.github.io/hylo-docs/user-guide/campaigns/" data-i18n="w2.more">How changes are verified ↗</a>
+      <div class="text">
+        <p class="concept"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l9 5v9l-9 5-9-5V8Z"/><path d="M3 8l9 5 9-5M12 13v9M12 3v10"/></svg><span data-i18n="w2.c">Worlds</span></p>
+        <h3 data-i18n="w2.t">The world shapes intelligence.</h3>
+        <div class="body">
+          <p data-i18n="w2.d">Action brings feedback. Feedback drives learning.</p>
+          <a class="more" href="https://hyloai.github.io/hylo-docs/user-guide/worlds/" data-i18n="w2.more">Explore worlds ↗</a>
+        </div>
       </div>
-      <figure class="shot"><img src="assets/program-improvement.jpg" alt="A held-out stacking episode: the hand-written parent program fails, the improved program succeeds" width="1280" height="616" loading="lazy"><figcaption>Held-out verification, Panda stacking</figcaption></figure>
+      <figure class="shot">
+        <div class="frame">
+          <img src="assets/thesis-feedback.webp" data-i18n-alt="w2.alt" alt="Close-up: the robot's feet on the floor and its broom pushing debris into the dustpan, with the contacts and the debris path marked." width="1536" height="1024" loading="lazy" decoding="async">
+          <svg class="marks" viewBox="0 0 1536 1024" aria-hidden="true"><defs><marker id="a2" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#c8442d"/></marker></defs><ellipse class="ring" cx="1095" cy="560" rx="95" ry="30"/><ellipse class="ring" cx="945" cy="450" rx="85" ry="26"/><ellipse class="ring" cx="495" cy="700" rx="150" ry="40"/><path class="flow" d="M610 712 Q690 742 752 690" marker-end="url(#a2)"/><line class="lead" x1="1198" y1="584" x2="1321" y2="717"/><line class="lead" x1="495" y1="737" x2="307" y2="860"/><line class="lead" x1="707" y1="722" x2="860" y2="881"/></svg>
+          <span class="tag" style="--x:86%;--y:70%" data-i18n="w2.t1">Feet hold the floor</span><span class="tag" style="--x:20%;--y:84%" data-i18n="w2.t2">Brush meets the floor</span><span class="tag" style="--x:56%;--y:86%" data-i18n="w2.t3">Debris enters the pan</span>
+          <p class="chip top"><span data-i18n="w2.chip">Every contact is feedback</span><small data-i18n="w2.chips">The floor and the debris answer each stroke</small></p>
+        </div>
+        <figcaption data-i18n="w2.cap">Close-up of the same episode. The world answers each stroke.</figcaption>
+      </figure>
     </article>
     <article class="thesis">
-      <svg class="mark" viewBox="0 0 64 64" aria-hidden="true"><path d="M10 22c7-7 15 7 22 0s15 7 22 0"/><path d="M10 33c7-7 15 7 22 0s15 7 22 0"/><path class="on" d="M10 44c7-7 15 7 22 0s15 7 22 0"/></svg>
-      <h3 data-i18n="w3.t">A world where intelligence can evolve.</h3>
-      <div class="body">
-        <p data-i18n="w3.d">A foundation for experience to accumulate and capabilities to grow.</p>
-        <a class="more" href="https://hyloai.github.io/hylo-docs/physical-rsi/" data-i18n="w3.more">Why Physical RSI ↗</a>
+      <div class="text">
+        <p class="concept"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l3 6 6 3-6 3-3 6-3-6-6-3 6-3Z"/></svg><span data-i18n="w3.c">Memory and skills</span></p>
+        <h3 data-i18n="w3.t">A world where intelligence can evolve.</h3>
+        <div class="body">
+          <p data-i18n="w3.d">A foundation for experience to accumulate and capabilities to grow.</p>
+          <a class="more" href="https://hyloai.github.io/hylo-docs/user-guide/skills/" data-i18n="w3.more">Explore skills ↗</a>
+        </div>
       </div>
-      <figure class="shot"><img src="assets/studio-campaigns.jpg" alt="The Studio's self-improvement page listing campaigns, their cycles, candidates and state" width="1280" height="800" loading="lazy"><figcaption>Self-improvement campaigns, Hylo Studio</figcaption></figure>
+      <figure class="shot">
+        <div class="frame">
+          <img src="assets/thesis-evolve.webp" data-i18n-alt="w3.alt" alt="Seven moments of one sweeping stroke layered as fading traces, with a stack of experience cards; the top card is the sweeping skill." width="1536" height="1024" loading="lazy" decoding="async">
+          <svg class="marks" viewBox="0 0 1536 1024" aria-hidden="true"><defs><marker id="a3" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#c8442d"/></marker></defs><line class="lead" x1="630" y1="788" x2="338" y2="676"/><circle class="dot" cx="630" cy="788" r="9"/><line class="lead" x1="791" y1="753" x2="1014" y2="901"/><circle class="dot" cx="791" cy="753" r="9"/></svg>
+          <span class="tag" style="--x:22%;--y:66%" data-i18n="w3.t1">Earlier strokes</span><span class="tag" style="--x:66%;--y:88%" data-i18n="w3.t2">This stroke</span>
+          <div class="cards" aria-label="Experience">
+            <p class="card skill"><b data-i18n="w3.k1">Skill: sweep the floor ✓</b><small data-i18n="w3.k1s">Learned from real demonstrations</small></p>
+            <p class="card" data-i18n="w3.k2">Hang keys on a hook</p>
+            <p class="card" data-i18n="w3.k3">Set the table</p>
+            <p class="card" data-i18n="w3.k4">Restock the fridge</p>
+            <p class="count" data-i18n="w3.k5">23,743 real episodes</p>
+          </div>
+          <p class="chip"><span data-i18n="w3.chip">Experience accumulates</span><small data-i18n="w3.chips">Each stroke is kept and reused</small></p>
+        </div>
+        <figcaption data-i18n="w3.cap">Seven moments of one stroke, layered. Experience from many tasks grows into skills.</figcaption>
+      </figure>
     </article>
+    <div class="thesis-bridge">
+      <a class="more" href="#loop" data-i18n="why.more">Explore Physical RSI ↓</a>
+      <small data-i18n="why.art">Renders of a G1 twin posed from real joint data</small>
+    </div>
   </div>
 </section>
 
@@ -546,15 +627,47 @@ uv run hylo run bench/examples/configs/mujoco_reach.yaml</pre>
     "hero.kicker": "物理 AI 的开放基座",
     "hero.title": "智能的下一个时代，<br>是物理的。",
     "hero.lede": "让物理智能从经验中学习，在与世界的交互中持续进化。",
+    "w1.c": "智能体",
     "w1.t": "智能，正走向物理世界。",
     "w1.d": "从理解世界，到参与世界。",
     "w1.more": "了解智能体 ↗",
+    "w1.alt": "G1 人形机器人在房间里扫地，扫帚、簸箕和地上的碎屑都有标注，右上角是真实机器人头部相机的画面。",
+    "w1.t1": "扫帚",
+    "w1.t2": "簸箕",
+    "w1.t3": "碎屑，6 处",
+    "w1.t4": "它看到的",
+    "w1.chip": "“把地扫干净”",
+    "w1.chips": "看清房间，找到工具，再动手",
+    "w1.cap": "依据真实扫地回合摆出姿态的 G1 孪生。右上：真实机器人的头部相机（<a href=\"https://huggingface.co/datasets/BitRobot/HIW-500-LeRobot\">HIW-500</a>，CC BY 4.0）。",
+    "w2.c": "世界",
     "w2.t": "世界塑造智能。",
     "w2.d": "行动带来反馈，反馈推动学习。",
-    "w2.more": "了解改动如何被检验 ↗",
+    "w2.more": "了解世界 ↗",
+    "w2.alt": "近景：机器人双脚踩在地上，扫帚把碎屑推进簸箕，接触点和碎屑路径都有标注。",
+    "w2.t1": "双脚稳住地面",
+    "w2.t2": "刷头贴住地面",
+    "w2.t3": "碎屑进入簸箕",
+    "w2.chip": "每一次接触都是反馈",
+    "w2.chips": "地面和碎屑回应每一下清扫",
+    "w2.cap": "同一回合的近景。世界回应每一下清扫。",
+    "w3.c": "记忆与技能",
     "w3.t": "一个让智能<br>不断进化的世界。",
     "w3.d": "让经验持续积累，让能力不断生长。",
-    "w3.more": "了解 Physical RSI ↗",
+    "w3.more": "了解技能 ↗",
+    "w3.alt": "同一下清扫的七个时刻叠成渐隐的轨迹，旁边是一摞经验卡片，最上面是扫地技能。",
+    "w3.t1": "之前的清扫",
+    "w3.t2": "这一下",
+    "w3.k1": "技能：扫地 ✓",
+    "w3.k1s": "从真实示范中习得",
+    "w3.k2": "把钥匙挂上挂钩",
+    "w3.k3": "摆好餐桌",
+    "w3.k4": "给冰箱补货",
+    "w3.k5": "23,743 段真实经验",
+    "w3.chip": "经验持续积累",
+    "w3.chips": "每一下清扫都被保留、被复用",
+    "w3.cap": "同一下清扫的七个时刻叠在一起。来自许多任务的经验，生长为技能。",
+    "why.more": "了解 Physical RSI ↓",
+    "why.art": "依据真实关节数据摆出姿态的 G1 孪生渲染",
     "hero.start": "快速上手",
     "hero.stack": "了解 Physical RSI",
     "loop.title": "Physical <em>RSI</em>",
@@ -651,11 +764,14 @@ uv run hylo run bench/examples/configs/mujoco_reach.yaml</pre>
   var en = {};
   var nodes = document.querySelectorAll("[data-i18n]");
   nodes.forEach(function (n) { en[n.getAttribute("data-i18n")] = n.innerHTML; });
+  var altNodes = document.querySelectorAll("[data-i18n-alt]");
+  altNodes.forEach(function (n) { en[n.getAttribute("data-i18n-alt")] = n.alt; });
   var button = document.getElementById("lang");
   var current = "en";
   function apply(lang) {
     var dict = lang === "zh" ? zh : en;
     nodes.forEach(function (n) { var k = n.getAttribute("data-i18n"); if (dict[k] != null) n.innerHTML = dict[k]; });
+    altNodes.forEach(function (n) { var k = n.getAttribute("data-i18n-alt"); if (dict[k] != null) n.alt = dict[k]; });
     document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
     button.textContent = lang === "zh" ? "EN" : "中文";
     button.setAttribute("aria-label", lang === "zh" ? "Switch to English" : "切换到中文");
