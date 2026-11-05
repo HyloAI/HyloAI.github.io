@@ -71,7 +71,7 @@ header.top { position: sticky; top: 0; z-index: 10; background: color-mix(in srg
 .brand { display: inline-flex; align-items: center; gap: .6rem; text-decoration: none; font: 800 1.25rem/1 var(--font);
   letter-spacing: -.02em; }
 .brand img { width: 30px; height: 30px; }
-nav.links { display: flex; gap: 1.8rem; margin: 0 auto; font-size: .95rem; font-weight: 500; }
+nav.links { display: flex; gap: 1.35rem; margin: 0 auto; font-size: .95rem; font-weight: 500; }
 nav.links a { color: var(--muted); text-decoration: none; }
 nav.links a:hover { color: var(--ink); }
 .menu-toggle { display: none; }
@@ -322,8 +322,9 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
     <nav class="links" id="site-nav" aria-label="Main navigation" data-i18n-aria-label="nav.label">
       <a href="#why" data-i18n="nav.why">Why Hylo</a>
       <a href="#loop" data-i18n="nav.loop">Physical RSI</a>
-      <a href="#work" data-i18n="nav.work">Examples</a>
+      <a href="#work" data-i18n="nav.work">Use Cases</a>
       <a href="#start" data-i18n="nav.start">Get started</a>
+      <a href="/research/" data-i18n="nav.research">Research</a>
       <a href="https://hyloai.github.io/hylo-docs/" data-i18n="nav.docs">Docs ↗</a>
       <a href="https://github.com/HyloAI">GitHub ↗</a>
     </nav>
@@ -497,7 +498,7 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
       <div>
         <h3 data-i18n="t4.h">Build worlds through conversation</h3>
         <p data-i18n="t4.d">Describe a robot workspace, refine its layout through conversation, and explore the generated simulation in Studio.</p>
-        <a class="more" href="https://hyloai.github.io/hylo-docs/user-guide/worlds/#chat-to-world-demo" data-i18n="t4.more">Full demo &amp; walkthrough ↗</a>
+        <a class="more" href="https://hyloai.github.io/hylo-docs/use-cases/worlds/#chat-to-world-demo" data-i18n="t4.more">Full demo &amp; walkthrough ↗</a>
       </div>
       <div class="shot"><video src="assets/world-chat.mp4" poster="assets/world-chat.jpg" controls muted playsinline preload="none" style="width:100%;display:block" aria-label="Recorded AI session replay: English chat builds and refines a dual-arm workbench in World Studio"></video></div>
     </div>
@@ -505,7 +506,7 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
       <div>
         <h3 data-i18n="t3.h">From experience to verified skills</h3>
         <p data-i18n="t3.d">Improve a sorting program through experience, verify it, and reuse the skill in new layouts.</p>
-        <a class="more" href="https://hyloai.github.io/hylo-docs/user-guide/research-and-skills/#recorded-skill-development-demo" data-i18n="t3.more">Full demo &amp; walkthrough ↗</a>
+        <a class="more" href="https://hyloai.github.io/hylo-docs/use-cases/program-skills/" data-i18n="t3.more">Full demo &amp; walkthrough ↗</a>
       </div>
       <div class="shot"><video src="assets/skills-sorting.mp4" poster="assets/skills-sorting.jpg" controls muted playsinline preload="none" style="width:100%;display:block" aria-label="Recorded skill development: AI revises a sorting program, the frozen candidate passes independent verification, and a later agent reuses the verified skill"></video></div>
     </div>
@@ -513,7 +514,7 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
       <div>
         <h3 data-i18n="t5.h">An AI agent operating a robot</h3>
         <p data-i18n="t5.d">“Stack the purple block on the green block.” The agent turns an instruction into robot actions in simulation.</p>
-        <a class="more" href="https://hyloai.github.io/hylo-docs/user-guide/tool-agents/#recorded-robot-control-demo" data-i18n="t5.more">Full demo &amp; walkthrough ↗</a>
+        <a class="more" href="https://hyloai.github.io/hylo-docs/use-cases/robot-control/" data-i18n="t5.more">Full demo &amp; walkthrough ↗</a>
       </div>
       <div class="shot"><video src="assets/tools-llm-stack.mp4" poster="assets/tools-llm-stack.jpg" controls muted playsinline preload="none" style="width:100%;display:block" aria-label="Recorded AI robot-control walkthrough: a Panda arm stacks a purple block on a green block, with tool calls and task verification"></video></div>
     </div>
@@ -532,6 +533,36 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
         <a class="more" href="https://hyloai.github.io/hylo-docs/physical-rsi/" data-i18n="t6.more">Physical RSI docs ↗</a>
       </div>
       <div class="shot"><video src="assets/studio-campaigns.mp4" poster="assets/studio-campaigns.jpg" controls muted loop playsinline preload="none" style="width:100%;display:block" aria-label="The Studio's self-improvement pages: a candidate's cascade, an approval, the rollback form and the A/B arena"></video></div>
+    </div>
+  </div>
+</section>
+
+<section id="research" aria-labelledby="research-title" tabindex="-1">
+  <div class="wrap">
+    <div class="start-intro">
+      <div>
+        <p class="kicker">Hylo Research</p>
+        <h2 id="research-title" data-i18n="research.title">Learning, measured.</h2>
+        <p data-i18n="research.lede">Studies of agents, memory and reusable skills, with the evidence and limits behind each result.</p>
+      </div>
+      <a class="more" href="/research/" data-i18n="research.more">Explore Research →</a>
+    </div>
+    <div class="paths">
+      <article class="path">
+        <h3 data-i18n="research.skills">From a program to a skill</h3>
+        <p data-i18n="research.skills.desc">A recorded sorting experiment follows development, independent verification and later skill calls.</p>
+        <a class="more" href="/research/articles/program-skills/" data-i18n="research.read">Read the study →</a>
+      </article>
+      <article class="path">
+        <h3 data-i18n="research.memory">When memory helps</h3>
+        <p data-i18n="research.memory.desc">Paired comparisons show where recall improves outcomes and where it adds no measurable benefit.</p>
+        <a class="more" href="/research/articles/when-memory-helps/" data-i18n="research.read">Read the study →</a>
+      </article>
+      <article class="path">
+        <h3 data-i18n="research.bench">Benchmarks</h3>
+        <p data-i18n="research.bench.desc">Reference policies evaluated under a shared protocol, with historical versions kept separate.</p>
+        <a class="more" href="/research/benchmarks/" data-i18n="research.results">Explore results →</a>
+      </article>
     </div>
   </div>
 </section>
@@ -588,7 +619,7 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
       <div><h4 data-i18n="foot.dev">Developers</h4><ul>
         <li><a href="https://hyloai.github.io/hylo-docs/" data-i18n="foot.docs">Documentation</a></li>
         <li><a href="https://hyloai.github.io/hylo-docs/getting-started/quickstart/" data-i18n="foot.quick">Quickstart</a></li>
-        <li><a href="https://hyloai.github.io/hylo-docs/benchmarking/leaderboard/" data-i18n="foot.board">Leaderboard</a></li></ul></div>
+        <li><a href="/research/benchmarks/" data-i18n="foot.board">Benchmarks</a></li></ul></div>
       <div><h4 data-i18n="foot.company">Company</h4><ul>
         <li><a href="https://github.com/HyloAI">GitHub ↗</a></li>
         <li><a href="https://github.com/HyloAI/hylo-harness/blob/main/LICENSE">Apache-2.0</a></li></ul></div>
@@ -609,7 +640,8 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
     "s5.link": "阅读部署文档",
     "nav.why": "理念",
     "nav.loop": "Physical RSI",
-    "nav.work": "实例",
+    "nav.work": "案例",
+    "nav.research": "研究",
     "nav.start": "开始使用",
     "nav.docs": "文档 ↗",
     "hero.kicker": "物理 AI 的开放基座",
@@ -707,7 +739,18 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
     "foot.dev": "开发者",
     "foot.docs": "文档",
     "foot.quick": "快速上手",
-    "foot.board": "排行榜",
+    "foot.board": "评测结果",
+    "research.title": "用实验衡量学习。",
+    "research.lede": "探索智能体、记忆与可复用技能，公开每项结果的证据与局限。",
+    "research.more": "探索研究 →",
+    "research.skills": "从程序到技能",
+    "research.skills.desc": "一次分拣实验，记录程序开发、独立验证和后续技能调用。",
+    "research.read": "阅读研究 →",
+    "research.memory": "记忆何时有效",
+    "research.memory.desc": "通过配对比较，了解记忆何时改善结果，何时没有可测量的收益。",
+    "research.bench": "评测结果",
+    "research.bench.desc": "在统一协议下评测参考策略，历史版本单独展示。",
+    "research.results": "查看结果 →",
     "foot.company": "公司",
     "foot.open": "以 Apache-2.0 许可开源",
     "c2.t": "世界",
