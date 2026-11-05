@@ -38,6 +38,6 @@ The video is a presentation of saved research records and a physics replay, with
 
 ## Reproduce and inspect
 
-- [Watch the use case](/hylo-docs/use-cases/program-skills/) for the full recorded workflow.
+- [Watch the use case](/hylo-docs/user-guide/skills/development-and-reuse/) for the full recorded workflow.
 - [Develop and reuse a program skill](/hylo-docs/user-guide/research-and-skills/) for commands and configuration. A new model run can produce different results.
 - [Source and replay provenance](/assets/skills-sorting.provenance.json) includes the source revisions, program, evaluation, skill calls and trace/video hashes. The table above is generated from this record.

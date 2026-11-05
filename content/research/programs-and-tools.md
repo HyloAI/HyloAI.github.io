@@ -25,7 +25,7 @@ A successful robot episode can come from a supplied program, a program revised b
 | Model-developed programs | A model revises code before it is frozen for evaluation | Development cases, independent gate and held-out report |
 | Interactive tool-calling agents | A model makes decisions during the episode | Tool trace, model calls and independent task verdict |
 
-The [sorting skill study](/research/articles/program-skills/) belongs to the second category. The [recorded robot-control case](/hylo-docs/use-cases/robot-control/) belongs to the third. Their outcomes describe different experiments and should not be placed on a shared ranking.
+The [sorting skill study](/research/articles/program-skills/) belongs to the second category. The [recorded robot-control case](/hylo-docs/user-guide/agents/robot-control/) belongs to the third. Their outcomes describe different experiments and should not be placed on a shared ranking.
 
 ## Conditions that matter
 

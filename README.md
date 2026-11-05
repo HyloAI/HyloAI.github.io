@@ -29,7 +29,7 @@ Keep labels brief; hover and keyboard focus highlight related stages and capabil
 deployment and architecture are supporting entry points. Keep homepage copy concise and aligned with the docs'
 concept definitions. Keep English text, Chinese
 `data-i18n` entries and metadata aligned with the [docs wording guide](https://github.com/HyloAI/hylo-docs/blob/main/docs/developer-guide/docs.md#shared-website-wording). Case studies must state their robot, observation conditions
-and measured scope; link experimental findings to Research and workflows to Use Cases in the documentation. Build and verify the linked docs before publishing.
+and measured scope; link experimental findings to Research and workflows to Demos within the corresponding Guides topic. Build and verify the linked docs before publishing.
 
 After changing Chinese text, regenerate the MiSans subsets with `tools/subset_fonts.py` and check both languages.
 
@@ -38,7 +38,7 @@ Apache License 2.0. Copyright 2026 Hylo AI.
 ## Research and documentation
 
 The website owns `/research/`: public articles, curated experimental analysis and benchmark result pages.
-Documentation owns operational guides, Use Cases and developer validation/reproduction records. Internal
+Documentation owns operational guides, demos and developer validation/reproduction records. Internal
 research notes and RFCs in hylo-docs are source material; they are not automatically published to Research.
 
 - Edit articles in `content/research/*.md` (YAML metadata plus Markdown).
@@ -61,6 +61,6 @@ A standalone build can install `tools/requirements-research.txt`. Rebuild Chines
 translated text. Research HTML is generated locally and committed; GitHub Pages continues to serve the repository
 without a framework runtime or a new deployment service.
 
-When moving a documentation URL, add a redirect in hylo-docs and retain meaningful old fragment anchors.
-Publish new destinations before switching older entry points. Verify cross-site links against the public docs
+When moving a documentation URL, update incoming links to the current destination.
+Publish new destinations before switching older entry points; legacy redirects are not required. Verify cross-site links against the public docs
 build as well as the full internal docs build.
