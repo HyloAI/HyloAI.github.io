@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Phase-guided program repair: an initial study · Hylo Research</title><meta name="description" content="The repair lifecycle works in integration tests; five real-model probes produced no promoted candidate.">
+<link rel="canonical" href="https://hyloai.github.io/research/articles/phase-guided-repair/"><meta property="og:title" content="Phase-guided program repair: an initial study · Hylo Research">
+<meta property="og:description" content="The repair lifecycle works in integration tests; five real-model probes produced no promoted candidate."><meta property="og:url" content="https://hyloai.github.io/research/articles/phase-guided-repair/">
+<link rel="icon" href="/assets/logo.svg" type="image/svg+xml"><link rel="stylesheet" href="/assets/research.css">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+</head><body><a class="skip" href="#main" data-i18n="skip">Skip to content</a>
+<header class="top"><div class="wrap"><a class="brand" href="/" aria-label="Hylo home"><img src="/assets/logo.svg" alt="" width="30" height="30">Hylo</a>
+<nav class="links" id="site-nav" aria-label="Main navigation"><a href="/" data-i18n="home">Home</a><a href="/research/" data-i18n="research" aria-current="true">Research</a><a href="/research/benchmarks/" data-i18n="benchmarks" >Benchmarks</a><a href="/hylo-docs/" data-i18n="docs">Docs ↗</a><a href="https://github.com/HyloAI">GitHub ↗</a></nav>
+<button class="lang" id="lang" aria-label="切换到中文" type="button">中文</button><button class="menu" id="menu" type="button" aria-expanded="false" aria-controls="site-nav" data-i18n="menu">Menu</button></div></header>
+<main id="main" class="wrap"><div class="article-head"><div class="breadcrumb"><a href="/research/" data-i18n="research">Research</a> / <span data-i18n="Experiment">Experiment</span></div>
+<div class="eyebrow">Agents · Physical RSI</div><h1 data-i18n="title">Phase-guided program repair: an initial study</h1><p class="summary" data-i18n="summary">The repair lifecycle works in integration tests; five real-model probes produced no promoted candidate.</p>
+<div class="meta"><span data-i18n="published">Published</span> <time datetime="2026-11-05">2026-11-05</time></div><p class="language-note" data-zh-only hidden>以下研究正文为英文，实验日期见正文。</p></div><div class="article-layout"><aside class="toc" aria-label="On this page"><p data-i18n="contents">On this page</p><div class="toc">
+<ul>
+<li><a href="#the-question">The question</a></li>
+<li><a href="#method">Method</a></li>
+<li><a href="#results">Results</a></li>
+<li><a href="#scope-and-limitations">Scope and limitations</a></li>
+<li><a href="#reproduce-and-inspect">Reproduce and inspect</a></li>
+</ul>
+</div>
+</aside><article class="article-body" lang="en"><h2 id="the-question">The question</h2>
+<p>Can an explicit phase plan and recall of earlier repairs help a model develop a successful robot program? The optional <code>harness.program</code> strategy combines phase planning, bounded program development and evidence-linked repair notes.</p>
+<h2 id="method">Method</h2>
+<p>The strategy asks for observable phases, completion conditions, fallbacks and step budgets. It runs a development session on <code>search</code> cases. All selected development cases must succeed before a candidate reaches selection and an independent gate. Repair notes reference failed cases and successful replays and become available only from active, promoted lineages.</p>
+<p>This is an independent design adaptation inspired by HarnessPAI. The pinned upstream project had no project licence; no upstream source, prompts or templates were copied. It is not a reproduction of the authors' benchmark result.</p>
+<h2 id="results">Results</h2>
+<p>The November 4, 2026 record contains five real-model probes:</p>
+<div class="table-scroll" role="region" aria-label="Results table" tabindex="0"><table>
+<thead>
+<tr>
+<th>Probe</th>
+<th>Model</th>
+<th>Outcome</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>v1</td>
+<td>gpt-oss:20b</td>
+<td>No submitted program; tool-call mistakes and token-budget exhaustion</td>
+</tr>
+<tr>
+<td>v2</td>
+<td>qwen3.5:35b-a3b</td>
+<td>Planning timed out; no completed model reply</td>
+</tr>
+<tr>
+<td>v3</td>
+<td>gpt-oss:20b</td>
+<td>No submitted program; incomplete toolkit context</td>
+</tr>
+<tr>
+<td>v4</td>
+<td>gpt-oss:20b</td>
+<td>No submitted program; definitions changed without submission</td>
+</tr>
+<tr>
+<td>v5</td>
+<td>gpt-oss:20b</td>
+<td>Four submissions; each solved 0/2 development cases</td>
+</tr>
+</tbody>
+</table></div>
+<p>No candidate reached gate or held-out evaluation. No repair notes were admitted from these real-model attempts. A scripted-model integration test exercised repair, gate, approval, recall and rollback; that validates orchestration rather than autonomous task improvement.</p>
+<h2 id="scope-and-limitations">Scope and limitations</h2>
+<p>The probes used a CPU toy environment with red/blue block instructions and privileged test-double perception. They were not RoboMME, MIKASA-Robo or deployment-observation-only robot evaluations. Model-inference hardware was not established by the record.</p>
+<p>The final four submissions are adaptive revisions on the same two cases, not eight independent benchmark samples. The observed program targeted the red block under both instructions. Correct workflow mechanics did not compensate for weak program synthesis.</p>
+<h2 id="reproduce-and-inspect">Reproduce and inspect</h2>
+<ul>
+<li><a href="/hylo-docs/developer-guide/validation/phase-guided/">Strategy and reproduction record</a> includes the implementation, source paths and experimental conditions.</li>
+<li><a href="/hylo-docs/user-guide/research-and-skills/">Program-development guide</a> describes how the strategy fits the campaign lifecycle.</li>
+<li><a href="https://github.com/HyloAI/hylo-docs/blob/c2de438c9219ac27106067f10b83f3c9c3010dcb/docs/research/experiments/2026-11-04-harness-program-evolution.md">Dated experiment record</a> preserves the complete attempt history.</li>
+<li><a href="/research/data/phase-guided-repair.json">Machine-readable results</a> retain outcome counts and evidence hashes.</li>
+</ul><p class="evidence-note" data-i18n="evidence">This article presents existing experimental records. Its publication adds no new evaluation run.</p></article></div></main>
+<footer><div class="wrap"><span>© 2026 Hylo AI · <span data-i18n="footer">The open foundation for physical AI</span></span><nav aria-label="Footer"><a href="/research/" data-i18n="research">Research</a><a href="/research/benchmarks/" data-i18n="benchmarks">Benchmarks</a><a href="/hylo-docs/" data-i18n="docs">Docs ↗</a></nav></div></footer>
+<script id="translations" type="application/json">{"home": "首页", "research": "研究", "benchmarks": "评测", "docs": "文档 ↗", "menu": "菜单", "skip": "跳到正文", "kicker": "Hylo Research", "hero": "在交互中学习。", "intro": "研究智能体如何行动、从经验中学习，并复用已验证的技能。每项结果都保留实验条件、证据和局限。", "featured": "精选研究", "all": "全部研究", "read": "阅读研究 →", "explore": "查看评测 →", "benchmark.title": "统一协议，分别评测", "benchmark.desc": "查看 MuJoCo reach 的已记录结果。不同协议版本单独展示，附带来源和复现方法。", "benchmark.hero": "Benchmarks", "benchmark.intro": "按任务和评测协议组织的实验结果。每份记录说明测量范围、版本和来源。", "All": "全部", "Skills": "技能", "Agents": "智能体", "Memory": "记忆", "Physical RSI": "Physical RSI", "Study": "研究", "Experiment": "实验", "overview": "研究概览", "contents": "本文内容", "published": "发布于", "footer": "开源的物理 AI 平台", "evidence": "本文整理已有实验记录；发布这篇文章没有产生新的评测结果。", "data": "下载结果数据 →", "mujoco.title": "MuJoCo reach：参考策略评测", "mujoco.summary": "两个协议版本的结果分别列出，保留各自的测量条件与来源。", "title": "分阶段程序修复：初步实验", "summary": "修复流程通过了集成检查；五次真实模型尝试均未产生晋升候选。"}</script><script src="/assets/research.js" defer></script></body></html>

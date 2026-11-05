@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MuJoCo reach: reference policies · Hylo Research</title><meta name="description" content="Recorded reference-policy results, separated by protocol digest.">
+<link rel="canonical" href="https://hyloai.github.io/research/benchmarks/mujoco-reach/"><meta property="og:title" content="MuJoCo reach: reference policies · Hylo Research">
+<meta property="og:description" content="Recorded reference-policy results, separated by protocol digest."><meta property="og:url" content="https://hyloai.github.io/research/benchmarks/mujoco-reach/">
+<link rel="icon" href="/assets/logo.svg" type="image/svg+xml"><link rel="stylesheet" href="/assets/research.css">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+</head><body><a class="skip" href="#main" data-i18n="skip">Skip to content</a>
+<header class="top"><div class="wrap"><a class="brand" href="/" aria-label="Hylo home"><img src="/assets/logo.svg" alt="" width="30" height="30">Hylo</a>
+<nav class="links" id="site-nav" aria-label="Main navigation"><a href="/" data-i18n="home">Home</a><a href="/research/" data-i18n="research" >Research</a><a href="/research/benchmarks/" data-i18n="benchmarks" aria-current="true">Benchmarks</a><a href="/hylo-docs/" data-i18n="docs">Docs ↗</a><a href="https://github.com/HyloAI">GitHub ↗</a></nav>
+<button class="lang" id="lang" aria-label="切换到中文" type="button">中文</button><button class="menu" id="menu" type="button" aria-expanded="false" aria-controls="site-nav" data-i18n="menu">Menu</button></div></header>
+<main id="main" class="wrap"><div class="article-head"><div class="breadcrumb"><a href="/research/">Research</a> / <a href="/research/benchmarks/">Benchmarks</a></div><div class="eyebrow">MuJoCo · Reach</div><h1 data-i18n="mujoco.title">MuJoCo reach: reference policies</h1><p class="summary" data-i18n="mujoco.summary">Two protocol snapshots, with separate rankings and reproducible sources.</p><div class="meta">Updated <time datetime="2026-11-05">2026-11-05</time></div><p class="language-note" data-zh-only hidden>以下评测说明为英文。</p></div><div class="article-layout"><aside class="toc" aria-label="On this page"><div class="toc">
+<ul>
+<li><a href="#what-is-measured">What is measured</a></li>
+<li><a href="#recorded-evaluation-examples">Recorded evaluation examples</a></li>
+<li><a href="#historical-reference-policy-board">Historical reference-policy board</a></li>
+<li><a href="#comparison-boundaries">Comparison boundaries</a></li>
+<li><a href="#reproduce-and-download">Reproduce and download</a></li>
+</ul>
+</div>
+</aside><article class="article-body" lang="en"><h2 id="what-is-measured">What is measured</h2>
+<p>These are reference-policy results on the small simulated <code>mujoco-reach</code> task. They do not rank general robot capability or policy families. Each scorecard belongs to one protocol name, version and digest. Different digests are separate boards, even when their human-readable names match.</p>
+<p>The tables are recorded snapshots, not a live submission service. They use 100 episodes per policy; equal scores share a rank. The measurement date of the historical board was not specified in its source.</p>
+<h2 id="recorded-evaluation-examples">Recorded evaluation examples</h2>
+<p>Protocol: <code>mujoco-reach v1</code> · Digest: <code>a76c7037efb84660</code>. Recorded 2026-11-01.</p>
+<div class="table-scroll" role="region" aria-label="Results table" tabindex="0"><table>
+<thead>
+<tr>
+<th>Rank</th>
+<th>Policy</th>
+<th>Success</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><code>expert-ik</code></td>
+<td>100%</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>ik-weak-gain</code></td>
+<td>87%</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>flow+steering-4</code></td>
+<td>84%</td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>bc+temporal-ensemble</code></td>
+<td>83%</td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>flow</code></td>
+<td>83%</td>
+</tr>
+<tr>
+<td>6</td>
+<td><code>bc</code></td>
+<td>71%</td>
+</tr>
+<tr>
+<td>7</td>
+<td><code>tokens</code></td>
+<td>68%</td>
+</tr>
+<tr>
+<td>8</td>
+<td><code>knn</code></td>
+<td>64%</td>
+</tr>
+<tr>
+<td>9</td>
+<td><code>random</code></td>
+<td>0%</td>
+</tr>
+</tbody>
+</table></div>
+<p><a href="https://github.com/HyloAI/hylo-bench/blob/f6aa505b1dde62632ec7671f5529166b02c0d49f/examples/showcase/README.md">Source record</a>.</p>
+<p>Measured on a 128-core CPU without a GPU. The source summary does not report per-row confidence intervals or mean steps for this board.</p>
+<h2 id="historical-reference-policy-board">Historical reference-policy board</h2>
+<p>Protocol: <code>mujoco-reach v1</code> · Digest: <code>5e0c57ef414a0b21</code>. Historical snapshot.</p>
+<div class="table-scroll" role="region" aria-label="Results table" tabindex="0"><table>
+<thead>
+<tr>
+<th>Rank</th>
+<th>Policy</th>
+<th>Success</th>
+<th>95% CI</th>
+<th>Mean steps</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><code>expert-ik</code></td>
+<td>100%</td>
+<td>96.3–100%</td>
+<td>36</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>mpc-cem</code></td>
+<td>86%</td>
+<td>77.9–91.5%</td>
+<td>60</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>flow+steering-4</code></td>
+<td>84%</td>
+<td>75.6–89.9%</td>
+<td>54</td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>bc+temporal-ensemble</code></td>
+<td>83%</td>
+<td>74.5–89.1%</td>
+<td>56</td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>flow</code></td>
+<td>83%</td>
+<td>74.5–89.1%</td>
+<td>56</td>
+</tr>
+<tr>
+<td>6</td>
+<td><code>bc</code></td>
+<td>71%</td>
+<td>61.5–79%</td>
+<td>68</td>
+</tr>
+<tr>
+<td>7</td>
+<td><code>tokens</code></td>
+<td>68%</td>
+<td>58.3–76.3%</td>
+<td>74</td>
+</tr>
+<tr>
+<td>8</td>
+<td><code>knn</code></td>
+<td>64%</td>
+<td>54.2–72.7%</td>
+<td>76</td>
+</tr>
+</tbody>
+</table></div>
+<p><a href="https://github.com/HyloAI/hylo-docs/blob/c2de438c9219ac27106067f10b83f3c9c3010dcb/docs/benchmarking/leaderboard.md">Source record</a>.</p>
+<p>Confidence intervals and mean steps are reproduced from that historical source.</p>
+<h2 id="comparison-boundaries">Comparison boundaries</h2>
+<p>The examples also change <code>safety.max_delta</code> to 0.05. That produces digest <code>7311c7b72f04043f</code>; its BC score of 36% belongs to a different protocol and is excluded from both boards above.</p>
+<p>The paired comparison in the November 1 examples finds flow+steering-4 versus BC at 84% versus 71%, with 18 candidate-only wins and 5 losses (one-sided exact McNemar p = 0.0053). Flow+steering-4 versus flow has 5 wins and 4 losses (p = 0.50), so this run provides no evidence that steering improves flow.</p>
+<p>No rows are imported from LIBERO, from demonstrations or from adaptive development runs. Those have different tasks and conditions.</p>
+<h2 id="reproduce-and-download">Reproduce and download</h2>
+<p>Run from the bench repository:</p>
+<pre><code class="language-bash">uv run python examples/showcase/01_leaderboard.py
+uv run python examples/showcase/02_pairwise.py
+</code></pre>
+<p>Your installed protocol digest determines which board a new run belongs to. See <a href="/hylo-docs/benchmarking/leaderboard/">Run and compare evaluations</a> for scoring and comparison commands, and <a href="/hylo-docs/benchmarking/protocols/">protocol definitions</a> for the digest contract.</p>
+<p><a href="/research/data/mujoco-reach.json">Download the recorded tables</a>. This JSON is a transcription of the cited result tables, with source hashes; it is not a bundle of original scorecards or episode traces.</p></article></div></main>
+<footer><div class="wrap"><span>© 2026 Hylo AI · <span data-i18n="footer">The open foundation for physical AI</span></span><nav aria-label="Footer"><a href="/research/" data-i18n="research">Research</a><a href="/research/benchmarks/" data-i18n="benchmarks">Benchmarks</a><a href="/hylo-docs/" data-i18n="docs">Docs ↗</a></nav></div></footer>
+<script id="translations" type="application/json">{"home": "首页", "research": "研究", "benchmarks": "评测", "docs": "文档 ↗", "menu": "菜单", "skip": "跳到正文", "kicker": "Hylo Research", "hero": "在交互中学习。", "intro": "研究智能体如何行动、从经验中学习，并复用已验证的技能。每项结果都保留实验条件、证据和局限。", "featured": "精选研究", "all": "全部研究", "read": "阅读研究 →", "explore": "查看评测 →", "benchmark.title": "统一协议，分别评测", "benchmark.desc": "查看 MuJoCo reach 的已记录结果。不同协议版本单独展示，附带来源和复现方法。", "benchmark.hero": "Benchmarks", "benchmark.intro": "按任务和评测协议组织的实验结果。每份记录说明测量范围、版本和来源。", "All": "全部", "Skills": "技能", "Agents": "智能体", "Memory": "记忆", "Physical RSI": "Physical RSI", "Study": "研究", "Experiment": "实验", "overview": "研究概览", "contents": "本文内容", "published": "发布于", "footer": "开源的物理 AI 平台", "evidence": "本文整理已有实验记录；发布这篇文章没有产生新的评测结果。", "data": "下载结果数据 →", "mujoco.title": "MuJoCo reach：参考策略评测", "mujoco.summary": "两个协议版本的结果分别列出，保留各自的测量条件与来源。"}</script><script src="/assets/research.js" defer></script></body></html>

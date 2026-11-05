@@ -1,7 +1,7 @@
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset=".github/assets/banner-dark.svg">
-    <img src=".github/assets/banner-light.svg" width="100%" alt="hyloai.github.io: the Hylo website; plain HTML, no build step">
+    <img src=".github/assets/banner-light.svg" width="100%" alt="hyloai.github.io: the Hylo website; static HTML, generated Research pages">
   </picture>
 </p>
 
@@ -13,7 +13,7 @@
 
 # Hylo AI website
 
-The site at https://hyloai.github.io/ (bilingual: English, 中文). Plain HTML, no build step: edit `index.html`, push to
+The site at https://hyloai.github.io/ (bilingual: English, 中文). Static HTML: edit `index.html`, rebuild Research when its sources change, then push to
 `main`, GitHub Pages serves it. Case-study images in `assets/` come from recorded runs (see hylo-docs).
 Each of the three opening statements names the core concept it rests on (Agents, Worlds, Memory and skills, with
 the same icon as the capability stack) and shows a Unitree G1 twin posed from a real sweeping episode (HIW-500,
@@ -29,8 +29,38 @@ Keep labels brief; hover and keyboard focus highlight related stages and capabil
 deployment and architecture are supporting entry points. Keep homepage copy concise and aligned with the docs'
 concept definitions. Keep English text, Chinese
 `data-i18n` entries and metadata aligned with the [docs wording guide](https://github.com/HyloAI/hylo-docs/blob/main/docs/developer-guide/docs.md#shared-website-wording). Case studies must state their robot, observation conditions
-and measured scope; link detailed results to the documentation. Build and verify the linked docs before publishing.
+and measured scope; link experimental findings to Research and workflows to Use Cases in the documentation. Build and verify the linked docs before publishing.
 
 After changing Chinese text, regenerate the MiSans subsets with `tools/subset_fonts.py` and check both languages.
 
 Apache License 2.0. Copyright 2026 Hylo AI.
+
+## Research and documentation
+
+The website owns `/research/`: public articles, curated experimental analysis and benchmark result pages.
+Documentation owns operational guides, Use Cases and developer validation/reproduction records. Internal
+research notes and RFCs in hylo-docs are source material; they are not automatically published to Research.
+
+- Edit articles in `content/research/*.md` (YAML metadata plus Markdown).
+- Edit recorded benchmark tables in `research/data/mujoco-reach.json`; keep protocol digests separate.
+- The sorting article generates its result table from `assets/skills-sorting.provenance.json`.
+- Update layout/build logic in `tools/build_research.py`, styles in `assets/research.css`, interactions in
+  `assets/research.js`. Commit the generated `research/**/index.html` files with their sources.
+- Research navigation and article summaries support English and Chinese. Article bodies currently use English;
+  the Chinese interface labels that explicitly. Publication dates and original experiment dates are separate.
+
+From the development workspace (the existing docs environment provides Markdown and PyYAML):
+
+```bash
+.venv/bin/python site/tools/build_research.py
+.venv/bin/python site/tools/build_research.py --check
+.venv/bin/python site/tools/check_links.py --docs runs/research-split-20261105/public-docs
+```
+
+A standalone build can install `tools/requirements-research.txt`. Rebuild Chinese font subsets after changing
+translated text. Research HTML is generated locally and committed; GitHub Pages continues to serve the repository
+without a framework runtime or a new deployment service.
+
+When moving a documentation URL, add a redirect in hylo-docs and retain meaningful old fragment anchors.
+Publish new destinations before switching older entry points. Verify cross-site links against the public docs
+build as well as the full internal docs build.

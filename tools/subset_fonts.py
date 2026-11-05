@@ -1,6 +1,6 @@
-"""Subset MiSans to the characters the homepage uses and write web fonts to assets/fonts.
+"""Subset MiSans to the characters the website uses and write web fonts to assets/fonts.
 
-Re-run whenever the page text changes (both languages live in index.html):
+Re-run after building Research whenever website text changes:
 
     uv run --no-project --with fonttools --with brotli python tools/subset_fonts.py <dir with MiSans-*.otf>
 
@@ -19,7 +19,10 @@ WEIGHTS = {"Regular": 400, "Medium": 500, "Demibold": 600, "Bold": 700, "Heavy":
 def main() -> None:
     src = pathlib.Path(sys.argv[1])
     text = (ROOT / "index.html").read_text(encoding="utf-8")
-    # every character on the page, plus printable ASCII so a missing Latin font still renders
+    for page in (ROOT / "research").rglob("*.html"):
+        text += page.read_text(encoding="utf-8")
+    text += (ROOT / "assets/research.js").read_text(encoding="utf-8")
+    # every character on the website, plus printable ASCII so a missing Latin font still renders
     chars = sorted(set(text) | {chr(c) for c in range(0x20, 0x7F)})
     chars = "".join(c for c in chars if c.isprintable())
     out = ROOT / "assets" / "fonts"

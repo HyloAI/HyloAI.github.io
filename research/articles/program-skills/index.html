@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>From a task program to a reusable skill · Hylo Research</title><meta name="description" content="A recorded sorting experiment separates program development, independent verification and later skill calls.">
+<link rel="canonical" href="https://hyloai.github.io/research/articles/program-skills/"><meta property="og:title" content="From a task program to a reusable skill · Hylo Research">
+<meta property="og:description" content="A recorded sorting experiment separates program development, independent verification and later skill calls."><meta property="og:url" content="https://hyloai.github.io/research/articles/program-skills/">
+<link rel="icon" href="/assets/logo.svg" type="image/svg+xml"><link rel="stylesheet" href="/assets/research.css">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+</head><body><a class="skip" href="#main" data-i18n="skip">Skip to content</a>
+<header class="top"><div class="wrap"><a class="brand" href="/" aria-label="Hylo home"><img src="/assets/logo.svg" alt="" width="30" height="30">Hylo</a>
+<nav class="links" id="site-nav" aria-label="Main navigation"><a href="/" data-i18n="home">Home</a><a href="/research/" data-i18n="research" aria-current="true">Research</a><a href="/research/benchmarks/" data-i18n="benchmarks" >Benchmarks</a><a href="/hylo-docs/" data-i18n="docs">Docs ↗</a><a href="https://github.com/HyloAI">GitHub ↗</a></nav>
+<button class="lang" id="lang" aria-label="切换到中文" type="button">中文</button><button class="menu" id="menu" type="button" aria-expanded="false" aria-controls="site-nav" data-i18n="menu">Menu</button></div></header>
+<main id="main" class="wrap"><div class="article-head"><div class="breadcrumb"><a href="/research/" data-i18n="research">Research</a> / <span data-i18n="Study">Study</span></div>
+<div class="eyebrow">Skills · Agents</div><h1 data-i18n="title">From a task program to a reusable skill</h1><p class="summary" data-i18n="summary">A recorded sorting experiment separates program development, independent verification and later skill calls.</p>
+<div class="meta"><span data-i18n="published">Published</span> <time datetime="2026-11-05">2026-11-05</time></div><p class="language-note" data-zh-only hidden>以下研究正文为英文，实验日期见正文。</p></div><div class="article-layout"><aside class="toc" aria-label="On this page"><p data-i18n="contents">On this page</p><div class="toc">
+<ul>
+<li><a href="#the-question">The question</a></li>
+<li><a href="#method">Method</a></li>
+<li><a href="#results">Results</a></li>
+<li><a href="#scope-and-limitations">Scope and limitations</a></li>
+<li><a href="#reproduce-and-inspect">Reproduce and inspect</a></li>
+</ul>
+</div>
+</aside><article class="article-body" lang="en"><img class="article-cover" src="/assets/skills-sorting.jpg" alt="Recorded Panda sorting task with coloured blocks and trays"><h2 id="the-question">The question</h2>
+<p>Can a model revise a supplied robot program, pass an independent evaluation and leave a skill that another agent actually calls? This recorded case follows one Panda sorting task family from a one-object-per-colour starter to multi-object sorting.</p>
+<h2 id="method">Method</h2>
+<p>The model, <code>claude:sonnet</code>, develops <code>solve(robot)</code> on four development cases. The selected submission solves all four. Candidate execution uses <code>code.program</code>, with no model calls during the program's execution. The starter and its robot-tool helpers were supplied; this is program revision rather than a from-scratch system or model-weight training.</p>
+<p>The selected program is frozen before the independent promotion gate. A separate held-out report does not select the candidate. The resulting skill, <code>sort_by_colour@1</code>, records its implementation digest and promotion evidence. Later agents retrieve it, verify its artifact integrity and call <code>skills.sort_by_colour(robot)</code>.</p>
+<h2 id="results">Results</h2>
+<div class="table-scroll" role="region" aria-label="Results table" tabindex="0"><table>
+<thead>
+<tr>
+<th>Evaluation</th>
+<th>Starter</th>
+<th>Candidate</th>
+<th>Scope</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Independent promotion gate</td>
+<td>8%</td>
+<td>92%</td>
+<td>12 paired scenes; 10 wins, 0 losses; p = 0.000976562</td>
+</tr>
+<tr>
+<td>Held-out report</td>
+<td>8%</td>
+<td>83%</td>
+<td>12 paired scenes; not used for selection</td>
+</tr>
+<tr>
+<td>Later skill calls</td>
+<td>—</td>
+<td>3/3</td>
+<td>Separate validation scenes; no paired control</td>
+</tr>
+</tbody>
+</table></div>
+<p>Two preceding local-model development attempts produced no qualifying candidate. The recorded walkthrough follows the selected Claude session. The three reuse episodes show actual retrieval and calls; they do not measure a paired improvement over an agent without skills.</p>
+<h2 id="scope-and-limitations">Scope and limitations</h2>
+<p>The task uses one Panda simulation, two 160 × 120 RGB-D cameras and simulator instance segmentation. This observation privilege matters: the experiment does not establish real-world visual recognition, hardware transfer or generalisation to other task families. Twelve pairs provide a small evaluation sample.</p>
+<p>The video is a presentation of saved research records and a physics replay, with model waits shortened, motion timing edited and higher-resolution presentation cameras. It is not a live Studio authoring interface. Replayed joint/gripper states and final task verdicts were checked against their source traces.</p>
+<h2 id="reproduce-and-inspect">Reproduce and inspect</h2>
+<ul>
+<li><a href="/hylo-docs/use-cases/program-skills/">Watch the use case</a> for the full recorded workflow.</li>
+<li><a href="/hylo-docs/user-guide/research-and-skills/">Develop and reuse a program skill</a> for commands and configuration. A new model run can produce different results.</li>
+<li><a href="/assets/skills-sorting.provenance.json">Source and replay provenance</a> includes the source revisions, program, evaluation, skill calls and trace/video hashes. The table above is generated from this record.</li>
+</ul><p class="evidence-note" data-i18n="evidence">This article presents existing experimental records. Its publication adds no new evaluation run.</p></article></div></main>
+<footer><div class="wrap"><span>© 2026 Hylo AI · <span data-i18n="footer">The open foundation for physical AI</span></span><nav aria-label="Footer"><a href="/research/" data-i18n="research">Research</a><a href="/research/benchmarks/" data-i18n="benchmarks">Benchmarks</a><a href="/hylo-docs/" data-i18n="docs">Docs ↗</a></nav></div></footer>
+<script id="translations" type="application/json">{"home": "首页", "research": "研究", "benchmarks": "评测", "docs": "文档 ↗", "menu": "菜单", "skip": "跳到正文", "kicker": "Hylo Research", "hero": "在交互中学习。", "intro": "研究智能体如何行动、从经验中学习，并复用已验证的技能。每项结果都保留实验条件、证据和局限。", "featured": "精选研究", "all": "全部研究", "read": "阅读研究 →", "explore": "查看评测 →", "benchmark.title": "统一协议，分别评测", "benchmark.desc": "查看 MuJoCo reach 的已记录结果。不同协议版本单独展示，附带来源和复现方法。", "benchmark.hero": "Benchmarks", "benchmark.intro": "按任务和评测协议组织的实验结果。每份记录说明测量范围、版本和来源。", "All": "全部", "Skills": "技能", "Agents": "智能体", "Memory": "记忆", "Physical RSI": "Physical RSI", "Study": "研究", "Experiment": "实验", "overview": "研究概览", "contents": "本文内容", "published": "发布于", "footer": "开源的物理 AI 平台", "evidence": "本文整理已有实验记录；发布这篇文章没有产生新的评测结果。", "data": "下载结果数据 →", "mujoco.title": "MuJoCo reach：参考策略评测", "mujoco.summary": "两个协议版本的结果分别列出，保留各自的测量条件与来源。", "title": "从任务程序到可复用技能", "summary": "一次分拣实验，分别记录程序开发、独立验证和后续技能调用。"}</script><script src="/assets/research.js" defer></script></body></html>

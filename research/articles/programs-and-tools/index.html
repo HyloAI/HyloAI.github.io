@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Programs and tool-calling agents: reading the evidence · Hylo Research</title><meta name="description" content="Separate supplied programs, model-written revisions and interactive tool use before comparing outcomes.">
+<link rel="canonical" href="https://hyloai.github.io/research/articles/programs-and-tools/"><meta property="og:title" content="Programs and tool-calling agents: reading the evidence · Hylo Research">
+<meta property="og:description" content="Separate supplied programs, model-written revisions and interactive tool use before comparing outcomes."><meta property="og:url" content="https://hyloai.github.io/research/articles/programs-and-tools/">
+<link rel="icon" href="/assets/logo.svg" type="image/svg+xml"><link rel="stylesheet" href="/assets/research.css">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+</head><body><a class="skip" href="#main" data-i18n="skip">Skip to content</a>
+<header class="top"><div class="wrap"><a class="brand" href="/" aria-label="Hylo home"><img src="/assets/logo.svg" alt="" width="30" height="30">Hylo</a>
+<nav class="links" id="site-nav" aria-label="Main navigation"><a href="/" data-i18n="home">Home</a><a href="/research/" data-i18n="research" aria-current="true">Research</a><a href="/research/benchmarks/" data-i18n="benchmarks" >Benchmarks</a><a href="/hylo-docs/" data-i18n="docs">Docs ↗</a><a href="https://github.com/HyloAI">GitHub ↗</a></nav>
+<button class="lang" id="lang" aria-label="切换到中文" type="button">中文</button><button class="menu" id="menu" type="button" aria-expanded="false" aria-controls="site-nav" data-i18n="menu">Menu</button></div></header>
+<main id="main" class="wrap"><div class="article-head"><div class="breadcrumb"><a href="/research/" data-i18n="research">Research</a> / <span data-i18n="Study">Study</span></div>
+<div class="eyebrow">Agents · Skills</div><h1 data-i18n="title">Programs and tool-calling agents: reading the evidence</h1><p class="summary" data-i18n="summary">Separate supplied programs, model-written revisions and interactive tool use before comparing outcomes.</p>
+<div class="meta"><span data-i18n="published">Published</span> <time datetime="2026-11-05">2026-11-05</time></div><p class="language-note" data-zh-only hidden>以下研究正文为英文，实验日期见正文。</p></div><div class="article-layout"><aside class="toc" aria-label="On this page"><p data-i18n="contents">On this page</p><div class="toc">
+<ul>
+<li><a href="#the-question">The question</a></li>
+<li><a href="#three-distinct-workflows">Three distinct workflows</a></li>
+<li><a href="#conditions-that-matter">Conditions that matter</a></li>
+<li><a href="#reproduce-and-inspect">Reproduce and inspect</a></li>
+</ul>
+</div>
+</aside><article class="article-body" lang="en"><img class="article-cover" src="/assets/tools-llm-stack.jpg" alt="Panda robot stacking blocks in the recorded tool-calling demonstration"><h2 id="the-question">The question</h2>
+<p>A successful robot episode can come from a supplied program, a program revised by a model or a model choosing tools during execution. Which part of the system did the experiment actually evaluate?</p>
+<h2 id="three-distinct-workflows">Three distinct workflows</h2>
+<div class="table-scroll" role="region" aria-label="Results table" tabindex="0"><table>
+<thead>
+<tr>
+<th>Workflow</th>
+<th>What changes</th>
+<th>Evidence to inspect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Supplied task programs</td>
+<td>A developer writes the policy logic</td>
+<td>Observation access, supplied helpers, task coverage and failures</td>
+</tr>
+<tr>
+<td>Model-developed programs</td>
+<td>A model revises code before it is frozen for evaluation</td>
+<td>Development cases, independent gate and held-out report</td>
+</tr>
+<tr>
+<td>Interactive tool-calling agents</td>
+<td>A model makes decisions during the episode</td>
+<td>Tool trace, model calls and independent task verdict</td>
+</tr>
+</tbody>
+</table></div>
+<p>The <a href="/research/articles/program-skills/">sorting skill study</a> belongs to the second category. The <a href="/hylo-docs/use-cases/robot-control/">recorded robot-control case</a> belongs to the third. Their outcomes describe different experiments and should not be placed on a shared ranking.</p>
+<h2 id="conditions-that-matter">Conditions that matter</h2>
+<p>The existing program and tool records span scene construction, physics replay, motion, LIBERO and robot manipulation. Some paths use simulator segmentation or other privileged observations. Some worlds have motion demonstrations without success-rate evaluations. A working command or rendered video does not by itself measure task reliability.</p>
+<p>The source records retain unsuccessful workflows, external replay limitations and paths that were not run. Consult the per-workflow conditions before quoting a headline rate.</p>
+<h2 id="reproduce-and-inspect">Reproduce and inspect</h2>
+<p>The <a href="/hylo-docs/developer-guide/validation/tool-agents/">workflow records</a> separate each experiment and link its source scripts. For implementation, use the <a href="/hylo-docs/user-guide/developing-strategies/">program-development guide</a> or the <a href="/hylo-docs/user-guide/tool-agents/">tool-calling agent guide</a>.</p>
+<p>This overview is a guide to interpreting recorded evidence; it adds no new evaluation run.</p><p class="evidence-note" data-i18n="evidence">This article presents existing experimental records. Its publication adds no new evaluation run.</p></article></div></main>
+<footer><div class="wrap"><span>© 2026 Hylo AI · <span data-i18n="footer">The open foundation for physical AI</span></span><nav aria-label="Footer"><a href="/research/" data-i18n="research">Research</a><a href="/research/benchmarks/" data-i18n="benchmarks">Benchmarks</a><a href="/hylo-docs/" data-i18n="docs">Docs ↗</a></nav></div></footer>
+<script id="translations" type="application/json">{"home": "首页", "research": "研究", "benchmarks": "评测", "docs": "文档 ↗", "menu": "菜单", "skip": "跳到正文", "kicker": "Hylo Research", "hero": "在交互中学习。", "intro": "研究智能体如何行动、从经验中学习，并复用已验证的技能。每项结果都保留实验条件、证据和局限。", "featured": "精选研究", "all": "全部研究", "read": "阅读研究 →", "explore": "查看评测 →", "benchmark.title": "统一协议，分别评测", "benchmark.desc": "查看 MuJoCo reach 的已记录结果。不同协议版本单独展示，附带来源和复现方法。", "benchmark.hero": "Benchmarks", "benchmark.intro": "按任务和评测协议组织的实验结果。每份记录说明测量范围、版本和来源。", "All": "全部", "Skills": "技能", "Agents": "智能体", "Memory": "记忆", "Physical RSI": "Physical RSI", "Study": "研究", "Experiment": "实验", "overview": "研究概览", "contents": "本文内容", "published": "发布于", "footer": "开源的物理 AI 平台", "evidence": "本文整理已有实验记录；发布这篇文章没有产生新的评测结果。", "data": "下载结果数据 →", "mujoco.title": "MuJoCo reach：参考策略评测", "mujoco.summary": "两个协议版本的结果分别列出，保留各自的测量条件与来源。", "title": "程序与工具调用智能体：如何解读实验结果", "summary": "区分预写程序、模型修改的程序和交互式工具调用，再理解各自的实验结果。"}</script><script src="/assets/research.js" defer></script></body></html>

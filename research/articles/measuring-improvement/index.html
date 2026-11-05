@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Learning and improvement under independent evaluation · Hylo Research</title><meta name="description" content="Small reach experiments expose data scaling, selection optimism and the power limits of promotion gates.">
+<link rel="canonical" href="https://hyloai.github.io/research/articles/measuring-improvement/"><meta property="og:title" content="Learning and improvement under independent evaluation · Hylo Research">
+<meta property="og:description" content="Small reach experiments expose data scaling, selection optimism and the power limits of promotion gates."><meta property="og:url" content="https://hyloai.github.io/research/articles/measuring-improvement/">
+<link rel="icon" href="/assets/logo.svg" type="image/svg+xml"><link rel="stylesheet" href="/assets/research.css">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+</head><body><a class="skip" href="#main" data-i18n="skip">Skip to content</a>
+<header class="top"><div class="wrap"><a class="brand" href="/" aria-label="Hylo home"><img src="/assets/logo.svg" alt="" width="30" height="30">Hylo</a>
+<nav class="links" id="site-nav" aria-label="Main navigation"><a href="/" data-i18n="home">Home</a><a href="/research/" data-i18n="research" aria-current="true">Research</a><a href="/research/benchmarks/" data-i18n="benchmarks" >Benchmarks</a><a href="/hylo-docs/" data-i18n="docs">Docs ↗</a><a href="https://github.com/HyloAI">GitHub ↗</a></nav>
+<button class="lang" id="lang" aria-label="切换到中文" type="button">中文</button><button class="menu" id="menu" type="button" aria-expanded="false" aria-controls="site-nav" data-i18n="menu">Menu</button></div></header>
+<main id="main" class="wrap"><div class="article-head"><div class="breadcrumb"><a href="/research/" data-i18n="research">Research</a> / <span data-i18n="Study">Study</span></div>
+<div class="eyebrow">Physical RSI</div><h1 data-i18n="title">Learning and improvement under independent evaluation</h1><p class="summary" data-i18n="summary">Small reach experiments expose data scaling, selection optimism and the power limits of promotion gates.</p>
+<div class="meta"><span data-i18n="published">Published</span> <time datetime="2026-11-05">2026-11-05</time></div><p class="language-note" data-zh-only hidden>以下研究正文为英文，实验日期见正文。</p></div><div class="article-layout"><aside class="toc" aria-label="On this page"><p data-i18n="contents">On this page</p><div class="toc">
+<ul>
+<li><a href="#the-question">The question</a></li>
+<li><a href="#method-and-results">Method and results</a></li>
+<li><a href="#where-evaluation-breaks-down">Where evaluation breaks down</a></li>
+<li><a href="#reproduce-and-inspect">Reproduce and inspect</a></li>
+</ul>
+</div>
+</aside><article class="article-body" lang="en"><img class="article-cover" src="/assets/campaign-mujoco-reach-gain.png" alt="Recorded improvement campaign on MuJoCo reach"><h2 id="the-question">The question</h2>
+<p>How much does a policy improve, and how reliably can an evaluation confirm that improvement? Learning curves, held-out reports and gate-power experiments answer different parts of this question.</p>
+<h2 id="method-and-results">Method and results</h2>
+<p>The learning and evolution examples were measured on November 1, 2026, on MuJoCo planar reach. The learning jobs separate demonstration data, search rollouts and held-out evaluation. The campaign example starts from a flow policy with deliberately excessive sampling noise.</p>
+<div class="table-scroll" role="region" aria-label="Results table" tabindex="0"><table>
+<thead>
+<tr>
+<th>Experiment</th>
+<th>Recorded outcome</th>
+<th>Evaluation scope</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Flow policy trained from demonstrations</td>
+<td>0.397 with 10 demonstrations; 0.847 with 160</td>
+<td>300 held-out episodes</td>
+</tr>
+<tr>
+<td>Online CEM over steering settings</td>
+<td>Starting setting 0.458; selected best 0.836</td>
+<td>500 held-out episodes</td>
+</tr>
+<tr>
+<td>Three-cycle improvement campaign</td>
+<td>0.440 → 0.726 → 0.762; two promotions</td>
+<td>500 fresh held-out episodes</td>
+</tr>
+<tr>
+<td>Gate sensitivity to a roughly ten-point gain</td>
+<td>About 26% of cycles promote it</td>
+<td>Default 40 episodes per split; finite-pool resampling</td>
+</tr>
+</tbody>
+</table></div>
+<p>The CEM best setting scores 0.887 on the search cases used to select it and 0.836 held out. This gap illustrates selection optimism. The campaign improves a deliberately noisy baseline by lowering its sampling noise; it does not establish open-ended capability growth.</p>
+<h2 id="where-evaluation-breaks-down">Where evaluation breaks down</h2>
+<p>The gate-power study resamples a finite pool of real simulated episodes. At default split sizes, larger effects are easier to confirm: a roughly 29-point gain is promoted in about 99% of cycles, while a four-point gain is promoted in about 6.5%. These are measured properties of this experiment and protocol.</p>
+<p>A calibrated success judge also loses precision under distribution shift. A judge calibrated to 0.95 precision labels another cell's episodes at 0.821 precision. Calibration alone cannot establish reliability on a new distribution.</p>
+<p>A simulated field-rate change reverses the ranking of parent and candidate, triggering rollback after 40 field episodes. Passing a simulation gate therefore does not establish deployment robustness.</p>
+<h2 id="reproduce-and-inspect">Reproduce and inspect</h2>
+<ul>
+<li><a href="/hylo-docs/developer-guide/validation/learning/">Learning records</a> include learning curves, calibration and online CEM commands.</li>
+<li><a href="/hylo-docs/developer-guide/validation/evolution/">Evolution records</a> include the campaign, gate-power study and rollback experiment.</li>
+<li><a href="/hylo-docs/user-guide/campaigns/">Run a campaign</a> explains the operational lifecycle.</li>
+</ul>
+<p>Sources: <a href="https://github.com/HyloAI/hylo-harness/blob/9c3138b645ba7ee25f663d26807898f4b5374cb6/examples/learn/README.md">learning</a>, <a href="https://github.com/HyloAI/hylo-harness/blob/9c3138b645ba7ee25f663d26807898f4b5374cb6/examples/evolve/README.md">evolution</a>.</p><p class="evidence-note" data-i18n="evidence">This article presents existing experimental records. Its publication adds no new evaluation run.</p></article></div></main>
+<footer><div class="wrap"><span>© 2026 Hylo AI · <span data-i18n="footer">The open foundation for physical AI</span></span><nav aria-label="Footer"><a href="/research/" data-i18n="research">Research</a><a href="/research/benchmarks/" data-i18n="benchmarks">Benchmarks</a><a href="/hylo-docs/" data-i18n="docs">Docs ↗</a></nav></div></footer>
+<script id="translations" type="application/json">{"home": "首页", "research": "研究", "benchmarks": "评测", "docs": "文档 ↗", "menu": "菜单", "skip": "跳到正文", "kicker": "Hylo Research", "hero": "在交互中学习。", "intro": "研究智能体如何行动、从经验中学习，并复用已验证的技能。每项结果都保留实验条件、证据和局限。", "featured": "精选研究", "all": "全部研究", "read": "阅读研究 →", "explore": "查看评测 →", "benchmark.title": "统一协议，分别评测", "benchmark.desc": "查看 MuJoCo reach 的已记录结果。不同协议版本单独展示，附带来源和复现方法。", "benchmark.hero": "Benchmarks", "benchmark.intro": "按任务和评测协议组织的实验结果。每份记录说明测量范围、版本和来源。", "All": "全部", "Skills": "技能", "Agents": "智能体", "Memory": "记忆", "Physical RSI": "Physical RSI", "Study": "研究", "Experiment": "实验", "overview": "研究概览", "contents": "本文内容", "published": "发布于", "footer": "开源的物理 AI 平台", "evidence": "本文整理已有实验记录；发布这篇文章没有产生新的评测结果。", "data": "下载结果数据 →", "mujoco.title": "MuJoCo reach：参考策略评测", "mujoco.summary": "两个协议版本的结果分别列出，保留各自的测量条件与来源。", "title": "通过独立评测衡量学习与改进", "summary": "小规模到达任务揭示数据规模效应、选择偏差，以及晋升检验的统计功效限制。"}</script><script src="/assets/research.js" defer></script></body></html>

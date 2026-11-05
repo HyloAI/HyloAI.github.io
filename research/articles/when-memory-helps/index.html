@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>When memory helps—and when it does not · Hylo Research</title><meta name="description" content="Paired simulations show a strong occlusion benefit, exploratory action recall and limits on transfer.">
+<link rel="canonical" href="https://hyloai.github.io/research/articles/when-memory-helps/"><meta property="og:title" content="When memory helps—and when it does not · Hylo Research">
+<meta property="og:description" content="Paired simulations show a strong occlusion benefit, exploratory action recall and limits on transfer."><meta property="og:url" content="https://hyloai.github.io/research/articles/when-memory-helps/">
+<link rel="icon" href="/assets/logo.svg" type="image/svg+xml"><link rel="stylesheet" href="/assets/research.css">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+</head><body><a class="skip" href="#main" data-i18n="skip">Skip to content</a>
+<header class="top"><div class="wrap"><a class="brand" href="/" aria-label="Hylo home"><img src="/assets/logo.svg" alt="" width="30" height="30">Hylo</a>
+<nav class="links" id="site-nav" aria-label="Main navigation"><a href="/" data-i18n="home">Home</a><a href="/research/" data-i18n="research" aria-current="true">Research</a><a href="/research/benchmarks/" data-i18n="benchmarks" >Benchmarks</a><a href="/hylo-docs/" data-i18n="docs">Docs ↗</a><a href="https://github.com/HyloAI">GitHub ↗</a></nav>
+<button class="lang" id="lang" aria-label="切换到中文" type="button">中文</button><button class="menu" id="menu" type="button" aria-expanded="false" aria-controls="site-nav" data-i18n="menu">Menu</button></div></header>
+<main id="main" class="wrap"><div class="article-head"><div class="breadcrumb"><a href="/research/" data-i18n="research">Research</a> / <span data-i18n="Study">Study</span></div>
+<div class="eyebrow">Memory · Skills</div><h1 data-i18n="title">When memory helps—and when it does not</h1><p class="summary" data-i18n="summary">Paired simulations show a strong occlusion benefit, exploratory action recall and limits on transfer.</p>
+<div class="meta"><span data-i18n="published">Published</span> <time datetime="2026-11-05">2026-11-05</time></div><p class="language-note" data-zh-only hidden>以下研究正文为英文，实验日期见正文。</p></div><div class="article-layout"><aside class="toc" aria-label="On this page"><p data-i18n="contents">On this page</p><div class="toc">
+<ul>
+<li><a href="#the-question">The question</a></li>
+<li><a href="#method">Method</a></li>
+<li><a href="#results">Results</a></li>
+<li><a href="#what-limits-the-conclusion">What limits the conclusion</a></li>
+<li><a href="#reproduce-and-inspect">Reproduce and inspect</a></li>
+</ul>
+</div>
+</aside><article class="article-body" lang="en"><img class="article-cover" src="/research/assets/memory-results.png" alt="Recorded memory comparisons with confidence intervals"><h2 id="the-question">The question</h2>
+<p>Memory can preserve a missing observation, retrieve an action or carry a verified skill. These mechanisms answer different questions. We compare each against its corresponding control rather than combining them into a single memory score.</p>
+<h2 id="method">Method</h2>
+<p>The full examples were recorded on November 1, 2026, on a 128-core CPU workstation without a GPU. They use MuJoCo table/planar reach, fixed seeds and paired task instances. No LLM is used. Reported p-values in the source are exact two-sided McNemar tests on discordant pairs.</p>
+<h2 id="results">Results</h2>
+<div class="table-scroll" role="region" aria-label="Results table" tabindex="0"><table>
+<thead>
+<tr>
+<th>Mechanism and conditions</th>
+<th>Control → memory</th>
+<th>Interpretation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Spatial recall; targets visible for only five steps, 300 pairs</td>
+<td>0.00 → 0.75</td>
+<td>Large benefit from retaining target positions; 225 candidate-only wins, no losses</td>
+</tr>
+<tr>
+<td>Spatial recall; targets always visible</td>
+<td>0.75 → 0.75</td>
+<td>No added benefit when the observation remains available</td>
+</tr>
+<tr>
+<td>Action recall; revisited scenes</td>
+<td>0.75 → 0.81</td>
+<td>Exploratory; p = 0.29</td>
+</tr>
+<tr>
+<td>Action recall; new held-out scenes</td>
+<td>0.69 → 0.75</td>
+<td>Exploratory; p = 0.24</td>
+</tr>
+<tr>
+<td>Frozen skill library; 200 fresh paired scenes</td>
+<td>0.47 → 0.86</td>
+<td>One verified noise-scale skill; 85 wins and 6 losses, p = 6e-19</td>
+</tr>
+</tbody>
+</table></div>
+<p>Spatial recall does not solve instruction interpretation. Direct and push tasks reach 0.99, while indirect colour instructions reach 0.27 because the rule chooser cannot resolve phrases such as “the colour of a ripe tomato”.</p>
+<h2 id="what-limits-the-conclusion">What limits the conclusion</h2>
+<p>Action-memory settings were chosen from a sweep on the example's splits, so those p-values are exploratory. Both six-point changes are non-significant. With looser retrieval and a well-tuned policy, a development run lost 11 points on revisited scenes and 12 on new scenes.</p>
+<p>The skill-library example relies on a small proposer that suggests a noise-scale change. Its result does not demonstrate autonomous discovery of general robot skills. The across-session example repeatedly visits the same scenes, so a naive pooled significance estimate is not independent evidence across tasks.</p>
+<p>Earlier recorded LIBERO-10 action-memory experiments also depended on scene familiarity. Their results should not be pooled with these state-based MuJoCo experiments. The retrieval representations and evaluation conditions differ.</p>
+<h2 id="reproduce-and-inspect">Reproduce and inspect</h2>
+<p>Run from the harness repository:</p>
+<pre><code class="language-bash">uv run python examples/memory/01_spatial_memory_occlusion.py
+uv run python examples/memory/03_action_memory_scene_recall.py
+uv run python examples/memory/04_skill_library.py
+</code></pre>
+<p>The <a href="/hylo-docs/developer-guide/validation/memory/">full reproduction record</a> retains every example, its conditions, negative findings and commands. <a href="/hylo-docs/user-guide/memory/">Memory guides</a> explain the supported backends and how to configure them.</p>
+<p><a href="https://github.com/HyloAI/hylo-harness/blob/9c3138b645ba7ee25f663d26807898f4b5374cb6/examples/memory/README.md">Recorded source</a>.</p><p class="evidence-note" data-i18n="evidence">This article presents existing experimental records. Its publication adds no new evaluation run.</p></article></div></main>
+<footer><div class="wrap"><span>© 2026 Hylo AI · <span data-i18n="footer">The open foundation for physical AI</span></span><nav aria-label="Footer"><a href="/research/" data-i18n="research">Research</a><a href="/research/benchmarks/" data-i18n="benchmarks">Benchmarks</a><a href="/hylo-docs/" data-i18n="docs">Docs ↗</a></nav></div></footer>
+<script id="translations" type="application/json">{"home": "首页", "research": "研究", "benchmarks": "评测", "docs": "文档 ↗", "menu": "菜单", "skip": "跳到正文", "kicker": "Hylo Research", "hero": "在交互中学习。", "intro": "研究智能体如何行动、从经验中学习，并复用已验证的技能。每项结果都保留实验条件、证据和局限。", "featured": "精选研究", "all": "全部研究", "read": "阅读研究 →", "explore": "查看评测 →", "benchmark.title": "统一协议，分别评测", "benchmark.desc": "查看 MuJoCo reach 的已记录结果。不同协议版本单独展示，附带来源和复现方法。", "benchmark.hero": "Benchmarks", "benchmark.intro": "按任务和评测协议组织的实验结果。每份记录说明测量范围、版本和来源。", "All": "全部", "Skills": "技能", "Agents": "智能体", "Memory": "记忆", "Physical RSI": "Physical RSI", "Study": "研究", "Experiment": "实验", "overview": "研究概览", "contents": "本文内容", "published": "发布于", "footer": "开源的物理 AI 平台", "evidence": "本文整理已有实验记录；发布这篇文章没有产生新的评测结果。", "data": "下载结果数据 →", "mujoco.title": "MuJoCo reach：参考策略评测", "mujoco.summary": "两个协议版本的结果分别列出，保留各自的测量条件与来源。", "title": "记忆何时有效，何时无效", "summary": "配对仿真实验展示遮挡下的收益、动作检索的探索性结果，以及迁移的边界。"}</script><script src="/assets/research.js" defer></script></body></html>

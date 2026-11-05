@@ -1,0 +1,135 @@
+{
+  "benchmark": "mujoco-reach",
+  "version": 1,
+  "updated": "2026-11-05",
+  "boards": [
+    {
+      "digest": "a76c7037efb84660",
+      "recorded": "2026-11-01",
+      "label": "Recorded evaluation examples",
+      "episodes": 100,
+      "source": "https://github.com/HyloAI/hylo-bench/blob/f6aa505b1dde62632ec7671f5529166b02c0d49f/examples/showcase/README.md",
+      "source_sha256": "6f95b6e9aed83c2ba785e6a0924eada961ab3bd092227490004f07db7855a9ce",
+      "rows": [
+        {
+          "name": "expert-ik",
+          "success_percent": 100
+        },
+        {
+          "name": "ik-weak-gain",
+          "success_percent": 87
+        },
+        {
+          "name": "flow+steering-4",
+          "success_percent": 84
+        },
+        {
+          "name": "bc+temporal-ensemble",
+          "success_percent": 83
+        },
+        {
+          "name": "flow",
+          "success_percent": 83
+        },
+        {
+          "name": "bc",
+          "success_percent": 71
+        },
+        {
+          "name": "tokens",
+          "success_percent": 68
+        },
+        {
+          "name": "knn",
+          "success_percent": 64
+        },
+        {
+          "name": "random",
+          "success_percent": 0
+        }
+      ]
+    },
+    {
+      "digest": "5e0c57ef414a0b21",
+      "recorded": null,
+      "label": "Historical reference-policy board",
+      "episodes": 100,
+      "source": "https://github.com/HyloAI/hylo-docs/blob/c2de438c9219ac27106067f10b83f3c9c3010dcb/docs/benchmarking/leaderboard.md",
+      "source_sha256": "3acab468aaa11876a5eb7a8dd7a0aa38dbedc6602334c24094929085c7e0c494",
+      "rows": [
+        {
+          "name": "expert-ik",
+          "success_percent": 100.0,
+          "ci95": [
+            96.3,
+            100.0
+          ],
+          "mean_steps": 36
+        },
+        {
+          "name": "mpc-cem",
+          "success_percent": 86.0,
+          "ci95": [
+            77.9,
+            91.5
+          ],
+          "mean_steps": 60
+        },
+        {
+          "name": "flow+steering-4",
+          "success_percent": 84.0,
+          "ci95": [
+            75.6,
+            89.9
+          ],
+          "mean_steps": 54
+        },
+        {
+          "name": "bc+temporal-ensemble",
+          "success_percent": 83.0,
+          "ci95": [
+            74.5,
+            89.1
+          ],
+          "mean_steps": 56
+        },
+        {
+          "name": "flow",
+          "success_percent": 83.0,
+          "ci95": [
+            74.5,
+            89.1
+          ],
+          "mean_steps": 56
+        },
+        {
+          "name": "bc",
+          "success_percent": 71.0,
+          "ci95": [
+            61.5,
+            79.0
+          ],
+          "mean_steps": 68
+        },
+        {
+          "name": "tokens",
+          "success_percent": 68.0,
+          "ci95": [
+            58.3,
+            76.3
+          ],
+          "mean_steps": 74
+        },
+        {
+          "name": "knn",
+          "success_percent": 64.0,
+          "ci95": [
+            54.2,
+            72.7
+          ],
+          "mean_steps": 76
+        }
+      ]
+    }
+  ]
+}
