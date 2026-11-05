@@ -58,7 +58,7 @@ img { max-width: 100%; height: auto; display: block; }
 /* keep a lone word or character off the last line of every paragraph */
 p { text-wrap: pretty; }
 /* short blocks: even lines, which also catches a lone Chinese character that pretty leaves behind */
-.head p, .stat small { text-wrap: balance; }
+.head p { text-wrap: balance; }
 [hidden] { display: none !important; }
 .wrap { max-width: var(--wrap); margin: 0 auto; padding-left: max(20px, env(safe-area-inset-left, 0px));
   padding-right: max(20px, env(safe-area-inset-right, 0px)); }
@@ -147,12 +147,11 @@ html[lang="zh-CN"] .thesis h3 { letter-spacing: .01em; line-height: 1.3; font-si
 .card.skill { background: #fff; color: #171c22; border-left: 3px solid #c8442d; padding: .6rem .75rem; }
 .card.skill b { display: block; font-weight: 700; font-size: .86rem; }
 .card.skill small { color: #5b6168; font-size: .72rem; }
-.cards .count { margin: .15rem 0 0; color: #171c22; font: 700 .74rem var(--mono); text-align: right; text-shadow: 0 1px 6px rgba(255, 255, 255, .9); }
 @media (max-width: 720px) {
   .tag { font-size: .6rem; padding: .18rem .45rem; }
   .inset { right: .5rem; top: .5rem; width: 32%; } .inset span { font-size: .58rem; left: .3rem; bottom: .3rem; }
   .cards { right: .5rem; top: .5rem; width: 42%; gap: .2rem; } .card { font-size: .58rem; padding: .25rem .45rem; }
-  .card.skill b { font-size: .64rem; } .card.skill small { display: none; } .cards .count { font-size: .58rem; }
+  .card.skill b { font-size: .64rem; } .card.skill small { display: none; }
 }
 /* the image is light in both themes, so the chip keeps fixed light colours */
 .chip { position: absolute; left: 1rem; bottom: 1rem; max-width: calc(100% - 2rem); margin: 0; padding: .65rem .85rem;
@@ -168,7 +167,6 @@ html[lang="zh-CN"] .thesis h3 { letter-spacing: .01em; line-height: 1.3; font-si
 .thesis figcaption { margin-top: .65rem; color: var(--muted); font-size: .8rem; }
 .thesis-bridge { border-top: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between;
   gap: 1.5rem; padding-block: 1.6rem; }
-.thesis-bridge small { color: var(--muted); font-size: .75rem; }
 @media (max-width: 720px) { .thesis { grid-template-columns: minmax(0, 1fr); row-gap: 1.6rem; padding-block: 2.6rem; }
   .chip { left: .6rem; bottom: .6rem; max-width: calc(100% - 1.2rem); padding: .5rem .65rem; font-size: .8rem; }
   .chip.top { top: .6rem; bottom: auto; }
@@ -257,12 +255,9 @@ html[lang="zh-CN"] h2 { letter-spacing: .01em; line-height: 1.25; }
   background: var(--surface); color: var(--muted); cursor: pointer; }
 .tabs button[aria-selected="true"] { background: var(--ink); border-color: var(--ink); color: var(--bg); }
 .panel { display: grid; grid-template-columns: minmax(0, .75fr) minmax(0, 1.25fr); gap: 3.5rem; align-items: center; }
-.panel .tag { font: 500 .8rem var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--accent); margin: 0 0 1rem; }
 .panel h3 { font: 800 clamp(1.7rem, 3vw, 2.4rem)/1.15 var(--font); letter-spacing: -.025em; margin: 0 0 1rem; text-wrap: balance; }
 html[lang="zh-CN"] .panel h3 { letter-spacing: .01em; line-height: 1.35; }
 .panel p { margin: 0 0 1.6rem; color: var(--muted); font-size: 1.08rem; }
-.panel p.stat { font: 900 clamp(2rem, 4vw, 3rem)/1 var(--font); letter-spacing: -.03em; color: var(--ink); margin: 0 0 1.6rem; }
-.stat small { display: block; font: 500 .95rem/1.5 var(--font); letter-spacing: 0; color: var(--muted); margin-top: .5rem; }
 .shot { border-radius: 18px; overflow: hidden; border: 1px solid var(--line); background: var(--figure); }
 .shot.pad { padding: 1rem; }
 .bars { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 2rem; display: grid; gap: 1.5rem; }
@@ -354,11 +349,11 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
         <div class="frame">
           <img src="assets/thesis-act.webp" data-i18n-alt="w1.alt" alt="A G1 humanoid sweeps a room; its broom, dustpan and the debris on the floor are labelled, and an inset shows the real robot's head camera." width="1536" height="1024" loading="lazy" decoding="async">
           <svg class="marks" viewBox="0 0 1536 1024" aria-hidden="true"><defs><marker id="a1" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#c8442d"/></marker></defs><line class="lead" x1="698" y1="816" x2="476" y2="717"/><circle class="dot" cx="698" cy="816" r="9"/><line class="lead" x1="785" y1="741" x2="1014" y2="655"/><circle class="dot" cx="785" cy="741" r="9"/><line class="lead" x1="658" y1="862" x2="445" y2="942"/><circle class="dot" cx="658" cy="862" r="9"/><line class="lead dash" x1="934" y1="97" x2="1037" y2="143"/><circle class="dot" cx="934" cy="97" r="9"/></svg>
-          <span class="tag" style="--x:31%;--y:70%" data-i18n="w1.t1">Broom</span><span class="tag" style="--x:66%;--y:64%" data-i18n="w1.t2">Dustpan</span><span class="tag" style="--x:29%;--y:92%" data-i18n="w1.t3">Debris, 6 pieces</span>
+          <span class="tag" style="--x:31%;--y:70%" data-i18n="w1.t1">Broom</span><span class="tag" style="--x:66%;--y:64%" data-i18n="w1.t2">Dustpan</span><span class="tag" style="--x:29%;--y:92%" data-i18n="w1.t3">Debris</span>
           <div class="inset"><img src="assets/thesis-act-headcam.webp" alt="" width="640" height="480" loading="lazy"><span data-i18n="w1.t4">What it sees</span></div>
           <p class="chip top"><span data-i18n="w1.chip">“Sweep the floor”</span><small data-i18n="w1.chips">See the room, find the tools, then act</small></p>
         </div>
-        <figcaption data-i18n="w1.cap">A G1 twin posed from a real sweeping episode. Inset: the real robot's head camera (<a href="https://huggingface.co/datasets/BitRobot/HIW-500-LeRobot">HIW-500</a>, CC BY 4.0).</figcaption>
+        <figcaption data-i18n="w1.cap">G1 simulation render; inset footage: <a href="https://huggingface.co/datasets/BitRobot/HIW-500-LeRobot">BitRobot / HIW-500</a> (CC BY 4.0).</figcaption>
       </figure>
     </article>
     <article class="thesis">
@@ -377,7 +372,6 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
           <span class="tag" style="--x:86%;--y:70%" data-i18n="w2.t1">Feet hold the floor</span><span class="tag" style="--x:20%;--y:84%" data-i18n="w2.t2">Brush meets the floor</span><span class="tag" style="--x:56%;--y:86%" data-i18n="w2.t3">Debris enters the pan</span>
           <p class="chip top"><span data-i18n="w2.chip">Every contact is feedback</span><small data-i18n="w2.chips">The floor and the debris answer each stroke</small></p>
         </div>
-        <figcaption data-i18n="w2.cap">Close-up of the same episode. The world answers each stroke.</figcaption>
       </figure>
     </article>
     <article class="thesis">
@@ -399,16 +393,13 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
             <p class="card" data-i18n="w3.k2">Hang keys on a hook</p>
             <p class="card" data-i18n="w3.k3">Set the table</p>
             <p class="card" data-i18n="w3.k4">Restock the fridge</p>
-            <p class="count" data-i18n="w3.k5">23,743 real episodes</p>
           </div>
           <p class="chip"><span data-i18n="w3.chip">Experience accumulates</span><small data-i18n="w3.chips">Each stroke is kept and reused</small></p>
         </div>
-        <figcaption data-i18n="w3.cap">Seven moments of one stroke, layered. Experience from many tasks grows into skills.</figcaption>
       </figure>
     </article>
     <div class="thesis-bridge">
       <a class="more" href="#loop" data-i18n="why.more">Explore Physical RSI ↓</a>
-      <small data-i18n="why.art">Renders of a G1 twin posed from real joint data</small>
     </div>
   </div>
 </section>
@@ -489,59 +480,46 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
     <div class="tabs" role="tablist">
       <button role="tab" aria-selected="true" aria-controls="t4" id="b4" data-i18n="t4.tab">Worlds</button>
       <button role="tab" aria-selected="false" aria-controls="t3" id="b3" data-i18n="t3.tab">Skill improvement</button>
-      <button role="tab" aria-selected="false" aria-controls="t5" id="b5" data-i18n="t5.tab">Tool-calling agent</button>
+      <button role="tab" aria-selected="false" aria-controls="t5" id="b5" data-i18n="t5.tab">Agents</button>
       <button role="tab" aria-selected="false" aria-controls="t7" id="b7" data-i18n="t7.tab">Memory</button>
       <button role="tab" aria-selected="false" aria-controls="t6" id="b6" data-i18n="t6.tab">Self-improvement</button>
     </div>
     <div class="panel" role="tabpanel" id="t4" aria-labelledby="b4">
       <div>
-        <p class="tag" data-i18n="t4.tag">Example 01 · MuJoCo worlds</p>
         <h3 data-i18n="t4.h">Build worlds through conversation</h3>
-        <p data-i18n="t4.d">Describe a workbench in English. Refine its layout through chat, then explore the MuJoCo scene in Studio.</p>
-        <p class="stat"><span>23</span><small data-i18n="t4.ss">Scene objects, including two Panda arms</small></p>
-        <p class="note" data-i18n="t4.note">42-second scene-building replay · Waits shortened.</p>
-        <a class="more" href="https://hyloai.github.io/hylo-docs/user-guide/worlds/#chat-to-world-demo" data-i18n="t4.more">Watch the full demo · 2:10 ↗</a>
+        <p data-i18n="t4.d">Describe a robot workspace, refine its layout through conversation, and explore the generated simulation in Studio.</p>
+        <a class="more" href="https://hyloai.github.io/hylo-docs/user-guide/worlds/#chat-to-world-demo" data-i18n="t4.more">Watch the full demo ↗</a>
       </div>
       <div class="shot"><video src="assets/world-chat.mp4" poster="assets/world-chat.jpg" controls muted playsinline preload="none" style="width:100%;display:block" aria-label="Recorded AI session replay: English chat builds and refines a dual-arm workbench in World Studio"></video></div>
     </div>
     <div class="panel" role="tabpanel" id="t3" aria-labelledby="b3" hidden>
       <div>
-        <p class="tag" data-i18n="t3.tag">Example 02 · Panda sorting simulation</p>
         <h3 data-i18n="t3.h">From experience to verified skills</h3>
-        <p data-i18n="t3.d">AI turns a one-object-per-colour program into a verified skill for sorting multiple objects, then reuses it on new layouts.</p>
-        <p class="stat"><span>8% → 83%</span><small data-i18n="t3.ss">Held-out success · 12 paired sorting scenes</small></p>
-        <p class="note" data-i18n="t3.note">45-second recorded replay · Simulator segmentation; program changes, no model weight updates.</p>
-        <a class="more" href="https://hyloai.github.io/hylo-docs/user-guide/research-and-skills/#recorded-skill-development-demo" data-i18n="t3.more">Watch the full demo · 2:33 ↗</a>
+        <p data-i18n="t3.d">Improve a sorting program through experience, verify it, and reuse the skill in new layouts.</p>
+        <a class="more" href="https://hyloai.github.io/hylo-docs/user-guide/research-and-skills/#recorded-skill-development-demo" data-i18n="t3.more">Watch the full demo ↗</a>
       </div>
       <div class="shot"><video src="assets/skills-sorting.mp4" poster="assets/skills-sorting.jpg" controls muted playsinline preload="none" style="width:100%;display:block" aria-label="Recorded skill development: AI revises a sorting program, the frozen candidate passes independent verification, and a later agent reuses the verified skill"></video></div>
     </div>
     <div class="panel" role="tabpanel" id="t5" aria-labelledby="b5" hidden>
       <div>
-        <p class="tag" data-i18n="t5.tag">Example 03 · Panda manipulation simulation</p>
         <h3 data-i18n="t5.h">An AI agent operating a robot</h3>
-        <p data-i18n="t5.d">“Stack the purple block on the green block.” A local model calls robot tools to complete the task in simulation.</p>
-        <p class="stat"><span>5 → 2</span><small data-i18n="t5.ss">Model calls → robot actions</small></p>
-        <p class="note" data-i18n="t5.note">42-second MuJoCo replay · Model waits shortened; motion slowed.</p>
-        <a class="more" href="https://hyloai.github.io/hylo-docs/user-guide/tool-agents/#recorded-robot-control-demo" data-i18n="t5.more">Watch the full demo · 1:45 ↗</a>
+        <p data-i18n="t5.d">“Stack the purple block on the green block.” The agent turns an instruction into robot actions in simulation.</p>
+        <a class="more" href="https://hyloai.github.io/hylo-docs/user-guide/tool-agents/#recorded-robot-control-demo" data-i18n="t5.more">Watch the full demo ↗</a>
       </div>
       <div class="shot"><video src="assets/tools-llm-stack.mp4" poster="assets/tools-llm-stack.jpg" controls muted playsinline preload="none" style="width:100%;display:block" aria-label="Recorded AI robot-control walkthrough: a Panda arm stacks a purple block on a green block, with tool calls and task verification"></video></div>
     </div>
     <div class="panel" role="tabpanel" id="t7" aria-labelledby="b7" hidden>
       <div>
-        <p class="tag" data-i18n="t7.tag">Example 04 · Studio memory</p>
-        <h3 data-i18n="t7.h">What the agent learned, with its evidence</h3>
-        <p data-i18n="t7.d">Save successful actions and lessons for future tasks, with evidence for each.</p>
-        <p class="stat"><span>0.47 → 0.86</span><small data-i18n="t7.ss">Fresh scenes with a verified skill applied, 200 pairs</small></p>
+        <h3 data-i18n="t7.h">Carry experience into the next task</h3>
+        <p data-i18n="t7.d">Keep successful actions and lessons for future tasks, with a record of where they came from.</p>
         <a class="more" href="https://hyloai.github.io/hylo-docs/user-guide/memory/" data-i18n="t7.more">See memory ↗</a>
       </div>
       <div class="shot"><video src="assets/studio-experience.mp4" poster="assets/studio-experience.jpg" controls muted loop playsinline preload="none" style="width:100%;display:block" aria-label="The Studio's Experience page: skill libraries, lesson books and an action bank"></video></div>
     </div>
     <div class="panel" role="tabpanel" id="t6" aria-labelledby="b6" hidden>
       <div>
-        <p class="tag" data-i18n="t6.tag">Example 05 · MuJoCo and LIBERO</p>
-        <h3 data-i18n="t6.h">A change is kept only if the gate agrees</h3>
-        <p data-i18n="t6.d">A reach candidate passes evaluation and human approval. LIBERO proposals that fail evaluation are kept out.</p>
-        <p class="stat"><span>40% → 100%</span><small data-i18n="t6.ss">Reach held-out success · 40 paired episodes, p = 6e-8</small></p>
+        <h3 data-i18n="t6.h">Verify improvements before adopting them</h3>
+        <p data-i18n="t6.d">Evaluate proposed changes, review the results, and approve improvements before adopting them.</p>
         <a class="more" href="https://hyloai.github.io/hylo-docs/user-guide/campaigns/" data-i18n="t6.more">See campaigns ↗</a>
       </div>
       <div class="shot"><video src="assets/studio-campaigns.mp4" poster="assets/studio-campaigns.jpg" controls muted loop playsinline preload="none" style="width:100%;display:block" aria-label="The Studio's self-improvement pages: a candidate's cascade, an approval, the rollback form and the A/B arena"></video></div>
@@ -634,11 +612,11 @@ uv run hylo run bench/examples/configs/mujoco_reach.yaml</pre>
     "w1.alt": "G1 人形机器人在房间里扫地，扫帚、簸箕和地上的碎屑都有标注，右上角是真实机器人头部相机的画面。",
     "w1.t1": "扫帚",
     "w1.t2": "簸箕",
-    "w1.t3": "碎屑，6 处",
+    "w1.t3": "碎屑",
     "w1.t4": "它看到的",
     "w1.chip": "“把地扫干净”",
     "w1.chips": "看清房间，找到工具，再动手",
-    "w1.cap": "依据真实扫地回合摆出姿态的 G1 孪生。右上：真实机器人的头部相机（<a href=\"https://huggingface.co/datasets/BitRobot/HIW-500-LeRobot\">HIW-500</a>，CC BY 4.0）。",
+    "w1.cap": "G1 仿真渲染；右上实拍画面：<a href=\"https://huggingface.co/datasets/BitRobot/HIW-500-LeRobot\">BitRobot / HIW-500</a>（CC BY 4.0）。",
     "w2.c": "世界",
     "w2.t": "世界塑造智能。",
     "w2.d": "行动带来反馈，反馈推动学习。",
@@ -649,7 +627,6 @@ uv run hylo run bench/examples/configs/mujoco_reach.yaml</pre>
     "w2.t3": "碎屑进入簸箕",
     "w2.chip": "每一次接触都是反馈",
     "w2.chips": "地面和碎屑回应每一下清扫",
-    "w2.cap": "同一回合的近景。世界回应每一下清扫。",
     "w3.c": "记忆与技能",
     "w3.t": "一个让智能<br>不断进化的世界。",
     "w3.d": "让经验持续积累，让能力不断生长。",
@@ -662,12 +639,9 @@ uv run hylo run bench/examples/configs/mujoco_reach.yaml</pre>
     "w3.k2": "把钥匙挂上挂钩",
     "w3.k3": "摆好餐桌",
     "w3.k4": "给冰箱补货",
-    "w3.k5": "23,743 段真实经验",
     "w3.chip": "经验持续积累",
     "w3.chips": "每一下清扫都被保留、被复用",
-    "w3.cap": "同一下清扫的七个时刻叠在一起。来自许多任务的经验，生长为技能。",
     "why.more": "了解 Physical RSI ↓",
-    "why.art": "依据真实关节数据摆出姿态的 G1 孪生渲染",
     "hero.start": "快速上手",
     "hero.stack": "了解 Physical RSI",
     "loop.title": "Physical <em>RSI</em>",
@@ -687,42 +661,24 @@ uv run hylo run bench/examples/configs/mujoco_reach.yaml</pre>
     "work.lede": "从构建世界到改进技能，看自我进化如何一步步实现。",
     "t3.tab": "技能改进",
     "t4.tab": "世界",
-    "t5.tab": "工具调用智能体",
+    "t5.tab": "智能体",
     "t6.tab": "自我改进",
     "t7.tab": "记忆",
-    "t4.tag": "实例 01 · MuJoCo 世界",
     "t4.h": "通过对话，构建机器人世界",
-    "t4.d": "用英文描述工作台，通过对话调整布局，在 Studio 中查看生成的 MuJoCo 场景。",
-    "t4.ss": "个场景对象，包含两台 Panda 机械臂",
-    "t4.note": "42 秒场景构建回放 · 已缩短等待时间。",
-    "t4.more": "观看完整演示 · 2:10 ↗",
-    "t5.tag": "实例 03 · Panda 操作仿真",
+    "t4.d": "描述机器人工作空间，通过对话调整布局，在 Studio 中查看生成的仿真场景。",
+    "t4.more": "观看完整演示 ↗",
     "t5.h": "让 AI 操作机器人",
-    "t5.d": "“把紫色方块叠到绿色方块上。”本地模型调用机器人工具，在仿真中完成任务。",
-    "t5.ss": "模型调用 → 机器人动作",
-    "t5.note": "42 秒 MuJoCo 回放 · 缩短模型等待，放慢动作展示。",
-    "t5.more": "观看完整演示 · 1:45 ↗",
-    "t6.tag": "实例 05 · MuJoCo 与 LIBERO",
-    "t6.h": "候选改动通过准入评测后才能晋升",
-    "t6.d": "Reach 候选通过评测后，经人工审批采用；未通过评测的 LIBERO 改动不予采用。",
-    "t6.ss": "Reach 留出集成功率 · 40 对回合，p = 6e-8",
+    "t5.d": "“把紫色方块叠到绿色方块上。”智能体将指令转化为机器人在仿真中的动作。",
+    "t5.more": "观看完整演示 ↗",
+    "t6.h": "验证改进，再采用",
+    "t6.d": "评测候选改动，查看结果，审批通过后再采用。",
     "t6.more": "了解改进任务 ↗",
-    "t7.tag": "实例 04 · Studio 记忆",
-    "t7.h": "智能体学到了什么，以及证据",
-    "t7.d": "保存成功动作与经验教训，为后续任务提供参考，每项记录都有据可查。",
-    "t7.ss": "应用一条已验证技能后的新场景成功率，200 对",
+    "t7.h": "让经验用于下一次任务",
+    "t7.d": "保存成功动作与经验教训，为后续任务提供参考，并保留来源记录。",
     "t7.more": "了解记忆 ↗",
-    "t3.tag": "实例 02 · Panda 分拣仿真",
     "t3.h": "从执行经验到经过验证的技能",
-    "t3.d": "AI 将每种颜色只处理一个物体的程序，改进为经验证的多物体分拣技能，再用于新布局。",
-    "t3.ss": "留出集成功率 · 12 对分拣场景",
-    "t3.more": "观看完整演示 · 2:33 ↗",
-    "t3.parent": "当前版本",
-    "t3.cand": "候选版本",
-    "t3.r1": "筛选评测",
-    "t3.r2": "准入评测（gate）",
-    "t3.r3": "留出集报告",
-    "t3.note": "45 秒实录回放 · 使用仿真分割信息；改进程序，不更新模型权重。",
+    "t3.d": "从执行经验中改进分拣程序，经过验证后，将技能用于新的布局。",
+    "t3.more": "观看完整演示 ↗",
     "start.title": "让智能<em>成为现实</em>",
     "start.lede": "搭建你的世界，开始第一轮探索与改进。",
     "p1.t": "运行与评测",
