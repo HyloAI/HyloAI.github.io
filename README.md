@@ -23,7 +23,8 @@ Sources, frames and cameras are in `assets/thesis-stills.provenance.json`.
 
 The homepage and docs share five core concepts: Physical RSI, Worlds, Agents, Memory and Skills. Physical RSI
 connects the other four. The homepage pairs a circular five-step loop with a capability stack.
-Inference Engine is its bottom layer, representing model serving and linking to the policy-serving guide.
+Model serving is its bottom layer, linking to the policy-serving guide. Distinguish in-page links (↓),
+documentation links (↗) and local controls; keep the mobile menu and example tabs keyboard-accessible.
 Keep labels brief; hover and keyboard focus highlight related stages and capabilities. Preserve the `#loop` and `#stack` anchors. Studio,
 deployment and architecture are supporting entry points. Keep homepage copy concise and aligned with the docs'
 concept definitions. Keep English text, Chinese

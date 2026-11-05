@@ -74,10 +74,21 @@ header.top { position: sticky; top: 0; z-index: 10; background: color-mix(in srg
 nav.links { display: flex; gap: 1.8rem; margin: 0 auto; font-size: .95rem; font-weight: 500; }
 nav.links a { color: var(--muted); text-decoration: none; }
 nav.links a:hover { color: var(--ink); }
-.lang { font: 600 .85rem var(--font); border: 1px solid var(--line); background: var(--surface); color: var(--ink);
+.menu-toggle { display: none; }
+.lang, .menu-toggle { min-height: 44px; font: 600 .85rem var(--font); border: 1px solid var(--line); background: var(--surface); color: var(--ink);
   border-radius: 999px; padding: .38rem .95rem; cursor: pointer; }
-.lang:hover { border-color: var(--accent); }
-@media (max-width: 820px) { nav.links { display: none; } .lang { margin-left: auto; } }
+.lang:hover, .menu-toggle:hover { border-color: var(--accent); }
+@media (max-width: 1040px) {
+  .top .wrap { flex-wrap: wrap; gap: .6rem; }
+  .brand { order: 0; }
+  .lang { order: 1; margin-left: auto; }
+  .menu-toggle { display: inline-flex; align-items: center; justify-content: center; order: 2; }
+  nav.links { display: none; order: 3; flex-basis: 100%; flex-direction: column; gap: 0;
+    margin: .3rem 0 0; padding-top: .5rem; border-top: 1px solid var(--line);
+    max-height: calc(100dvh - 5.5rem); overflow-y: auto; }
+  .top.menu-open nav.links { display: flex; }
+  nav.links a { padding: .65rem .4rem; min-height: 44px; }
+}
 
 /* buttons and links */
 .btn { display: inline-flex; align-items: center; gap: .45rem; padding: .85rem 1.5rem; border-radius: 10px;
@@ -174,7 +185,7 @@ html[lang="zh-CN"] .thesis h3 { letter-spacing: .01em; line-height: 1.3; font-si
   .thesis-bridge { align-items: flex-start; flex-direction: column; gap: .5rem; } }
 
 /* section headings */
-section { padding-block: 7rem; }
+section { padding-block: 7rem; scroll-margin-top: 6rem; }
 .head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 27rem); gap: 3rem; align-items: end; margin-bottom: 3.5rem; }
 h2 { font: 900 clamp(2.3rem, 5vw, 4rem)/1.05 var(--font); letter-spacing: -.03em; margin: 0; text-wrap: balance; }
 html[lang="zh-CN"] h2 { letter-spacing: .01em; line-height: 1.25; }
@@ -197,7 +208,7 @@ html[lang="zh-CN"] h2 { letter-spacing: .01em; line-height: 1.25; }
 .orbit-center strong { font: 800 clamp(1.15rem, 2.3vw, 1.65rem)/1.25 var(--font); white-space: nowrap; letter-spacing: -.02em; }
 .orbit-steps { list-style: none; margin: 0; padding: 0; }
 .orbit-steps li { position: absolute; left: var(--x); top: var(--y); transform: translate(-50%, -50%); }
-.orbit-step { display: grid; place-items: center; min-height: 2.8rem; min-width: 6.1rem; padding: .5rem .7rem; border-radius: 8px;
+.orbit-step { display: inline-flex; align-items: center; justify-content: center; gap: .3rem; min-height: 2.8rem; min-width: 6.1rem; padding: .5rem .7rem; border-radius: 8px;
   border: 1px solid color-mix(in srgb, var(--kernel-ink) 23%, transparent); background: var(--kernel); color: var(--kernel-ink);
   text-decoration: none; font: 600 .97rem var(--font); scroll-margin-top: 6rem; transition: color .18s, border-color .18s, background .18s; }
 .orbit-step:hover, .orbit-step:focus-visible, .orbit-step:target { border-color: var(--accent); background: var(--accent); color: var(--accent-ink); }
@@ -307,13 +318,14 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
 <header class="top">
   <div class="wrap">
     <a class="brand" href="#"><img src="assets/logo.svg" alt="" width="30" height="30">Hylo</a>
-    <nav class="links" aria-label="Sections">
+    <button class="menu-toggle" id="menu-toggle" type="button" aria-controls="site-nav" aria-expanded="false" data-i18n="nav.menu">Menu</button>
+    <nav class="links" id="site-nav" aria-label="Main navigation" data-i18n-aria-label="nav.label">
       <a href="#why" data-i18n="nav.why">Why Hylo</a>
       <a href="#loop" data-i18n="nav.loop">Physical RSI</a>
       <a href="#work" data-i18n="nav.work">Examples</a>
       <a href="#start" data-i18n="nav.start">Get started</a>
-      <a href="https://hyloai.github.io/hylo-docs/" data-i18n="nav.docs">Docs</a>
-      <a href="https://github.com/HyloAI">GitHub</a>
+      <a href="https://hyloai.github.io/hylo-docs/" data-i18n="nav.docs">Docs ↗</a>
+      <a href="https://github.com/HyloAI">GitHub ↗</a>
     </nav>
     <button class="lang" id="lang" type="button" aria-label="切换到中文">中文</button>
   </div>
@@ -325,13 +337,13 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
     <h1 data-i18n="hero.title">The next era of intelligence <br>is physical.</h1>
     <p class="lede" data-i18n="hero.lede">Physical intelligence that learns from experience and evolves through interaction with the world.</p>
     <div class="cta">
-      <a class="btn primary" href="https://hyloai.github.io/hylo-docs/getting-started/quickstart/" data-i18n="hero.start">Quickstart</a>
-      <a class="btn ghost" href="https://hyloai.github.io/hylo-docs/physical-rsi/" data-i18n="hero.stack">Explore Physical RSI</a>
+      <a class="btn primary" href="https://hyloai.github.io/hylo-docs/getting-started/quickstart/" data-i18n="hero.start">Quickstart ↗</a>
+      <a class="btn ghost" href="#loop" data-i18n="hero.stack">Explore Physical RSI ↓</a>
     </div>
   </div>
 </div>
 
-<section id="why">
+<section id="why" tabindex="-1">
   <div class="wrap">
     <article class="thesis">
       <div class="text">
@@ -339,7 +351,7 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
         <h3 data-i18n="w1.t">Intelligence is becoming physical.</h3>
         <div class="body">
           <p data-i18n="w1.d">From understanding the world to acting within it.</p>
-          <a class="more" href="https://hyloai.github.io/hylo-docs/user-guide/agents/" data-i18n="w1.more">Explore agents ↗</a>
+          <a class="more" href="https://hyloai.github.io/hylo-docs/user-guide/agents/" data-i18n="w1.more">Agents guide ↗</a>
         </div>
       </div>
       <figure class="shot">
@@ -359,7 +371,7 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
         <h3 data-i18n="w2.t">The world shapes intelligence.</h3>
         <div class="body">
           <p data-i18n="w2.d">Action brings feedback. Feedback drives learning.</p>
-          <a class="more" href="https://hyloai.github.io/hylo-docs/user-guide/worlds/" data-i18n="w2.more">Explore worlds ↗</a>
+          <a class="more" href="https://hyloai.github.io/hylo-docs/user-guide/worlds/" data-i18n="w2.more">Worlds guide ↗</a>
         </div>
       </div>
       <figure class="shot">
@@ -377,7 +389,7 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
         <h3 data-i18n="w3.t">A world where intelligence can evolve.</h3>
         <div class="body">
           <p data-i18n="w3.d">A foundation for experience to accumulate and capabilities to grow.</p>
-          <a class="more" href="https://hyloai.github.io/hylo-docs/user-guide/skills/" data-i18n="w3.more">Explore skills ↗</a>
+          <a class="more" href="https://hyloai.github.io/hylo-docs/user-guide/skills/" data-i18n="w3.more">Skills guide ↗</a>
         </div>
       </div>
       <figure class="shot">
@@ -401,7 +413,7 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
   </div>
 </section>
 
-<section id="loop" aria-labelledby="rsi-title">
+<section id="loop" aria-labelledby="rsi-title" tabindex="-1">
   <div class="wrap">
     <div class="head">
       <h2 id="rsi-title" data-i18n="loop.title">Physical <em>RSI</em></h2>
@@ -409,7 +421,7 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
     </div>
     <div class="rsi-system">
       <div class="orbit-panel">
-        <h3 class="diagram-label" data-i18n="loop.orbit">The loop</h3>
+        <h3 class="diagram-label" data-i18n="loop.orbit">The loop · documentation</h3>
         <div class="orbit">
           <svg class="orbit-track" viewBox="0 0 500 500" aria-hidden="true">
             <defs><marker id="rsi-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M1 1L9 5L1 9Z"/></marker></defs>
@@ -425,11 +437,11 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
             <strong data-i18n="loop.evolve">Keep evolving</strong>
           </div>
           <ol class="orbit-steps">
-            <li style="--x:50.00%;--y:17.00%"><a class="orbit-step" id="rsi-build" href="https://hyloai.github.io/hylo-docs/user-guide/worlds/" data-i18n="s1.t">Build</a></li>
-            <li style="--x:81.38%;--y:39.80%"><a class="orbit-step" id="rsi-run" href="https://hyloai.github.io/hylo-docs/user-guide/agents/" data-i18n="s2.t">Run</a></li>
-            <li style="--x:69.40%;--y:76.70%"><a class="orbit-step" id="rsi-improve" href="https://hyloai.github.io/hylo-docs/user-guide/learning/" data-i18n="s3.t">Improve</a></li>
-            <li style="--x:30.60%;--y:76.70%"><a class="orbit-step" id="rsi-verify" href="https://hyloai.github.io/hylo-docs/user-guide/campaigns/" data-i18n="s4.t">Verify</a></li>
-            <li style="--x:18.62%;--y:39.80%"><a class="orbit-step" id="rsi-deploy" href="https://hyloai.github.io/hylo-docs/user-guide/deployment/" data-i18n="s5.t">Deploy</a></li>
+            <li style="--x:50.00%;--y:17.00%"><a class="orbit-step" id="rsi-build" href="https://hyloai.github.io/hylo-docs/user-guide/worlds/" aria-label="Read the world building guide" data-i18n-aria-label="s1.link"><span data-i18n="s1.t">Build</span><span aria-hidden="true"> ↗</span></a></li>
+            <li style="--x:81.38%;--y:39.80%"><a class="orbit-step" id="rsi-run" href="https://hyloai.github.io/hylo-docs/user-guide/agents/" aria-label="Read the agent execution guide" data-i18n-aria-label="s2.link"><span data-i18n="s2.t">Run</span><span aria-hidden="true"> ↗</span></a></li>
+            <li style="--x:69.40%;--y:76.70%"><a class="orbit-step" id="rsi-improve" href="https://hyloai.github.io/hylo-docs/physical-rsi/#what-improves" aria-label="Read about improving capabilities" data-i18n-aria-label="s3.link"><span data-i18n="s3.t">Improve</span><span aria-hidden="true"> ↗</span></a></li>
+            <li style="--x:30.60%;--y:76.70%"><a class="orbit-step" id="rsi-verify" href="https://hyloai.github.io/hylo-docs/user-guide/campaigns/" aria-label="Read the verification and promotion guide" data-i18n-aria-label="s4.link"><span data-i18n="s4.t">Verify</span><span aria-hidden="true"> ↗</span></a></li>
+            <li style="--x:18.62%;--y:39.80%"><a class="orbit-step" id="rsi-deploy" href="https://hyloai.github.io/hylo-docs/user-guide/deployment/" aria-label="Read the deployment guide" data-i18n-aria-label="s5.link"><span data-i18n="s5.t">Deploy</span><span aria-hidden="true"> ↗</span></a></li>
           </ol>
         </div>
       </div>
@@ -458,80 +470,80 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
           </a>
           <a class="stack-layer engine-layer" data-stages="run verify deploy" style="--width:100%" href="https://hyloai.github.io/hylo-docs/user-guide/deployment/#3-serving-a-policy">
             <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><rect x="8" y="8" width="16" height="16" rx="3"/><rect x="12" y="12" width="8" height="8" rx="1"/><path d="M12 3v5M20 3v5M12 24v5M20 24v5M3 12h5M3 20h5M24 12h5M24 20h5"/></svg>
-            <span><span class="layer-name" data-i18n="engine.t">Inference Engine</span><span class="layer-role" data-i18n="engine.d">Efficient inference</span></span>
+            <span><span class="layer-name" data-i18n="engine.t">Model serving</span><span class="layer-role" data-i18n="engine.d">Serve policies and agents</span></span>
             <span class="layer-arrow" aria-hidden="true">↗</span>
           </a>
         </div>
       </div>
     </div>
-    <p class="rsi-more"><a class="more" href="https://hyloai.github.io/hylo-docs/physical-rsi/" data-i18n="loop.more">Explore Physical RSI ↗</a></p>
+    <p class="rsi-more"><a class="more" href="https://hyloai.github.io/hylo-docs/physical-rsi/" data-i18n="loop.more">Physical RSI docs ↗</a></p>
   </div>
 </section>
 
-<section id="work">
+<section id="work" tabindex="-1">
   <div class="wrap">
     <div class="head">
       <h2 data-i18n="work.title">Hylo at <em>work</em></h2>
       <p data-i18n="work.lede">From building worlds to improving skills, see the foundations of self-improvement in action.</p>
     </div>
-    <div class="tabs" role="tablist">
-      <button role="tab" aria-selected="true" aria-controls="t4" id="b4" data-i18n="t4.tab">Worlds</button>
-      <button role="tab" aria-selected="false" aria-controls="t5" id="b5" data-i18n="t5.tab">Agents</button>
-      <button role="tab" aria-selected="false" aria-controls="t7" id="b7" data-i18n="t7.tab">Memory</button>
-      <button role="tab" aria-selected="false" aria-controls="t3" id="b3" data-i18n="t3.tab">Skills</button>
-      <button role="tab" aria-selected="false" aria-controls="t6" id="b6" data-i18n="t6.tab">Evolution</button>
+    <div class="tabs" role="tablist" aria-label="Hylo demonstrations" data-i18n-aria-label="work.tabs">
+      <button role="tab" aria-selected="true" tabindex="0" aria-controls="t4" id="b4" data-i18n="t4.tab">Worlds</button>
+      <button role="tab" aria-selected="false" tabindex="-1" aria-controls="t5" id="b5" data-i18n="t5.tab">Agents</button>
+      <button role="tab" aria-selected="false" tabindex="-1" aria-controls="t7" id="b7" data-i18n="t7.tab">Memory</button>
+      <button role="tab" aria-selected="false" tabindex="-1" aria-controls="t3" id="b3" data-i18n="t3.tab">Skills</button>
+      <button role="tab" aria-selected="false" tabindex="-1" aria-controls="t6" id="b6" data-i18n="t6.tab">Evolution</button>
     </div>
-    <div class="panel" role="tabpanel" id="t4" aria-labelledby="b4">
+    <div class="panel" role="tabpanel" tabindex="0" id="t4" aria-labelledby="b4">
       <div>
         <h3 data-i18n="t4.h">Build worlds through conversation</h3>
         <p data-i18n="t4.d">Describe a robot workspace, refine its layout through conversation, and explore the generated simulation in Studio.</p>
-        <a class="more" href="https://hyloai.github.io/hylo-docs/user-guide/worlds/#chat-to-world-demo" data-i18n="t4.more">Watch the full demo ↗</a>
+        <a class="more" href="https://hyloai.github.io/hylo-docs/user-guide/worlds/#chat-to-world-demo" data-i18n="t4.more">Full demo &amp; walkthrough ↗</a>
       </div>
       <div class="shot"><video src="assets/world-chat.mp4" poster="assets/world-chat.jpg" controls muted playsinline preload="none" style="width:100%;display:block" aria-label="Recorded AI session replay: English chat builds and refines a dual-arm workbench in World Studio"></video></div>
     </div>
-    <div class="panel" role="tabpanel" id="t3" aria-labelledby="b3" hidden>
+    <div class="panel" role="tabpanel" tabindex="0" id="t3" aria-labelledby="b3" hidden>
       <div>
         <h3 data-i18n="t3.h">From experience to verified skills</h3>
         <p data-i18n="t3.d">Improve a sorting program through experience, verify it, and reuse the skill in new layouts.</p>
-        <a class="more" href="https://hyloai.github.io/hylo-docs/user-guide/research-and-skills/#recorded-skill-development-demo" data-i18n="t3.more">Watch the full demo ↗</a>
+        <a class="more" href="https://hyloai.github.io/hylo-docs/user-guide/research-and-skills/#recorded-skill-development-demo" data-i18n="t3.more">Full demo &amp; walkthrough ↗</a>
       </div>
       <div class="shot"><video src="assets/skills-sorting.mp4" poster="assets/skills-sorting.jpg" controls muted playsinline preload="none" style="width:100%;display:block" aria-label="Recorded skill development: AI revises a sorting program, the frozen candidate passes independent verification, and a later agent reuses the verified skill"></video></div>
     </div>
-    <div class="panel" role="tabpanel" id="t5" aria-labelledby="b5" hidden>
+    <div class="panel" role="tabpanel" tabindex="0" id="t5" aria-labelledby="b5" hidden>
       <div>
         <h3 data-i18n="t5.h">An AI agent operating a robot</h3>
         <p data-i18n="t5.d">“Stack the purple block on the green block.” The agent turns an instruction into robot actions in simulation.</p>
-        <a class="more" href="https://hyloai.github.io/hylo-docs/user-guide/tool-agents/#recorded-robot-control-demo" data-i18n="t5.more">Watch the full demo ↗</a>
+        <a class="more" href="https://hyloai.github.io/hylo-docs/user-guide/tool-agents/#recorded-robot-control-demo" data-i18n="t5.more">Full demo &amp; walkthrough ↗</a>
       </div>
       <div class="shot"><video src="assets/tools-llm-stack.mp4" poster="assets/tools-llm-stack.jpg" controls muted playsinline preload="none" style="width:100%;display:block" aria-label="Recorded AI robot-control walkthrough: a Panda arm stacks a purple block on a green block, with tool calls and task verification"></video></div>
     </div>
-    <div class="panel" role="tabpanel" id="t7" aria-labelledby="b7" hidden>
+    <div class="panel" role="tabpanel" tabindex="0" id="t7" aria-labelledby="b7" hidden>
       <div>
         <h3 data-i18n="t7.h">Carry experience into the next task</h3>
         <p data-i18n="t7.d">Keep successful actions and lessons for future tasks, with a record of where they came from.</p>
-        <a class="more" href="https://hyloai.github.io/hylo-docs/user-guide/memory/" data-i18n="t7.more">See memory ↗</a>
+        <a class="more" href="https://hyloai.github.io/hylo-docs/user-guide/memory/" data-i18n="t7.more">Memory docs ↗</a>
       </div>
       <div class="shot"><video src="assets/studio-experience.mp4" poster="assets/studio-experience.jpg" controls muted loop playsinline preload="none" style="width:100%;display:block" aria-label="The Studio's Experience page: skill libraries, lesson books and an action bank"></video></div>
     </div>
-    <div class="panel" role="tabpanel" id="t6" aria-labelledby="b6" hidden>
+    <div class="panel" role="tabpanel" tabindex="0" id="t6" aria-labelledby="b6" hidden>
       <div>
         <h3 data-i18n="t6.h">Intelligence that evolves through experience</h3>
         <p data-i18n="t6.d">Agents use experience to propose and test improvements. Each verified advance becomes the starting point for the next cycle.</p>
-        <a class="more" href="https://hyloai.github.io/hylo-docs/physical-rsi/" data-i18n="t6.more">Explore Physical RSI ↗</a>
+        <a class="more" href="https://hyloai.github.io/hylo-docs/physical-rsi/" data-i18n="t6.more">Physical RSI docs ↗</a>
       </div>
       <div class="shot"><video src="assets/studio-campaigns.mp4" poster="assets/studio-campaigns.jpg" controls muted loop playsinline preload="none" style="width:100%;display:block" aria-label="The Studio's self-improvement pages: a candidate's cascade, an approval, the rollback form and the A/B arena"></video></div>
     </div>
   </div>
 </section>
 
-<section id="start" aria-labelledby="start-title">
+<section id="start" aria-labelledby="start-title" tabindex="-1">
   <div class="wrap">
     <div class="start-intro">
       <div>
         <h2 id="start-title" data-i18n="start.title">Get started with <em>Hylo</em></h2>
         <p data-i18n="start.lede">Run your first simulation. Follow the quickstart from setup to evaluating and improving an agent.</p>
       </div>
-      <a class="btn primary" href="https://hyloai.github.io/hylo-docs/getting-started/quickstart/" data-i18n="start.quick">Follow the quickstart ↗</a>
+      <a class="btn primary" href="https://hyloai.github.io/hylo-docs/getting-started/quickstart/" data-i18n="start.quick">Quickstart ↗</a>
     </div>
     <div class="paths">
       <div class="path">
@@ -561,10 +573,11 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
         <a class="brand" href="#"><img src="assets/logo.svg" alt="" width="30" height="30">Hylo AI</a>
         <p class="claim" data-i18n="foot.claim">Robots that build on their own progress.</p>
       </div>
-      <div><h4 data-i18n="foot.products">Products</h4><ul>
-        <li><a href="https://github.com/HyloAI/hylo-studio">Studio</a></li>
-        <li><a href="https://github.com/HyloAI/hylo-bench">Bench</a></li>
-        <li><a href="https://github.com/HyloAI/hylo-serve">Serve</a></li></ul></div>
+      <div><h4 data-i18n="foot.products">Open source projects</h4><ul>
+        <li><a href="https://github.com/HyloAI/hylo-harness">Harness ↗</a></li>
+        <li><a href="https://github.com/HyloAI/hylo-studio">Studio ↗</a></li>
+        <li><a href="https://github.com/HyloAI/hylo-bench">Bench ↗</a></li>
+        <li><a href="https://github.com/HyloAI/hylo-serve">Serve ↗</a></li></ul></div>
       <div><h4 data-i18n="foot.stack">Core concepts</h4><ul>
         <li><a href="https://hyloai.github.io/hylo-docs/physical-rsi/" data-i18n="foot.c1">Physical RSI</a></li>
         <li><a href="https://hyloai.github.io/hylo-docs/user-guide/worlds/" data-i18n="foot.c2">Worlds</a></li>
@@ -577,7 +590,7 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
         <li><a href="https://hyloai.github.io/hylo-docs/getting-started/quickstart/" data-i18n="foot.quick">Quickstart</a></li>
         <li><a href="https://hyloai.github.io/hylo-docs/benchmarking/leaderboard/" data-i18n="foot.board">Leaderboard</a></li></ul></div>
       <div><h4 data-i18n="foot.company">Company</h4><ul>
-        <li><a href="https://github.com/HyloAI">GitHub</a></li>
+        <li><a href="https://github.com/HyloAI">GitHub ↗</a></li>
         <li><a href="https://github.com/HyloAI/hylo-harness/blob/main/LICENSE">Apache-2.0</a></li></ul></div>
     </div>
     <div class="legal"><span>© 2026 Hylo AI · 原觉智能</span><span data-i18n="foot.open">Open source under the Apache License 2.0</span></div>
@@ -586,18 +599,26 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
 <script>
 (function () {
   var zh = {
+    "nav.menu": "菜单",
+    "nav.label": "主导航",
+    "work.tabs": "Hylo 演示",
+    "s1.link": "阅读世界搭建文档",
+    "s2.link": "阅读智能体运行文档",
+    "s3.link": "阅读能力改进说明",
+    "s4.link": "阅读验证与晋升文档",
+    "s5.link": "阅读部署文档",
     "nav.why": "理念",
     "nav.loop": "Physical RSI",
     "nav.work": "实例",
     "nav.start": "开始使用",
-    "nav.docs": "文档",
+    "nav.docs": "文档 ↗",
     "hero.kicker": "物理 AI 的开放基座",
     "hero.title": "智能的下一个时代，<br>是物理的。",
     "hero.lede": "让物理智能从经验中学习，在与世界的交互中持续进化。",
     "w1.c": "智能体",
     "w1.t": "智能，正走向物理世界。",
     "w1.d": "从理解世界，到参与世界。",
-    "w1.more": "了解智能体 ↗",
+    "w1.more": "智能体文档 ↗",
     "w1.alt": "G1 人形机器人在房间里扫地，扫帚、簸箕和地上的碎屑都有标注，右上角是真实机器人头部相机的画面。",
     "w1.t1": "扫帚",
     "w1.t2": "簸箕",
@@ -609,7 +630,7 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
     "w2.c": "世界",
     "w2.t": "世界塑造智能。",
     "w2.d": "行动带来反馈，反馈推动学习。",
-    "w2.more": "了解世界 ↗",
+    "w2.more": "世界文档 ↗",
     "w2.alt": "近景：机器人双脚踩在地上，扫帚把碎屑推进簸箕，接触点和碎屑路径都有标注。",
     "w2.t1": "双脚稳住地面",
     "w2.t2": "刷头贴住地面",
@@ -619,7 +640,7 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
     "w3.c": "记忆与技能",
     "w3.t": "一个让智能<br>不断进化的世界。",
     "w3.d": "让经验持续积累，让能力不断生长。",
-    "w3.more": "了解技能 ↗",
+    "w3.more": "技能文档 ↗",
     "w3.alt": "同一下清扫的七个时刻叠成渐隐的轨迹，旁边是一摞经验卡片，最上面是扫地技能。",
     "w3.t1": "之前的清扫",
     "w3.t2": "这一下",
@@ -631,16 +652,16 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
     "w3.chip": "经验持续积累",
     "w3.chips": "每一下清扫都被保留、被复用",
     "why.more": "了解 Physical RSI ↓",
-    "hero.start": "快速上手",
-    "hero.stack": "了解 Physical RSI",
+    "hero.start": "快速上手 ↗",
+    "hero.stack": "了解 Physical RSI ↓",
     "loop.title": "Physical <em>RSI</em>",
     "loop.lede": "从经验到能力，从能力到进化。",
-    "loop.orbit": "进化循环",
+    "loop.orbit": "进化循环 · 阶段文档",
     "loop.stack": "能力基座",
     "loop.evolve": "持续进化",
-    "engine.t": "推理引擎",
-    "engine.d": "高效推理",
-    "loop.more": "了解 Physical RSI ↗",
+    "engine.t": "模型服务",
+    "engine.d": "策略与智能体服务",
+    "loop.more": "Physical RSI 文档 ↗",
     "s1.t": "搭建",
     "s2.t": "运行",
     "s3.t": "改进",
@@ -655,19 +676,19 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
     "t7.tab": "记忆",
     "t4.h": "通过对话，构建机器人世界",
     "t4.d": "描述机器人工作空间，通过对话调整布局，在 Studio 中查看生成的仿真场景。",
-    "t4.more": "观看完整演示 ↗",
+    "t4.more": "完整演示与说明 ↗",
     "t5.h": "让 AI 操作机器人",
     "t5.d": "“把紫色方块叠到绿色方块上。”智能体将指令转化为机器人在仿真中的动作。",
-    "t5.more": "观看完整演示 ↗",
+    "t5.more": "完整演示与说明 ↗",
     "t6.h": "让智能在实践中持续进化",
     "t6.d": "智能体从经验中提出并验证改进，让每一次能力提升，成为下一轮探索与进化的起点。",
-    "t6.more": "了解 Physical RSI ↗",
+    "t6.more": "Physical RSI 文档 ↗",
     "t7.h": "让经验用于下一次任务",
     "t7.d": "保存成功动作与经验教训，为后续任务提供参考，并保留来源记录。",
-    "t7.more": "了解记忆 ↗",
+    "t7.more": "记忆文档 ↗",
     "t3.h": "从执行经验到经过验证的技能",
     "t3.d": "从执行经验中改进分拣程序，经过验证后，将技能用于新的布局。",
-    "t3.more": "观看完整演示 ↗",
+    "t3.more": "完整演示与说明 ↗",
     "start.quick": "快速上手 ↗",
     "start.title": "开始使用 <em>Hylo</em>",
     "start.lede": "从第一个仿真任务开始，跟随快速上手指南，完成环境配置、智能体评测与改进。",
@@ -681,7 +702,7 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
     "p3.d": "编写机器人任务程序，测试行为，并在实践中持续改进。",
     "p3.more": "程序开发指南 ↗",
     "foot.claim": "让机器人在已有成果上持续进步。",
-    "foot.products": "产品",
+    "foot.products": "开源项目",
     "foot.stack": "核心概念",
     "foot.dev": "开发者",
     "foot.docs": "文档",
@@ -706,14 +727,22 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
   var en = {};
   var nodes = document.querySelectorAll("[data-i18n]");
   nodes.forEach(function (n) { en[n.getAttribute("data-i18n")] = n.innerHTML; });
-  var altNodes = document.querySelectorAll("[data-i18n-alt]");
-  altNodes.forEach(function (n) { en[n.getAttribute("data-i18n-alt")] = n.alt; });
+  var translatedAttributes = [];
+  ["alt", "aria-label"].forEach(function (attribute) {
+    document.querySelectorAll("[data-i18n-" + attribute + "]").forEach(function (node) {
+      var key = node.getAttribute("data-i18n-" + attribute);
+      en[key] = node.getAttribute(attribute);
+      translatedAttributes.push({ node: node, attribute: attribute, key: key });
+    });
+  });
   var button = document.getElementById("lang");
   var current = "en";
   function apply(lang) {
     var dict = lang === "zh" ? zh : en;
     nodes.forEach(function (n) { var k = n.getAttribute("data-i18n"); if (dict[k] != null) n.innerHTML = dict[k]; });
-    altNodes.forEach(function (n) { var k = n.getAttribute("data-i18n-alt"); if (dict[k] != null) n.alt = dict[k]; });
+    translatedAttributes.forEach(function (item) {
+      if (dict[item.key] != null) item.node.setAttribute(item.attribute, dict[item.key]);
+    });
     document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
     button.textContent = lang === "zh" ? "EN" : "中文";
     button.setAttribute("aria-label", lang === "zh" ? "Switch to English" : "切换到中文");
@@ -731,20 +760,77 @@ footer { padding-block: 4.5rem 3rem; border-top: 1px solid var(--line); }
     try { localStorage.setItem("hylo-lang", next); } catch (e) {}
   });
 
-  // example tabs
-  var tabs = document.querySelectorAll('[role="tab"]');
-  tabs.forEach(function (t) {
-    t.addEventListener("click", function () {
-      tabs.forEach(function (o) {
-        var on = o === t;
-        o.setAttribute("aria-selected", on ? "true" : "false");
-        document.getElementById(o.getAttribute("aria-controls")).hidden = !on;
-      });
-    });
+  // A disclosure menu keeps the same navigation available on small screens.
+  var header = document.querySelector("header.top");
+  var menuToggle = document.getElementById("menu-toggle");
+  var navigation = document.getElementById("site-nav");
+  var mobile = window.matchMedia("(max-width: 1040px)");
+  function setMenu(open, restoreFocus) {
+    header.classList.toggle("menu-open", open);
+    menuToggle.setAttribute("aria-expanded", String(open));
+    if (restoreFocus) menuToggle.focus();
+  }
+  menuToggle.addEventListener("click", function () {
+    setMenu(menuToggle.getAttribute("aria-expanded") !== "true");
+  });
+  navigation.addEventListener("click", function (event) {
+    var link = event.target.closest("a");
+    if (!link || !mobile.matches) return;
+    setMenu(false);
+    var href = link.getAttribute("href");
+    if (href.charAt(0) === "#") {
+      var target = document.querySelector(href);
+      if (target) target.focus({ preventScroll: true });
+    }
+  });
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape" && menuToggle.getAttribute("aria-expanded") === "true") {
+      setMenu(false, true);
+    }
+  });
+  document.addEventListener("click", function (event) {
+    if (!header.contains(event.target)) setMenu(false);
+  });
+  header.addEventListener("focusout", function (event) {
+    if (event.relatedTarget && !header.contains(event.relatedTarget)) setMenu(false);
+    // A breakpoint can hide a focused link before the media-query event fires.
+    if (!event.relatedTarget && mobile.matches && navigation.contains(event.target) &&
+        menuToggle.getAttribute("aria-expanded") === "false") menuToggle.focus();
+  });
+  mobile.addEventListener("change", function () {
+    var focused = document.activeElement;
+    setMenu(false);
+    if (mobile.matches && navigation.contains(focused)) menuToggle.focus();
+    if (!mobile.matches && focused === menuToggle) navigation.querySelector("a").focus();
   });
 
-  if (params.get("demo") === "skills") document.getElementById("b3").click();
-
+  // Tabs have one keyboard entry point and activate as arrow-key focus moves.
+  var tabs = Array.from(document.querySelectorAll('#work [role="tab"]'));
+  function activateTab(selected, moveFocus) {
+    tabs.forEach(function (tab) {
+      var active = tab === selected;
+      var panel = document.getElementById(tab.getAttribute("aria-controls"));
+      tab.setAttribute("aria-selected", String(active));
+      tab.tabIndex = active ? 0 : -1;
+      if (!active) panel.querySelectorAll("video").forEach(function (video) { video.pause(); });
+      panel.hidden = !active;
+    });
+    if (moveFocus) selected.focus();
+  }
+  tabs.forEach(function (tab, index) {
+    tab.addEventListener("click", function () { activateTab(tab, false); });
+    tab.addEventListener("keydown", function (event) {
+      var next;
+      if (event.key === "ArrowRight") next = (index + 1) % tabs.length;
+      else if (event.key === "ArrowLeft") next = (index + tabs.length - 1) % tabs.length;
+      else if (event.key === "Home") next = 0;
+      else if (event.key === "End") next = tabs.length - 1;
+      else return;
+      event.preventDefault();
+      activateTab(tabs[next], true);
+    });
+  });
+  if (params.get("demo") === "skills") activateTab(document.getElementById("b3"), false);
 
 })();
 </script>
